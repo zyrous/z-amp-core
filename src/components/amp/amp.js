@@ -104,7 +104,7 @@ class Amp extends AudioComponent {
      * @returns {Promise<Amp>} The newly initialised Amp.
      */
     async initialise(selector = "body", themeName){
-        console.log("Initialising")
+        
         // Get the selected theme.
         var theme = this.themeManager.getTheme(themeName);
 

@@ -57,3 +57,4 @@ dist/
 bin/
 docs/gen
 /index.html
+coverage/
