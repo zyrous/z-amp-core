@@ -1,0 +1,32 @@
+{
+  "name": "z-amp-core",
+  "version": "0.0.1",
+  "description": "Provides a robust audio framework to build audio components for the web",
+  "main": "src/exports.js",
+  "scripts": {
+    "build": "gulp build",
+    "serve": "gulp serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.26.13",
+    "browserify": "^17.0.0",
+    "browserify-css": "^0.15.0",
+    "cypress": "^6.2.0",
+    "faker": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.3.0",
+    "gulp-jsdoc3": "^3.0.0",
+    "gulp-pug-3": "^1.1.7",
+    "gulp-terser": "^2.0.0",
+    "jsdoc": "^3.6.6",
+    "pugify": "^2.2.0",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "dependencies": {
+    "uuid": "^8.3.2"
+  }
+}
