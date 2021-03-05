@@ -57,4 +57,7 @@ dist/
 bin/
 docs/gen
 /index.html
+
+# Test output
 coverage/
+.nyc_output/
