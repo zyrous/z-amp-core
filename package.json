@@ -1,6 +1,6 @@
 {
   "name": "z-amp-core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Provides a robust framework to build audio components for the web",
   "main": "build/z-amp-core.bundle.min.js",
   "repository": "git@bitbucket.org:zyrous/z-amp-core.git",
@@ -28,7 +28,10 @@
         "@semantic-release/git",
         {
           "message": "Release <%= nextRelease.version %> [skip ci]",
-          "assets": ["package.json", "CHANGELOG.md"]
+          "assets": [
+            "package.json",
+            "CHANGELOG.md"
+          ]
         }
       ]
     ]

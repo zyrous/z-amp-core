@@ -1,3 +1,11 @@
+## [1.0.1](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.0...v1.0.1) (2021-03-06)
+
+
+### Bug Fixes
+
+* changing release files to specify build and src folder ([3b30ce7](https://bitbucket.org/zyrous/z-amp-core/commits/3b30ce79ac185ea1e3c3e67adac8a3e73c35d1f7))
+* changing source folder for npm package ([1446ec1](https://bitbucket.org/zyrous/z-amp-core/commits/1446ec12771244c2451f1763b054d5305f2ab8e0))
+
 # 1.0.0 (2021-03-06)
 
 
