@@ -1,3 +1,10 @@
+## [1.0.2](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.1...v1.0.2) (2021-03-06)
+
+
+### Bug Fixes
+
+* adding keywords to package.json ([18a9a71](https://bitbucket.org/zyrous/z-amp-core/commits/18a9a715642750d29101b699999d71d05c04caec))
+
 ## [1.0.1](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.0...v1.0.1) (2021-03-06)
 
 
