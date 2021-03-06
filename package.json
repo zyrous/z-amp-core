@@ -2,7 +2,7 @@
   "name": "z-amp-core",
   "version": "1.0.0",
   "description": "Provides a robust framework to build audio components for the web",
-  "main": "src/exports.js",
+  "main": "build/z-amp-core.bundle.min.js",
   "repository": "git@bitbucket.org:zyrous/z-amp-core.git",
   "scripts": {
     "build": "gulp build",
@@ -11,8 +11,11 @@
     "watch": "nyc mocha src/**/*.test.js --watch",
     "coverage": "nyc --reporter=lcov --reporter=text --report-dir='./coverage' mocha src/**/*.test.js"
   },
+  "files": [
+    "build",
+    "src"
+  ],
   "release": {
-    "pkgRoot": "src",
     "branches": [
       "master"
     ],
