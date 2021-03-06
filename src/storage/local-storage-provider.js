@@ -39,7 +39,7 @@ class LocalStorageProvider extends StorageProvider {
         return new Promise((resolve) => {
             localStorage.setItem(name, JSON.stringify(value));
             resolve(value);
-        })
+        });
     }
 
     /**
@@ -53,7 +53,7 @@ class LocalStorageProvider extends StorageProvider {
     async getValue(name, defaultValue, args){
         return new Promise((resolve) => {
             if(localStorage[name]
-                && localStorage[name] != "undefined") {
+                && localStorage[name] !== "undefined") {
                 resolve(new StorageRetrievalResult(
                     JSON.parse(localStorage[name]),
                     args

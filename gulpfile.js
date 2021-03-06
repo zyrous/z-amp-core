@@ -42,7 +42,7 @@ function runBrowser() {
             baseDir: "./"
         }
     });
-};
+}
 
 /**
  * Build all source code sets into distributable files.
@@ -84,7 +84,7 @@ function buildDist(cb) {
     // When the stream has finished, we want to resolve the promise so that the
     // task completes successfully.
     stream.on("end", () => {
-        console.log(`Finished building distributable component from '${src.sourceFolder}'.`)
+        console.log(`Finished building distributable component from '${src.sourceFolder}'.`);
         cb();
     });
 

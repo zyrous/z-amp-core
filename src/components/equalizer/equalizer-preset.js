@@ -35,6 +35,6 @@ class EqualizerPreset {
         this.bands.set(frequency, gain);
         return this;
     }
-};
+}
 
 module.exports = { EqualizerPreset };

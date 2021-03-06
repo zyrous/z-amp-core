@@ -141,7 +141,6 @@ class Equalizer extends AudioComponent {
             }
 
             // Calculate a label for the frequency.
-            var fLabel;
             if(freqMid < 1000){
                 fLabel = `${freqMid.toFixed(0)}Hz`;
             } else {
@@ -256,7 +255,7 @@ class Equalizer extends AudioComponent {
      * @param {String} name The name of the preset to apply.
      */
     applyPreset(name) {
-        var preset = this.preferences.presets.find((p) => p.name == name);
+        var preset = this.preferences.presets.find((p) => p.name === name);
 
         if(preset){
             this.selectedPreset = preset.name;
@@ -264,7 +263,7 @@ class Equalizer extends AudioComponent {
             // Go through each band in the preset and set the frequency levels.
             Array.from(preset.bands.keys()).map((key) => {
                 this.changeFrequencyLevel(key, preset.bands.get(key));
-                this.bands.get(key).gain.value = preset.bands.get(key)
+                this.bands.get(key).gain.value = preset.bands.get(key);
             });
 
             this.raiseEvent("presetApplied", preset);
@@ -280,7 +279,7 @@ class Equalizer extends AudioComponent {
      */
     changeFrequencyLevel = (frequency, gain) => {
         this.bands.get(frequency).gain.value = gain;
-        const rangeElement = this.preferences.filterPreferences.frequencyRangeElements.find((e) => e.getAttribute("frequency") == frequency.toString());
+        const rangeElement = this.preferences.filterPreferences.frequencyRangeElements.find((e) => e.getAttribute("frequency") === frequency.toString());
         rangeElement.value = gain;
         this.storeValue(frequency, gain);
         this.raiseEvent("frequencyChanged", frequency, gain, rangeElement);
@@ -294,8 +293,9 @@ class Equalizer extends AudioComponent {
     onFrequencyLevelSelected = (event) => {
         this.changeFrequencyLevel(event.target.frequency, event.target.value);
         this.selectedPreset = "Custom";
-        Array.from(this.bands.keys()).map((key) => console.log(`${key}: ${this.bands.get(key).gain.value}`))
-    }
+        // NOTE: Uncomment this line if you want to see the frequencies for a specific level.
+        // Array.from(this.bands.keys()).map((key) => console.log(`${key}: ${this.bands.get(key).gain.value}`))
+    };
 
     /**
      * Set the AudioContext for this Equalizer component.
@@ -325,9 +325,9 @@ class Equalizer extends AudioComponent {
                 e.classList.remove(this.preferences.presetSelectedClass);
                 e.classList.add(this.preferences.presetUnselectedClass);
             }
-        })
+        });
         this.storeValue("activePreset", name);
     }
-};
+}
 
 module.exports = { Equalizer };

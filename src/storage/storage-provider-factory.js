@@ -21,7 +21,7 @@ class StorageProviderFactory {
      * @private
      * @type {Type}
      */
-    defaultProvider = NullStorageProvider;
+    DefaultProvider = NullStorageProvider;
 
     /**
      * Create a new storage provider, given its unique name.
@@ -31,22 +31,22 @@ class StorageProviderFactory {
      */
     createProvider(providerName) {
         // Get the first one with the specified name.
-        const providerType = this.providerTypes.find((type) => type.getName() === providerName);
+        const ProviderType = this.providerTypes.find((type) => type.getName() === providerName);
 
-        if(providerType){
+        if(ProviderType){
             // Create the provider.
-            const provider = new providerType();
+            const provider = new ProviderType();
             if(provider.isAvailable()) {
                 return provider;
             } else {
                 // Provider can't be used in this context.
-                return new this.defaultProvider();
+                return new this.DefaultProvider();
             }
         } else {
             // No match.
             throw Error(`Cannot find storage provider with name: ${providerName}`);
         }
     }
-};
+}
 
 module.exports = { StorageProviderFactory };

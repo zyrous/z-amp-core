@@ -33,7 +33,7 @@ class SessionStorageProvider extends StorageProvider {
         return new Promise((resolve) => {
             sessionStorage[name] = JSON.stringify(value);
             resolve(value);
-        })
+        });
     }
 
     /**
@@ -47,7 +47,7 @@ class SessionStorageProvider extends StorageProvider {
     async getValue(name, defaultValue, ...args){
         return new Promise((resolve) => {
             if(sessionStorage[name]
-                && localStorage[name] != "undefined") {
+                && localStorage[name] !== "undefined") {
                 resolve(new StorageRetrievalResult(
                     JSON.parse(sessionStorage[name]),
                     args
@@ -80,6 +80,6 @@ class SessionStorageProvider extends StorageProvider {
             return false;
         }
     }
-};
+}
 
 module.exports = { SessionStorageProvider };

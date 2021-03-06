@@ -130,8 +130,8 @@ class AudioPlayer extends AudioComponent {
      */
     async initialiseKeys() {
         if(this.preferences.mediaKeys) {
-            navigator.mediaSession.setActionHandler('play', this.onPlay);
-            navigator.mediaSession.setActionHandler('pause', this.onPause);
+            navigator.mediaSession.setActionHandler("play", this.onPlay);
+            navigator.mediaSession.setActionHandler("pause", this.onPause);
 
             // TODO: figure out how to get media keys for volume working.
         }
@@ -256,7 +256,7 @@ class AudioPlayer extends AudioComponent {
             || !this.currentTrack) {   // 2. We don't have a current track.
 
             // Calculate whether we're actually playing now or not (do we have a track?).
-            const currentlyPlaying = this.currentTrack !== undefined;
+            const currentlyPlaying = this.currentTrack ? true: false;
             this.track = track;
 
             if(!track) {
@@ -303,7 +303,7 @@ class AudioPlayer extends AudioComponent {
             if(!this.audioElement.src) {
                 this.audioElement.src = track.url;                
             }
-            var newVolume = this.isMuted ? 0 : this.currentVolume;
+            newVolume = this.isMuted ? 0 : this.currentVolume;
             this.audioElement.volume = 0;
             this.audioElement.play()
             .then(() => this.raiseEvent("audioPlaying", track))
@@ -407,7 +407,7 @@ class AudioPlayer extends AudioComponent {
                     resolve();
                 }
             }, stepDuration);
-        })
+        });
     }
 
     /**
@@ -547,7 +547,7 @@ class AudioPlayer extends AudioComponent {
      */
     onSeekBackward = () => {
         var audioPosition = Math.max(0, this.audioElement.currentTime - this.preferences.seekPreferences.seekBackwardTime);
-        var rangePosition = audioPosition == 0 ? 0 : audioPosition / this.audioElement.duration * 100;
+        var rangePosition = audioPosition === 0 ? 0 : audioPosition / this.audioElement.duration * 100;
         this.audioElement.currentTime = audioPosition;
         this.position = rangePosition;
         this.raiseEvent("seekBackward", audioPosition);
@@ -727,6 +727,6 @@ class AudioPlayer extends AudioComponent {
 
         this.raiseEvent("visibilityChanged", isHidden);
     }
-};
+}
 
 module.exports = { AudioPlayer };

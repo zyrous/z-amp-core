@@ -26,6 +26,6 @@ class FadePreferences {
      * @type {Number}
      */
     stepCount = 10;
-};
+}
 
 module.exports = {FadePreferences};

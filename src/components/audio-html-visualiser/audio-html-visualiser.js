@@ -168,7 +168,7 @@ class AudioHtmlVisualiser extends AudioComponent {
                         // Add a CSS mutator.
                         elementMutators.push(new CssMutator(this.preferences.frequencyElements[i], ...argumentParts));
                     }
-                })
+                });
                 mutators.push(elementMutators);
             } else {
                 mutators.push([new CssMutator(this.preferences.frequencyElements[i])]);
@@ -193,7 +193,7 @@ class AudioHtmlVisualiser extends AudioComponent {
 
                 // Now pass the percentage value to each of our mutators for this item.
                 // this.preferences.frequencyElements[i].style.height = `${currentMagnitude}%`;
-                mutators[i].map((mutator) => mutator.mutate(currentMagnitude));
+                mutators[i].map((mutator) => mutator.mutate(this.currentMagnitude));
             }
         }, this.preferences.animationFrameLength);
 

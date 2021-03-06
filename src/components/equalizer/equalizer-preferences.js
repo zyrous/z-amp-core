@@ -49,6 +49,6 @@ class EqualizerPreferences {
     constructor(preferences = new FilterPreferences()) {
         this.filterPreferences = preferences;
     }
-};
+}
 
 module.exports = { EqualizerPreferences };

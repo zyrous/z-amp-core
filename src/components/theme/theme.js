@@ -77,6 +77,6 @@ class Theme extends AudioComponent {
      * @returns {String}
      */
     get themeName() {}
-};
+}
 
 module.exports = { Theme };

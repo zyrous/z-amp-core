@@ -18,6 +18,6 @@ class SeekPreferences {
      * @type {Number}
      */
     seekBackwardTime = 10;
-};
+}
 
 module.exports = {SeekPreferences};

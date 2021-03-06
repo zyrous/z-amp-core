@@ -41,6 +41,6 @@ class AudioPipelineSegment {
         this.lastNode = lastNode;
         this.weighting = weighting;
     }
-};
+}
 
 module.exports = {AudioPipelineSegment};

@@ -28,6 +28,6 @@ class StorageRetrievalResult {
         this.value = value;
         this.args = args;
     }
-};
+}
 
 module.exports = { StorageRetrievalResult };

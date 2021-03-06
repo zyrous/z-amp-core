@@ -60,7 +60,7 @@ class AudioPipeline extends AudioComponent {
      * @private
      */
     onDocumentClick = () => {
-        if(this.audioContext.state != "running") {
+        if(this.audioContext.state !== "running") {
             // The audio context is not running, so we need to start it up again.
             // NOTE: This has likely been caused by the browser denying auto-play.
             this.audioContext.resume();
@@ -131,8 +131,8 @@ class AudioPipeline extends AudioComponent {
 
         // Because we should be starting with at least two segments (source and destination), if we're
         // unable to find a place in the array there must have been an error.
-        if(previousSegment === undefined
-            || nextSegment === undefined) {
+        if(!previousSegment
+            || !nextSegment) {
             throw Error("Could not find position in audio pipeline for weighting: ", weighting);
         }
 
@@ -155,6 +155,6 @@ class AudioPipeline extends AudioComponent {
         this.mediaElement = element;
         this.loadState();
     }
-};
+}
 
 module.exports = { AudioPipeline };

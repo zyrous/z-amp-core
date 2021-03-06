@@ -20,7 +20,7 @@ class ComponentConfigurer {
      * @private
      * @type {Type}
      */
-    componentType;
+    ComponentType;
 
     /**
      * The name of the component that this configurer will create. If not provided, the default
@@ -40,22 +40,22 @@ class ComponentConfigurer {
     /**
      * Create a new configurer for a specific type of WebAmp component.
      * @param {Type} componentType The type of the component to create.
-     * @param {Type} preferencesType The type of the preferences that will be provided to the 
+     * @param {Type} PreferencesType The type of the preferences that will be provided to the 
      * component when it is created.
      * @param {WebAmpConfigurer} webAmpConfigurer The configurer that this component configurer
      * belongs to.
      */
-    constructor(componentType, preferencesType, webAmpConfigurer) {
+    constructor(componentType, PreferencesType, webAmpConfigurer) {
 
         // Add this object to the parent configurer.
         this.webAmpConfigurer = webAmpConfigurer;
         this.webAmpConfigurer.addComponentConfigurer(this);
 
-        this.componentType = componentType;
+        this.ComponentType = componentType;
 
         // Create the preferences for the component.
-        if(preferencesType) {
-            this.preferences = new preferencesType();
+        if(PreferencesType) {
+            this.preferences = new PreferencesType();
         }
     }
 
@@ -68,7 +68,7 @@ class ComponentConfigurer {
     withSettings(settings) {
         if(!this.preferences) {
             // No type for a preferences object was provided.
-            throw Error(`Component ${this.componentType} cannot be used with settings.`);
+            throw Error(`Component ${this.ComponentType} cannot be used with settings.`);
         }
 
         // Merge the preferences we already have with the ones we're being provided.
@@ -85,7 +85,7 @@ class ComponentConfigurer {
     withName(name){
         if(!name){
             // Need a name.
-            throw error("You must specify a name to give to the component.");
+            throw "You must specify a name to give to the component.";
         }
         
         this.componentName = name;
@@ -98,7 +98,7 @@ class ComponentConfigurer {
      * @returns {any} The newly constructed component.
      */
     configure() {
-        return new this.componentType(this.preferences, this.componentName);
+        return new this.ComponentType(this.preferences, this.componentName);
     }
 
     /**
@@ -112,6 +112,6 @@ class ComponentConfigurer {
      * @public
      */
     finish() { return this.webAmpConfigurer; }
-};
+}
 
 module.exports = { ComponentConfigurer };

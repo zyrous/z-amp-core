@@ -28,7 +28,7 @@ class ThemeManager {
      * @returns {Theme} The theme with the specified name.
      */
     getTheme(name = "Invisible"){
-        return this.themes.find((theme) => theme.themeName == name);
+        return this.themes.find((theme) => theme.themeName === name);
     }
 
     /**
@@ -42,6 +42,6 @@ class ThemeManager {
         } 
         return window.themes;
     }
-};
+}
 
 module.exports = { ThemeManager };

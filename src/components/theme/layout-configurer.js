@@ -99,6 +99,6 @@ class LayoutConfigurer {
      * @public
      */
     finish() { return this.webAmpConfigurer; }
-};
+}
 
 module.exports = { LayoutConfigurer };

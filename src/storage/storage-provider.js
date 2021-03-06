@@ -53,6 +53,6 @@ class StorageProvider {
      * @returns {Boolean}
      */
     isAvailable() {}
-};
+}
 
 module.exports = { StorageProvider };

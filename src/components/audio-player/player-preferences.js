@@ -183,6 +183,6 @@ class PlayerPreferences {
      * @type {SeekPreferences}
      */
     seekPreferences = new SeekPreferences();
-};
+}
 
 module.exports = { PlayerPreferences };

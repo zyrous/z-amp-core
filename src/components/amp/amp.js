@@ -148,7 +148,7 @@ class Amp extends AudioComponent {
      * @returns {AudioComponent} The component with the specified name (if available).
      */
     findComponent(componentName) {
-        const component = this.components.find((component) => component.componentName == componentName);
+        const component = this.components.find((component) => component.componentName === componentName);
 
         if(!component){
             throw Error(`No component found with name '${componentName}. Did you (or your theme) forget to register it?`);
@@ -162,35 +162,35 @@ class Amp extends AudioComponent {
      * @public
      * @returns {AudioComponent} The audio player.
      */
-    get player() { return this.findComponent("AudioPlayer") }
+    get player() { return this.findComponent("AudioPlayer"); }
 
     /**
      * Retrieve the playlist component (if available).
      * @public
      * @returns {AudioComponent} The playlist.
      */
-    get playlist() { return this.findComponent("PlaylistManager") }
+    get playlist() { return this.findComponent("PlaylistManager"); }
     
     /**
      * Retrieve the equalizer component (if available).
      * @public
      * @returns {AudioComponent} The equalizer.
      */
-    get equalizer() { return this.findComponent("Equalizer") }
+    get equalizer() { return this.findComponent("Equalizer"); }
 
     /**
      * Retrieve the theme.
      * @public
      * @returns {AudioComponent} The active theme.
      */
-    get theme() { return this.findComponent("Theme") }
+    get theme() { return this.findComponent("Theme"); }
 
     /**
      * Retrieve the theme manager.
      * @public
      * @returns {ThemeManager} The theme manager.
      */
-    get themeManager() { return this.findComponent("ThemeManager") }
+    get themeManager() { return this.findComponent("ThemeManager"); }
 }
 
 module.exports = { Amp };

@@ -178,13 +178,13 @@ describe("Audio Component", function() {
         var testSelector = faker.hacker.noun();
         var testParentObject = {};
         var mockDocument = sandbox.mock(document);
-        mockDocument.expects("querySelector").withArgs(testSelector).returns(undefined);
+        mockDocument.expects("querySelector").withArgs(testSelector).returns(null);
 
         var component = new AudioComponent();
         var result = await component.attachElement(testParentObject, testElementName, testSelector);
 
-        expect(result).to.equal(undefined);
-        expect(testParentObject[testElementName]).to.equal(undefined);
+        expect(result).to.equal(null);
+        expect(testParentObject[testElementName]).to.equal(null);
         mockDocument.verify();
     }),
 
@@ -202,5 +202,5 @@ describe("Audio Component", function() {
         expect(result.indexOf(testElements[0])).to.be.gte(0);
         expect(result.indexOf(testElements[1])).to.be.gte(0);
         mockDocument.verify();
-    })
+    });
 });

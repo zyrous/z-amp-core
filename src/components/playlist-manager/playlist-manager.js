@@ -72,15 +72,15 @@ class PlaylistManager extends AudioComponent {
             }
         }).then(() => {
             this.getValue("trackIndex", 0).then((results) => {
-                if(this.preferences.tracks.length != 0) {
+                if(this.preferences.tracks.length !== 0) {
                     if(results.value >= this.preferences.tracks.length || results.value < 0) {
                         results.value = this.preferences.tracks.length - 1;
                     }
-                    if(this.currentTrackIndex != results.value) {
+                    if(this.currentTrackIndex !== results.value) {
                         this.trackIndex = results.value;
                     }
                 }
-            })
+            });
         }),
         this.getValue("loop", this.preferences.loop).then((results) => this.loop = results.value),
         this.getValue("shuffle", this.preferences.shuffle).then((results) => this.shuffle = results.value)
@@ -92,8 +92,8 @@ class PlaylistManager extends AudioComponent {
      * @protected
      */
     async initialiseKeys() {
-        navigator.mediaSession.setActionHandler('nexttrack', this.onNextTrack);
-        navigator.mediaSession.setActionHandler('previoustrack', this.onPreviousTrack);
+        navigator.mediaSession.setActionHandler("nexttrack", this.onNextTrack);
+        navigator.mediaSession.setActionHandler("previoustrack", this.onPreviousTrack);
     }
     
     /**
@@ -127,7 +127,7 @@ class PlaylistManager extends AudioComponent {
         this.attachElement(this.preferences, "trackNumberLabelElement", "[audio-label-track-number]")
         .then((element) => {
             if(element){
-                element.innerHTML = null
+                element.innerHTML = null;
             }
         });
         this.attachElement(this.preferences, "trackNameLabelElement", "[audio-label-track-name]")
@@ -183,7 +183,7 @@ class PlaylistManager extends AudioComponent {
         var existingTrack = this.preferences.tracks.find((t) => t.equals(new AudioTrack(track)));
         const newTrackIndex = this.preferences.tracks.indexOf(existingTrack);
 
-        if(newTrackIndex != this.currentTrackIndex) {
+        if(newTrackIndex !== this.currentTrackIndex) {
             this.trackIndex = newTrackIndex;
             this.raiseEvent("trackChanged", track);
         }
@@ -236,7 +236,7 @@ class PlaylistManager extends AudioComponent {
             if(newNode.querySelector("[audio-playlist-item-title]")) {
                 newNode.querySelector("[audio-playlist-item-title]").innerHTML = track.title;
             }
-            if(this.preferences.playlistItemContainerElements.length == this.currentTrackIndex) {
+            if(this.preferences.playlistItemContainerElements.length === this.currentTrackIndex) {
                 newNode.classList.add(this.preferences.playlistItemContainerPlayingClass);
             }
 
@@ -340,7 +340,7 @@ class PlaylistManager extends AudioComponent {
      * @private
      */
     onTrackRequired =  () => {
-        if(this.preferences.tracks && this.preferences.tracks.length == 0) {
+        if(this.preferences.tracks && this.preferences.tracks.length === 0) {
             // Track required but we don't have one!
             this.trackRequired = true;
         } else {
@@ -510,7 +510,7 @@ class PlaylistManager extends AudioComponent {
      * @param {Number} index The new track index value.
      */
     set trackIndex(index) {
-        if(this.preferences.tracks.length == 0) {
+        if(this.preferences.tracks.length === 0) {
             throw Error("Cannot set track index; no tracks have been added to the playlist yet.");
         }
         else if(index < 0) {
@@ -572,6 +572,6 @@ class PlaylistManager extends AudioComponent {
     get tracks() {
         return this.preferences.tracks;
     }
-};
+}
 
 module.exports = { PlaylistManager };

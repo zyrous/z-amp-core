@@ -47,6 +47,6 @@ class FilterPreferences {
      * @type {Number}
      */
     defaultFrequencyGain = 0.0;
-};
+}
 
 module.exports = {FilterPreferences};

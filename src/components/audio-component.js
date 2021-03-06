@@ -90,7 +90,7 @@ class AudioComponent {
                 .then(() => {
                     this.initialiseKeys();
                     resolve();
-                })
+                });
             })
         });
     }
@@ -239,6 +239,6 @@ class AudioComponent {
     onStorageProviderChanged = (storageProvider) => {
         this.storageProvider = storageProvider;
     }
-};
+}
 
 module.exports = { AudioComponent };
