@@ -18,11 +18,24 @@ stepdefinitions:
         - npm install
         - npm run serve &
         - npx cypress run --record --key ${CYPRESS_RECORD_KEY}
+  - package: &package-and-release
+        name: Package and Release
+        caches:
+          - npm
+        script:
+          - npm install
+          - npm run build
+          - npx semantic-release
 
 pipelines:
   default:
     - step: *unit-test
     - step: *e2e-test
+  branches:
+    master:
+      - step: *unit-test
+      - step: *e2e-test
+      - step: *package-and-release
     
 definitions:
     caches:
