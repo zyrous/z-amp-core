@@ -9,10 +9,18 @@ stepdefinitions:
         - npm install
         - npm run coverage
         - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage/lcov.info
+  - e2e-test: &e2e-test
+      name: End-to-End Test
+      caches:
+        - npm
+      script:
+        - npm install
+        - npx cypress run --record --key ${CYPRESS_RECORD_KEY}
 
 pipelines:
   default:
     - step: *unit-test
+    - step: *e2e-test
     
 definitions:
     caches:
