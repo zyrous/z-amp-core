@@ -11,6 +11,11 @@
     "watch": "nyc mocha src/**/*.test.js --watch",
     "coverage": "nyc --reporter=lcov --reporter=text --report-dir='./coverage' mocha src/**/*.test.js"
   },
+  "keywords": [
+    "audio",
+    "html5",
+    "player"
+  ],
   "files": [
     "build",
     "src"
