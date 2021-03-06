@@ -2,6 +2,7 @@
 ### A robust framework to build audio components for the web
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/d82fa0f8dff24cf9833c6e818f814543)](https://www.codacy.com/bb/zyrous/z-amp-core/dashboard?utm_source=mason_zyrous@bitbucket.org&amp;utm_medium=referral&amp;utm_content=zyrous/z-amp-core&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/d82fa0f8dff24cf9833c6e818f814543)](https://www.codacy.com/bb/zyrous/z-amp-core/dashboard?utm_source=mason_zyrous@bitbucket.org&utm_medium=referral&utm_content=zyrous/z-amp-core&utm_campaign=Badge_Coverage)
+[![z-amp-core](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/b42gr3/master&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/b42gr3/runs)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 **z-amp-core** makes it easy to create high-quality audio players, visualisers and more with a simple theming system. This is the core framework that supports existing themes.
