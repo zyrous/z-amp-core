@@ -64,7 +64,7 @@ class LocalStorageProvider extends StorageProvider {
                     args
                 ));
             }
-        })
+        });
     }
 
     /**

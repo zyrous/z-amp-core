@@ -102,5 +102,5 @@ context("Audio Player", () => {
         
         cy.get("[audio-button-position-range]").invoke("val", 50).trigger("change");
         cy.get("[audio-label-track-position]").contains(convertSecondsToPlayerString(songLength / 2));
-    })
+    });
 });

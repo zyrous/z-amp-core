@@ -91,7 +91,7 @@ class AudioComponent {
                     this.initialiseKeys();
                     resolve();
                 });
-            })
+            });
         });
     }
 

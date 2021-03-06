@@ -170,7 +170,7 @@ class PlaylistManager extends AudioComponent {
             if(element) {
                 element.parentNode.removeChild(element);
             }
-        })
+        });
     }
 
     /**

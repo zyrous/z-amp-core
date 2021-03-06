@@ -58,7 +58,7 @@ class SessionStorageProvider extends StorageProvider {
                     args
                 ));
             }
-        })
+        });
     }
 
     /**
