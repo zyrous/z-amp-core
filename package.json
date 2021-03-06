@@ -12,6 +12,7 @@
     "coverage": "nyc --reporter=lcov --reporter=text --report-dir='./coverage' mocha src/**/*.test.js"
   },
   "release": {
+    "pkgRoot": "src",
     "branches": [
       "master"
     ],
@@ -20,7 +21,13 @@
       "@semantic-release/release-notes-generator",
       "@semantic-release/changelog",
       "@semantic-release/npm",
-      "@semantic-release/git"
+      [
+        "@semantic-release/git",
+        {
+          "message": "Release <%= nextRelease.version %> [skip ci]",
+          "assets": ["package.json", "CHANGELOG.md"]
+        }
+      ]
     ]
   },
   "author": {
