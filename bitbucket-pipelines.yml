@@ -12,7 +12,7 @@ stepdefinitions:
 
 pipelines:
   default:
-    - step: *unit-test]
+    - step: *unit-test
     
 definitions:
     caches:
