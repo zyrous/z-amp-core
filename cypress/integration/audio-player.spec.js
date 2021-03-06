@@ -87,6 +87,7 @@ context("Audio Player", () => {
 
     it("Should mute and un-mute audio when button pressed", () => {
         startAudio();
+        cy.wait(1000);
 
         cy.get("[audio-button-volume-mute]").click();
         cy.shouldBeMuted();

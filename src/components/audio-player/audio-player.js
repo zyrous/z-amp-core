@@ -358,8 +358,8 @@ class AudioPlayer extends AudioComponent {
     fadeAudioTo = async(newVolume, duration) => {
 
         if(this.fading) {
-            // We're already performing a fade operation, so reject the request.
-            return;
+            // We're already performing a fade operation, so cancel the timer.
+            clearInterval(this.timer);
         }
 
         this.fading = true;
@@ -390,7 +390,7 @@ class AudioPlayer extends AudioComponent {
 
 
             // Start firing the logic to adjust volume.
-            var timer = setInterval(() => {
+            this.timer = setInterval(() => {
                 if(this.audioElement.volume !== newVolume / 100) {
 
                     // Change the volume by one step (up or down).
@@ -401,8 +401,8 @@ class AudioPlayer extends AudioComponent {
                     }
 
                 } else {
-                    // We're at the correct value, so stop the function and return.
-                    clearInterval(timer);
+                    // We're at the correct value or we're cancelling, so stop the function and return.
+                    clearInterval(this.timer);
                     this.fading = false;
                     resolve();
                 }
@@ -663,7 +663,7 @@ class AudioPlayer extends AudioComponent {
         this.storeValue("isMuted", muted);
 
         if(muted){
-            this.preferences.audioElement.volume = 0;
+            this.fadeAudioTo(0, 0);
         } else {
             this.fadeAudioTo(this.currentVolume, 0);
         }
