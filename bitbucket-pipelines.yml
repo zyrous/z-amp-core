@@ -1,0 +1,15 @@
+image: node:14.15.1
+
+stepdefinitions:
+  - unit-test: &unit-test
+      name: Unit Test
+      caches:
+        - npm
+      script:
+        - npm install
+        - npm run coverage
+        - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage/lcov.info
+
+pipelines:
+  default:
+    - step: *unit-test
