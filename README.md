@@ -19,6 +19,7 @@
 ```
 This would render a button that starts audio playing automatically whenever pressed. That's it! **z-amp-core** uses its special tag (`audio-button-play`) to attach functionality to elements on your page.
 Right now, **z-amp-core** provides the following types of audio components:
+
 - Audio Player
 - Playlist Manager
 - HTML Visualiser
