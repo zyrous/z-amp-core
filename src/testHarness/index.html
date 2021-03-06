@@ -27,9 +27,13 @@
                 .then((amp) => {
                     amp.equalizer.addPreset({name: "Preset 1", bands: new Map([[22,-25],[103,-12.5],[490,0],[2324,12.5],[11020,25]])});
                     amp.equalizer.addPreset({name: "Preset 2", bands: new Map([[22,25],[103,12.5],[490,0],[2324,-12.5],[11020,-25]])});
-                    amp.playlist.addTrack({url: "https://archive.org/download/calexico2006-12-02..flac16/calexico2006-12-02d1t02.mp3", title: "Across the Wire", artist: "Calexico"});
-                    amp.playlist.addTrack({url: "https://archive.org/download/samples2003-11-21.flac16/samples2003-11-21d2t04.mp3", artist: "The Samples", title: "Feel Us Shaking"});
-                    amp.playlist.addTrack({url: "https://archive.org/download/mikedoughty2004-06-16.flac16/d1t13.mp3", artist: "Mike Doughty", title: "American Car"});
+                    // amp.playlist.addTrack({url: "https://archive.org/download/calexico2006-12-02..flac16/calexico2006-12-02d1t02.mp3", title: "Across the Wire", artist: "Calexico"});
+                    // amp.playlist.addTrack({url: "https://archive.org/download/samples2003-11-21.flac16/samples2003-11-21d2t04.mp3", artist: "The Samples", title: "Feel Us Shaking"});
+                    // amp.playlist.addTrack({url: "https://archive.org/download/mikedoughty2004-06-16.flac16/d1t13.mp3", artist: "Mike Doughty", title: "American Car"});
+                    amp.playlist.clear();
+                    amp.playlist.addTrack({url: "./track_1.mp3", title: "Track 1", artist: "Z Amp"});
+                    amp.playlist.addTrack({url: "./track_2.mp3", title: "Track 2", artist: "Z Amp"});
+                    amp.playlist.addTrack({url: "./track_3.mp3", title: "Track 3", artist: "Z Amp"});
                 });
             }
         </script>

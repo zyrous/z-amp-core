@@ -21,7 +21,7 @@ function convertSecondsToPlayerString(secondsToConvert) {
     return `00:${minutes}:${seconds}`;
 }
 
-const songLength = 206;
+const songLength = 30;
 
 context("Audio Player", () => {
     beforeEach(() => {
@@ -47,13 +47,13 @@ context("Audio Player", () => {
     it("Should skip through audio when buttons pressed", () => {
         startAudio();
         cy.get("[audio-button-seek-forward]").click();
-        cy.shouldBeAtTrackPosition(30);
-        
-        cy.get("[audio-button-seek-backward]").click();
         cy.shouldBeAtTrackPosition(20);
         
         cy.get("[audio-button-seek-backward]").click();
         cy.shouldBeAtTrackPosition(10);
+        
+        cy.get("[audio-button-seek-backward]").click();
+        cy.shouldBeAtTrackPosition(0);
     }),
 
     it("Should skip to correct position when slider changed", () => {

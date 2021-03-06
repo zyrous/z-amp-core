@@ -136,7 +136,7 @@ async function buildDev(cb) {
     // task completes successfully.
     stream.on("end", () => {
         console.log(`Finished building dev component from '${src.sourceFolder}'.`);
-        cb();
+        // cb();
     });
 
     stream

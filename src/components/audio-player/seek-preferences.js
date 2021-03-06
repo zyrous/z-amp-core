@@ -10,7 +10,7 @@ class SeekPreferences {
      * @public
      * @type {Number}
      */
-    seekForwardTime = 30;
+    seekForwardTime = 20;
 
     /**
      * The number of seconds to seek backward in a track when a user wishes to do so. Defaults to 10.
