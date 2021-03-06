@@ -11,10 +11,12 @@ stepdefinitions:
         - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage/lcov.info
   - e2e-test: &e2e-test
       name: End-to-End Test
+      image: cypress/included:6.6.0
       caches:
         - npm
       script:
         - npm install
+        - npm run serve &
         - npx cypress run --record --key ${CYPRESS_RECORD_KEY}
 
 pipelines:
