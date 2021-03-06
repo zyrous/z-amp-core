@@ -22,7 +22,7 @@ var src =
     sourceFolder: "./src/",
     entryPoint: "./src/exports.js",
     destinationFilename: "z-amp-core.bundle",
-    harnessFilepath: "./src/testHarness/index.html"
+    harnessFilepath: "./testHarness/index.html"
 };
 
 /**

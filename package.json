@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Provides a robust framework to build audio components for the web",
   "main": "src/exports.js",
+  "repository": "git@bitbucket.org:zyrous/z-amp-core.git",
   "scripts": {
     "build": "gulp build",
     "serve": "gulp serve",
@@ -10,7 +11,14 @@
     "watch": "nyc mocha src/**/*.test.js --watch",
     "coverage": "nyc --reporter=lcov --reporter=text --report-dir='./coverage' mocha src/**/*.test.js"
   },
-  "author": "",
+  "release": {
+    "branches": ["master"]
+  },
+  "author": {
+    "name": "Mason Yarrick",
+    "email": "mason.yarrick@zyrous.com",
+    "url": "https://www.zyrous.com"
+  },
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.26.13",
@@ -30,6 +38,7 @@
     "mocha": "^6.2.3",
     "nyc": "^15.0.1",
     "pugify": "^2.2.0",
+    "semantic-release": "^17.4.1",
     "sinon": "^9.0.2",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"

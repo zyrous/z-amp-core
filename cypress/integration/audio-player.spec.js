@@ -25,7 +25,7 @@ const songLength = 30;
 
 context("Audio Player", () => {
     beforeEach(() => {
-        cy.visit("/src/testHarness/index.html");
+        cy.visit("/testHarness/index.html");
     });
 
     it("Should play audio when play button pressed", () => {

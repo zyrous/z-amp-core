@@ -6,7 +6,7 @@
 class SeekPreferences {
 
     /**
-     * The number of seconds to seek forward in a track when a user wishes to do so. Defaults to 30.
+     * The number of seconds to seek forward in a track when a user wishes to do so. Defaults to 20.
      * @public
      * @type {Number}
      */
