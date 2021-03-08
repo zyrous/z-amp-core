@@ -117,14 +117,14 @@ class AudioPipeline extends AudioComponent {
         for(var i=0; i<this.pipelineSegments.length; i++){
 
             // Find the segments on either side of this one.
-            previousSegment = this.pipelineSegments[i];
-            nextSegment = this.pipelineSegments[i+1];
+            previousSegment = this.pipelineSegments[parseInt(i)];
+            nextSegment = this.pipelineSegments[parseInt(i)+1];
             
             if(previousSegment && previousSegment.weighting <= weighting
                 && nextSegment && nextSegment.weighting >= weighting) {
 
                 // We're inbetween two different weightings, so we've found the right place.
-                segmentIndex = i+1;
+                segmentIndex = parseInt(i)+1;
                 break;
             }
         }
