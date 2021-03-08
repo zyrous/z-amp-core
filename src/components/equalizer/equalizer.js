@@ -124,20 +124,20 @@ class Equalizer extends AudioComponent {
             var fLabel, freqMid;
 
             // First, check whether a frequency has been explicitly set on the HTML control.
-            if(this.preferences.filterPreferences.frequencyRangeElements[i].getAttribute("frequency")) {
+            if(this.preferences.filterPreferences.frequencyRangeElements[parseInt(i)].getAttribute("frequency")) {
 
                 // There's a frequency for the element already.
-                freqMid = Number.parseFloat(this.preferences.filterPreferences.frequencyRangeElements[i].getAttribute("frequency"));
+                freqMid = Number.parseFloat(this.preferences.filterPreferences.frequencyRangeElements[parseInt(i)].getAttribute("frequency"));
             } else {
 
                 // These values are simply a percentage of how far through the frequencies we should be.
-                var percentMid = segmentWidth * (i * 2 + 1);
+                var percentMid = segmentWidth * (parseInt(i) * 2 + 1);
 
                 // freqMid is the actual frequency value that the slider will adjust.
                 freqMid = nyquist * Math.pow(2.0, numOctaves * (percentMid - 1.0));
 
                 // Now set the frequency back to the element.
-                this.preferences.filterPreferences.frequencyRangeElements[i].setAttribute("frequency", freqMid);
+                this.preferences.filterPreferences.frequencyRangeElements[parseInt(i)].setAttribute("frequency", freqMid);
             }
 
             // Calculate a label for the frequency.
@@ -148,21 +148,21 @@ class Equalizer extends AudioComponent {
             }
 
             // Set the label if we have a HTML element for it.
-            if(this.preferences.filterPreferences.frequencyLabelElements[i]) {
-                this.preferences.filterPreferences.frequencyLabelElements[i].textContent = fLabel;
+            if(this.preferences.filterPreferences.frequencyLabelElements[parseInt(i)]) {
+                this.preferences.filterPreferences.frequencyLabelElements[parseInt(i)].textContent = fLabel;
             }
 
             // Save our calculated information as attributes on the range element. This won't
             // mean anything to the browser, but we'll be able to retrieve it later.
-            this.preferences.filterPreferences.frequencyRangeElements[i].frequency = freqMid;
-            this.preferences.filterPreferences.frequencyRangeElements[i].frequencyLabel = fLabel;
+            this.preferences.filterPreferences.frequencyRangeElements[parseInt(i)].frequency = freqMid;
+            this.preferences.filterPreferences.frequencyRangeElements[parseInt(i)].frequencyLabel = fLabel;
 
             // Create a biquad filter for the frequency.
             var band = this.audioContext.createBiquadFilter();
-            if(i === 0) {
+            if(parseInt(i) === 0) {
                 // The first (lowest frequency) band should be lowshelf.
                 band.type = "lowshelf";
-            } else if(i === numSliders - 1) {
+            } else if(parseInt(i) === numSliders - 1) {
                 // The last (highest frequency) band should be highshelf.
                 band.type = "highshelf";
             } else {
@@ -172,7 +172,7 @@ class Equalizer extends AudioComponent {
             band.frequency.value = freqMid;
 
             // Retrieve the current value for the band (zero by default).
-            this.getValue(freqMid, 0, band, i)
+            this.getValue(freqMid, 0, band, parseInt(i))
             .then((results) => {
                 this.preferences.filterPreferences.frequencyRangeElements[results.args[1]].value = results.value;
                 results.args[0].gain.value = results.value;
