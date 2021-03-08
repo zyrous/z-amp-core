@@ -46,7 +46,7 @@
     "email": "mason.yarrick@zyrous.com",
     "url": "https://www.zyrous.com"
   },
-  "license": "ISC",
+  "license": "MIT",
   "eslintConfig": {
     "extends": [
       "plugin:cypress/recommended"
