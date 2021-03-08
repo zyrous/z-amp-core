@@ -145,7 +145,7 @@ class Equalizer extends AudioComponent {
                 fLabel = `${freqMid.toFixed(0)}Hz`;
             } else {
                 fLabel = `${(freqMid / 1000).toFixed(1)}kHz`;
-            }
+            } 
 
             // Set the label if we have a HTML element for it.
             if(this.preferences.filterPreferences.frequencyLabelElements[parseInt(i, 10)]) {
