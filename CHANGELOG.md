@@ -1,3 +1,10 @@
+## [1.0.3](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.2...v1.0.3) (2021-03-08)
+
+
+### Bug Fixes
+
+* included MIT license ([1419f99](https://bitbucket.org/zyrous/z-amp-core/commits/1419f99c5e8bdeccca7c198288edd110201e2833))
+
 ## [1.0.2](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.1...v1.0.2) (2021-03-06)
 
 
