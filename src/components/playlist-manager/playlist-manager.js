@@ -522,7 +522,7 @@ class PlaylistManager extends AudioComponent {
             // the last one.
             index = this.preferences.tracks.length - 1;
         }
-        const track = this.preferences.tracks[index];
+        const track = this.preferences.tracks[parseInt(index, 10)];
         
         // Set all of the information elements.
         if(this.preferences.trackNumberLabelElement) {
@@ -539,11 +539,11 @@ class PlaylistManager extends AudioComponent {
         }
 
         // Set the class of the playlist items.
-        if(this.preferences.playlistItemContainerElements[this.currentTrackIndex]) {
-            this.preferences.playlistItemContainerElements[this.currentTrackIndex].classList.remove(this.preferences.playlistItemContainerPlayingClass);
+        if(this.preferences.playlistItemContainerElements[parseInt(this.currentTrackIndex, 10)]) {
+            this.preferences.playlistItemContainerElements[parseInt(this.currentTrackIndex, 10)].classList.remove(this.preferences.playlistItemContainerPlayingClass);
         }
-        if(this.preferences.playlistItemContainerElements[index]) {
-            this.preferences.playlistItemContainerElements[index].classList.add(this.preferences.playlistItemContainerPlayingClass);
+        if(this.preferences.playlistItemContainerElements[parseInt(index, 10)]) {
+            this.preferences.playlistItemContainerElements[parseInt(index, 10)].classList.add(this.preferences.playlistItemContainerPlayingClass);
         }
 
         this.currentTrackIndex = index;
