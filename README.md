@@ -10,10 +10,10 @@
 **z-amp-core** makes it easy to create high-quality audio players, visualisers and more with a simple theming system. This is the core framework that supports existing themes.
 
 ## Highlights
--  **Simple** to understand and start using with minimal coding required
--  **Audio pipeline** concept makes it easy to create advanced processing and new functionality
--  **Inter-component eventing** system allows developers to create new components with ease
--  **Easily animate** any HTML element in time with the music by simply adding HTML attributes
+-   **Simple** to understand and start using with minimal coding required
+-   **Audio pipeline** concept makes it easy to create advanced processing and new functionality
+-   **Inter-component eventing** system allows developers to create new components with ease
+-   **Easily animate** any HTML element in time with the music by simply adding HTML attributes
 
 ## How it works
 **z-amp-core** is a Javascript library, built with NodeJS, that interacts with the HTML DOM of your page to insert an HTML5 `<audio>` tag. Depending on the additional components that you're using, **z-amp-core** also looks for HTML elements in the DOM with specific attributes and attaches to them to enable player features. For example, you could add the following to your HTML:
@@ -23,10 +23,10 @@
 This would render a button that starts audio playing automatically whenever pressed. That's it! **z-amp-core** uses its special tag (`audio-button-play`) to attach functionality to elements on your page.
 Right now, **z-amp-core** provides the following types of audio components:
 
--  Audio Player
--  Playlist Manager
--  HTML Visualiser
--  Graphic Equalizer
+-   Audio Player
+-   Playlist Manager
+-   HTML Visualiser
+-   Graphic Equalizer
 
 If you'd like to create your own components, it's easy to get started. In addition, the powerful theming engine allows you to create advanced UIs quickly.
 
