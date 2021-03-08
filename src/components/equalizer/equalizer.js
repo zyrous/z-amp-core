@@ -149,7 +149,7 @@ class Equalizer extends AudioComponent {
 
             // Set the label if we have a HTML element for it.
             if(this.preferences.filterPreferences.frequencyLabelElements[i]) {
-                this.preferences.filterPreferences.frequencyLabelElements[i].innerHTML = fLabel;
+                this.preferences.filterPreferences.frequencyLabelElements[i].textContent = fLabel;
             }
 
             // Save our calculated information as attributes on the range element. This won't

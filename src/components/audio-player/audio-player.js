@@ -633,12 +633,12 @@ class AudioPlayer extends AudioComponent {
 
         // Set the track position.
         if(this.preferences.trackPositionLabelElement){
-            this.preferences.trackPositionLabelElement.innerHTML = this.formatTimeString(this.audioElement.currentTime);
+            this.preferences.trackPositionLabelElement.textContent = this.formatTimeString(this.audioElement.currentTime);
         }
 
         // Set the track duration.
         if(this.preferences.trackDurationLabelElement) {
-            this.preferences.trackDurationLabelElement.innerHTML = this.formatTimeString(this.audioElement.duration);
+            this.preferences.trackDurationLabelElement.textContent = this.formatTimeString(this.audioElement.duration);
         }
         this.raiseEvent("positionChanged", position);
     }

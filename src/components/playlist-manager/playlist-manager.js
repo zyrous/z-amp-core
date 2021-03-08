@@ -231,10 +231,10 @@ class PlaylistManager extends AudioComponent {
 
             // Set information for the item.
             if(newNode.querySelector("[audio-playlist-item-artist]")) {
-                newNode.querySelector("[audio-playlist-item-artist]").innerHTML = track.artist;
+                newNode.querySelector("[audio-playlist-item-artist]").textContent = track.artist;
             }
             if(newNode.querySelector("[audio-playlist-item-title]")) {
-                newNode.querySelector("[audio-playlist-item-title]").innerHTML = track.title;
+                newNode.querySelector("[audio-playlist-item-title]").textContent = track.title;
             }
             if(this.preferences.playlistItemContainerElements.length === this.currentTrackIndex) {
                 newNode.classList.add(this.preferences.playlistItemContainerPlayingClass);
@@ -526,16 +526,16 @@ class PlaylistManager extends AudioComponent {
         
         // Set all of the information elements.
         if(this.preferences.trackNumberLabelElement) {
-            this.preferences.trackNumberLabelElement.innerHTML = index + 1;
+            this.preferences.trackNumberLabelElement.textContent = index + 1;
         }
         if(this.preferences.trackNameLabelElement) {
-            this.preferences.trackNameLabelElement.innerHTML = track.title;
+            this.preferences.trackNameLabelElement.textContent = track.title;
         }
         if(this.preferences.artistNameLabelElement) {
-            this.preferences.artistNameLabelElement.innerHTML = track.artist;
+            this.preferences.artistNameLabelElement.textContent = track.artist;
         }
         if(this.preferences.trackUrlLabelElement) {
-            this.preferences.trackUrlLabelElement.innerHTML = track.url;
+            this.preferences.trackUrlLabelElement.textContent = track.url;
         }
 
         // Set the class of the playlist items.

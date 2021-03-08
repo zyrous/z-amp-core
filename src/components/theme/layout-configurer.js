@@ -71,7 +71,7 @@ class LayoutConfigurer {
         const headElement = document.getElementsByTagName("head")[0];
         this.styles.map((style) => {
             const styleElement = document.createElement("style");
-            styleElement.innerHTML = style;
+            styleElement.textContent = style;
             headElement.appendChild(styleElement);
         });
 
@@ -85,7 +85,19 @@ class LayoutConfigurer {
      * @param {HTMLElement} htmlElement The element to render the content within.
      */
     render(htmlElement) {
-        htmlElement.innerHTML += (this.layoutFunction());
+        // First, get the raw text that's rendered.
+        const htmlText = this.layoutFunction();
+        console.log("HTML TEXT: ", htmlText);
+
+        // Now, parse the HTML text into a set of tags.
+        const parser = new DOMParser();
+        const parsed = parser.parseFromString(htmlText);
+        const tags = parsed.getElementsByTagName("body");
+        console.log("TAGS: ", tags);
+
+        for(const tag of tags) {
+            htmlElement.appendChild(tag);
+        }
     }
 
     /**
