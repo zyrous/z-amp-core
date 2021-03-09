@@ -18,6 +18,3 @@ ZAmp.Theme = Theme; // Available for custom themes.
 window.ZAmp = ZAmp;
 
 module.exports = { Amp, Theme };
-
-// exports.Amp = { Amp };
-// exports.Theme = { Theme };

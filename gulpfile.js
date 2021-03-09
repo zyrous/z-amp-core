@@ -7,6 +7,7 @@ const terser = require("gulp-terser");
 const pug = require("gulp-pug-3");
 const pugify = require("pugify");
 const jsdoc = require("gulp-jsdoc3");
+const babel = require("gulp-babel");
 const browserSync = require("browser-sync").create();
 
 /**
@@ -30,7 +31,8 @@ var src =
  * distribution/deployment.
  */
 var distPaths = {
-    destinationFolder: "./build/"
+    destinationBrowserJsFolder: "./build/",
+    destinationNodeJsFolder: "./build/dist/"
 };
 
 /**
@@ -45,13 +47,25 @@ function runBrowser() {
 }
 
 /**
+ * Build the source code into ES5.
+ * @param {Object} cb The function to call when processing has completed.
+ */
+function buildDistEs5(cb) {
+    console.log(`Building distributable NodeJS component from '${src.sourceFolder}...'`)
+
+    gulp.src(`${src.sourceFolder}**/*.js`)
+        .pipe(babel())
+        .pipe(gulp.dest(distPaths.destinationNodeJsFolder));
+
+    cb();
+}
+
+/**
  * Build all source code sets into distributable files.
  */
-function buildDist(cb) {
+function buildDistBrowserJs(cb) {
 
-    console.log("Building all distributable components...");
-
-    console.log(`Building distributable component from '${src.sourceFolder}...'`);
+    console.log(`Building distributable browser component from '${src.sourceFolder}...'`);
 
     // Using browserify to compile code.
     const bundle = browserify({
@@ -99,7 +113,7 @@ function buildDist(cb) {
         // Obfuscate variable names where possible.
         mangle: true
     }))
-    .pipe(gulp.dest(distPaths.destinationFolder));
+    .pipe(gulp.dest(distPaths.destinationBrowserJsFolder));
 };
 
 /**
@@ -107,7 +121,7 @@ function buildDist(cb) {
  * spec.
  * @param {Function} cb the callback that signals that the task has completed.
  */
-async function buildDev(cb) {
+async function buildDevBrowserJs(cb) {
     console.log(`Building dev component from source '${src.sourceFolder}'...`);
 
     // We're using browserify to compile our output.
@@ -141,7 +155,7 @@ async function buildDev(cb) {
 
     stream
     .pipe(source(`${src.destinationFilename}.js`))
-    .pipe(gulp.dest(distPaths.destinationFolder))
+    .pipe(gulp.dest(distPaths.destinationBrowserJsFolder))
     // Stream the output to browsersync so that it can
     // refresh properly.
     .pipe(browserSync.stream());
@@ -174,7 +188,7 @@ function watchCode() {
     return gulp.watch([`${src.sourceFolder}**`, `!${src.sourceFolder}/*/bin/**`], parallel(buildDoc, () => {
         // The function already streams results to browsersync, so
         // we just need to call the function with the right code.
-        return buildDev(src);
+        return buildDevBrowserJs(src);
     }));
 };
 
@@ -194,9 +208,9 @@ async function watchHarness() {
 /**
  * Serve the code in local (development) mode.
  */
-exports.serve = series(parallel(buildDev, buildDoc, renderIndexPage), parallel(runBrowser, watchCode, watchHarness));
+exports.serve = series(parallel(buildDevBrowserJs, buildDoc, renderIndexPage), parallel(runBrowser, watchCode, watchHarness));
 
 /**
  * Build the code for deployment.
  */
-exports.build = parallel(buildDist, buildDoc);
+exports.build = parallel(buildDistBrowserJs, buildDistEs5, buildDoc);

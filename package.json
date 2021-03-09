@@ -2,7 +2,7 @@
   "name": "z-amp-core",
   "version": "1.0.7",
   "description": "Provides a robust framework to build audio components for the web",
-  "main": "src/exports.js",
+  "main": "build/dist/exports.js",
   "repository": "git@bitbucket.org:zyrous/z-amp-core.git",
   "scripts": {
     "build": "gulp build",
@@ -17,8 +17,7 @@
     "player"
   ],
   "files": [
-    "build",
-    "src"
+    "build"
   ],
   "release": {
     "branches": [
@@ -53,6 +52,9 @@
     ]
   },
   "devDependencies": {
+    "@babel/cli": "^7.13.10",
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
     "@commitlint/cli": "^12.0.1",
     "@commitlint/config-conventional": "^12.0.1",
     "@semantic-release/changelog": "^5.0.1",
@@ -67,6 +69,7 @@
     "eslint-plugin-cypress": "^2.11.2",
     "faker": "^5.1.0",
     "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
     "gulp-cli": "^2.3.0",
     "gulp-jsdoc3": "^3.0.0",
     "gulp-pug-3": "^1.1.7",
@@ -83,6 +86,7 @@
     "vinyl-source-stream": "^2.0.0"
   },
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
     "uuid": "^8.3.2"
   }
 }
