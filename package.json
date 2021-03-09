@@ -1,6 +1,6 @@
 {
   "name": "z-amp-core",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Provides a robust framework to build audio components for the web",
   "main": "src/exports.js",
   "repository": "git@bitbucket.org:zyrous/z-amp-core.git",
