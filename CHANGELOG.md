@@ -1,3 +1,10 @@
+## [1.0.6](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.5...v1.0.6) (2021-03-09)
+
+
+### Bug Fixes
+
+* changing main exports file ([7ece8f1](https://bitbucket.org/zyrous/z-amp-core/commits/7ece8f1493909c8673680567cdada585b304830c))
+
 ## [1.0.5](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.4...v1.0.5) (2021-03-09)
 
 
