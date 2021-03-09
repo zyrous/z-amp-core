@@ -1,3 +1,10 @@
+## [1.0.8](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.7...v1.0.8) (2021-03-09)
+
+
+### Bug Fixes
+
+* fixed bug with html equalizer not applying values ([0f9d558](https://bitbucket.org/zyrous/z-amp-core/commits/0f9d558a4ebdfdd6facc1e201aa3f95d2ef20cdc))
+
 ## [1.0.7](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.6...v1.0.7) (2021-03-09)
 
 
