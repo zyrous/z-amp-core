@@ -91,8 +91,8 @@ class LayoutConfigurer {
 
         // Now, parse the HTML text into a set of tags.
         const parser = new DOMParser();
-        const parsed = parser.parseFromString(htmlText);
-        const tags = parsed.getElementsByTagName("body");
+        const parsed = parser.parseFromString(htmlText, "text/html");
+        const tags = parsed.children;
         console.log("TAGS: ", tags);
 
         for(const tag of tags) {
