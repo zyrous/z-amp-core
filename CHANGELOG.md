@@ -1,3 +1,11 @@
+## [1.0.5](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.4...v1.0.5) (2021-03-09)
+
+
+### Bug Fixes
+
+* changing export syntax for Theme class ([3a1cbd6](https://bitbucket.org/zyrous/z-amp-core/commits/3a1cbd6ceeeff5d4e25ac7ec5e08a16ee1012d7b))
+* exporting amp and theme from module ([ccad6f1](https://bitbucket.org/zyrous/z-amp-core/commits/ccad6f1de7a000ba5de11b9a35057a692abf9e22))
+
 ## [1.0.4](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.3...v1.0.4) (2021-03-09)
 
 
