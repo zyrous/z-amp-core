@@ -20,4 +20,4 @@ class SeekPreferences {
     seekBackwardTime = 10;
 }
 
-module.exports = {SeekPreferences};
+module.exports = { SeekPreferences };

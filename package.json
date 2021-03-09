@@ -2,7 +2,7 @@
   "name": "z-amp-core",
   "version": "1.0.4",
   "description": "Provides a robust framework to build audio components for the web",
-  "main": "build/z-amp-core.bundle.min.js",
+  "main": "src/exports.js",
   "repository": "git@bitbucket.org:zyrous/z-amp-core.git",
   "scripts": {
     "build": "gulp build",

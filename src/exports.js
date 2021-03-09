@@ -17,5 +17,7 @@ ZAmp.Theme = Theme; // Available for custom themes.
 // Set the object back to the window.
 window.ZAmp = ZAmp;
 
-exports.Amp = { Amp };
-exports.Theme = { Theme };
+module.exports = { Amp, Theme };
+
+// exports.Amp = { Amp };
+// exports.Theme = { Theme };
