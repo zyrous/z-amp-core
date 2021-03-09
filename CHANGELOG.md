@@ -1,3 +1,10 @@
+## [1.0.9](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.8...v1.0.9) (2021-03-09)
+
+
+### Bug Fixes
+
+* adding babel for ES5 conversion ([cb37ecb](https://bitbucket.org/zyrous/z-amp-core/commits/cb37ecba38ebdbfed0e453c9d2752201186f3165))
+
 ## [1.0.8](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.7...v1.0.8) (2021-03-09)
 
 
