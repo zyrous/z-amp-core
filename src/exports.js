@@ -15,6 +15,7 @@ ZAmp.Amp = Amp;  // Available to initialise the player.
 ZAmp.Theme = Theme; // Available for custom themes.
 
 // Set the object back to the window.
-window.ZAmp = ZAmp; 
+window.ZAmp = ZAmp;
 
-module.exports = {};
+exports.Amp = { Amp };
+exports.Theme = { Theme };

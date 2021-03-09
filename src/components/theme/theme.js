@@ -79,5 +79,4 @@ class Theme extends AudioComponent {
     get themeName() {}
 }
 
-// module.exports = { Theme };
-exports.Theme = { Theme };
+module.exports = { Theme };
