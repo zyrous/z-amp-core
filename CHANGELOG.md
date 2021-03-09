@@ -1,3 +1,10 @@
+## [1.0.7](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.6...v1.0.7) (2021-03-09)
+
+
+### Bug Fixes
+
+* correcting bug in layout-configurer ([12c869c](https://bitbucket.org/zyrous/z-amp-core/commits/12c869c175ded468df04c43c742f7a86fdf0b10c))
+
 ## [1.0.6](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.5...v1.0.6) (2021-03-09)
 
 
