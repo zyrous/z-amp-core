@@ -87,15 +87,13 @@ class LayoutConfigurer {
     render(htmlElement) {
         // First, get the raw text that's rendered.
         const htmlText = this.layoutFunction();
-        console.log("HTML TEXT: ", htmlText);
 
         // Now, parse the HTML text into a set of tags.
         const parser = new DOMParser();
         const parsed = parser.parseFromString(htmlText, "text/html");
-        const tags = parsed.children;
-        console.log("TAGS: ", tags);
 
-        for(const tag of tags) {
+        // Now, add each child element to the target HTML element.
+        for(const tag of parsed.children) {
             htmlElement.appendChild(tag);
         }
     }

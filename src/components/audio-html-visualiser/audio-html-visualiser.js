@@ -193,7 +193,7 @@ class AudioHtmlVisualiser extends AudioComponent {
 
                 // Now pass the percentage value to each of our mutators for this item.
                 // this.preferences.frequencyElements[i].style.height = `${currentMagnitude}%`;
-                mutators[i].map((mutator) => mutator.mutate(this.currentMagnitude));
+                mutators[i].map((mutator) => mutator.mutate(currentMagnitude));
             }
         }, this.preferences.animationFrameLength);
 
