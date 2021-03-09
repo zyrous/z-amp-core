@@ -1,3 +1,10 @@
+## [1.0.4](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.3...v1.0.4) (2021-03-09)
+
+
+### Bug Fixes
+
+* moved test files. removed arbitrary wait in UI test ([29a4727](https://bitbucket.org/zyrous/z-amp-core/commits/29a4727ff5d42d596c17a3f01f79a65869418365))
+
 ## [1.0.3](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.2...v1.0.3) (2021-03-08)
 
 
