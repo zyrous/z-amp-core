@@ -10,11 +10,11 @@ global.window = dom.window;
 global.document = dom.window.document;
 
 // The class under test.
-const {AudioComponent} = require("../audio-component");
+const {AudioComponent} = require("./audio-component");
 
 // Dependencies for mocking.
-const {StorageProvider} = require("../../storage/storage-provider");
-const {StorageProviderFactory} = require("../../storage/storage-provider-factory");
+const {StorageProvider} = require("../storage/storage-provider");
+const {StorageProviderFactory} = require("../storage/storage-provider-factory");
 
 // Sandbox for mocks.
 const sandbox = sinon.createSandbox();

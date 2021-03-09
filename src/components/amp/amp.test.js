@@ -5,8 +5,8 @@ const faker = require("faker");
 const sinon = require("sinon");
 
 // Dependencies for testing.
-const {Amp} = require("../amp");
-const ThemeManager = require("../../../theme-manager/theme-manager");
+const {Amp} = require("./amp");
+const ThemeManager = require("../../theme-manager/theme-manager");
 
 describe("Amp Component", function() {
 
