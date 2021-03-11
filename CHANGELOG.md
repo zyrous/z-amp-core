@@ -1,3 +1,10 @@
+## [1.0.12](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.11...v1.0.12) (2021-03-11)
+
+
+### Bug Fixes
+
+* adding babel polyfills ([67b1455](https://bitbucket.org/zyrous/z-amp-core/commits/67b1455dae8efe9e6ccd183804f0df616b0f40d0))
+
 ## [1.0.11](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.10...v1.0.11) (2021-03-11)
 
 
