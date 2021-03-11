@@ -1,3 +1,11 @@
+## [1.0.11](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.10...v1.0.11) (2021-03-11)
+
+
+### Bug Fixes
+
+* added babel plugin for parameter transform ([9bc36b5](https://bitbucket.org/zyrous/z-amp-core/commits/9bc36b53e54e5314162526faa4c9577d5ae947a1))
+* making babel parameter transform loose ([aaa12f2](https://bitbucket.org/zyrous/z-amp-core/commits/aaa12f278d846b64744de5cf3032e03bb7111ace))
+
 ## [1.0.10](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.9...v1.0.10) (2021-03-11)
 
 
