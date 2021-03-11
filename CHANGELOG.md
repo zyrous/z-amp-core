@@ -1,3 +1,10 @@
+## [1.0.10](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.9...v1.0.10) (2021-03-11)
+
+
+### Bug Fixes
+
+* added loose transpiling for babel ([675fcc9](https://bitbucket.org/zyrous/z-amp-core/commits/675fcc9e74b3a9aab045dd08603270492f4f66c8))
+
 ## [1.0.9](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.8...v1.0.9) (2021-03-09)
 
 
