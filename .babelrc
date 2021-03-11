@@ -2,6 +2,6 @@
     "presets": ["@babel/env"],
     "plugins": [
         ["@babel/plugin-proposal-class-properties", { "loose": true }],
-        ["@babel/plugin-transform-parameters"]
+        ["@babel/plugin-transform-parameters", { "loose": true }]
     ]
 }
