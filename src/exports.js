@@ -5,9 +5,6 @@
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
  */
 
-const corejs =  require("core-js/stable");
-const regenerator = require("regenerator-runtime/runtime");
-
 // Get the existing WebAmp object, or create one if it doesn't exist.
 var ZAmp = window.ZAmp || {};
 const { Amp } = require("./components/amp/amp"); 
