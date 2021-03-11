@@ -1,3 +1,10 @@
+## [1.0.13](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.12...v1.0.13) (2021-03-11)
+
+
+### Bug Fixes
+
+* removing babel polyfill for core-js solution ([7606250](https://bitbucket.org/zyrous/z-amp-core/commits/76062505aff3d77cb9a8bcff9f04ee5d6fcf71ed))
+
 ## [1.0.12](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.11...v1.0.12) (2021-03-11)
 
 
