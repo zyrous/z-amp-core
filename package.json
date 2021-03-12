@@ -2,7 +2,7 @@
   "name": "z-amp-core",
   "version": "1.0.14",
   "description": "Provides a robust framework to build audio components for the web",
-  "main": "build/dist/exports.js",
+  "main": "src/exports.js",
   "repository": "git@bitbucket.org:zyrous/z-amp-core.git",
   "scripts": {
     "build": "gulp build",
@@ -17,6 +17,7 @@
     "player"
   ],
   "files": [
+    "src",
     "build"
   ],
   "release": {
@@ -52,11 +53,6 @@
     ]
   },
   "devDependencies": {
-    "@babel/cli": "^7.13.10",
-    "@babel/core": "^7.13.10",
-    "@babel/preset-env": "^7.13.10",
-    "@babel/preset-react": "^7.12.13",
-    "@babel/runtime-corejs3": "^7.13.10",
     "@commitlint/cli": "^12.0.1",
     "@commitlint/config-conventional": "^12.0.1",
     "@semantic-release/changelog": "^5.0.1",
@@ -66,13 +62,11 @@
     "browserify-css": "^0.15.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "core-js": "^3.9.1",
     "cypress": "^6.6.0",
     "eslint": "^7.21.0",
     "eslint-plugin-cypress": "^2.11.2",
     "faker": "^5.4.0",
     "gulp": "^4.0.2",
-    "gulp-babel": "^8.0.0",
     "gulp-cli": "^2.3.0",
     "gulp-jsdoc3": "^3.0.0",
     "gulp-pug-3": "^1.1.7",
@@ -83,7 +77,6 @@
     "mocha": "^6.2.3",
     "nyc": "^15.0.1",
     "pugify": "^2.2.0",
-    "regenerator-runtime": "^0.13.7",
     "semantic-release": "^17.4.1",
     "sinon": "^9.0.2",
     "vinyl-buffer": "^1.0.1",
