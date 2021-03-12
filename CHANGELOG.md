@@ -1,3 +1,10 @@
+## [1.0.15](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.14...v1.0.15) (2021-03-12)
+
+
+### Bug Fixes
+
+* removed babel code ([e109728](https://bitbucket.org/zyrous/z-amp-core/commits/e109728542f5a1197f602c999da25325646d1dc1))
+
 ## [1.0.14](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.13...v1.0.14) (2021-03-11)
 
 
