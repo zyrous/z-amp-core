@@ -7,6 +7,7 @@ const terser = require("gulp-terser");
 const pug = require("gulp-pug-3");
 const pugify = require("pugify");
 const jsdoc = require("gulp-jsdoc3");
+const babel = require("gulp-babel");
 const browserSync = require("browser-sync").create();
 
 /**
@@ -43,6 +44,20 @@ function runBrowser() {
             baseDir: "./"
         }
     });
+}
+
+/**
+ * Build the source code into ES5.
+ * @param {Object} cb The function to call when processing has completed.
+ */
+function buildDistEs5(cb) {
+    console.log(`Building distributable NodeJS component from '${src.sourceFolder}...'`)
+
+    gulp.src(`${src.sourceFolder}**/*.js`)
+        .pipe(babel())
+        .pipe(gulp.dest(distPaths.destinationNodeJsFolder));
+
+    cb();
 }
 
 /**
@@ -198,4 +213,4 @@ exports.serve = series(parallel(buildDevBrowserJs, buildDoc, renderIndexPage), p
 /**
  * Build the code for deployment.
  */
-exports.build = parallel(buildDistBrowserJs, buildDoc);
+exports.build = parallel(buildDistBrowserJs, buildDistEs5, buildDoc);

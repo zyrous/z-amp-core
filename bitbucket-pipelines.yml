@@ -6,7 +6,7 @@ stepdefinitions:
       caches:
         - npm
       script:
-        - npm install
+        - npm ci
         - npm run coverage
         - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage/lcov.info
   - e2e-test: &e2e-test
@@ -15,7 +15,7 @@ stepdefinitions:
       caches:
         - npm
       script:
-        - npm install
+        - npm ci
         - npm run serve &
         - npx cypress run --record --key ${CYPRESS_RECORD_KEY}
   - package: &package-and-release
@@ -23,7 +23,7 @@ stepdefinitions:
         caches:
           - npm
         script:
-          - npm install
+          - npm ci
           - npm run build
           - npx semantic-release
 
