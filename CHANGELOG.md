@@ -1,3 +1,12 @@
+## [1.0.16](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.15...v1.0.16) (2021-03-15)
+
+
+### Bug Fixes
+
+* changing transpilation options ([b8348f9](https://bitbucket.org/zyrous/z-amp-core/commits/b8348f92451dec775d06c551ebbd2a75d7bbce9a))
+* re-adding babel config for ES5 ([dd31cb3](https://bitbucket.org/zyrous/z-amp-core/commits/dd31cb390c32d1dfc92d36002b40b629b21e81e4))
+* re-adding test harness ([dbd1741](https://bitbucket.org/zyrous/z-amp-core/commits/dbd174155b3b01d60ecfd1757d81f693a9cb28bc))
+
 ## [1.0.15](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.14...v1.0.15) (2021-03-12)
 
 
