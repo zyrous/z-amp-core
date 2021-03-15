@@ -1,3 +1,10 @@
+## [1.0.17](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.16...v1.0.17) (2021-03-15)
+
+
+### Bug Fixes
+
+* moving core-js to non-dev dependency ([77ea1bf](https://bitbucket.org/zyrous/z-amp-core/commits/77ea1bf8300876606659482c5aa9a8085789dc6a))
+
 ## [1.0.16](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.15...v1.0.16) (2021-03-15)
 
 
