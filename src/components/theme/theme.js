@@ -1,6 +1,7 @@
 const { AudioComponent } = require("../audio-component");
 const { ThemeManager } = require("../../theme-manager/theme-manager");
 const { WebAmpConfigurer } = require("./web-amp-configurer");
+const { v4: uuidv4 } = require("uuid");
 
 /**
  * @namespace WebAmp.Components.Theme
@@ -10,7 +11,6 @@ const { WebAmpConfigurer } = require("./web-amp-configurer");
  * Provides a base class for custom WebAmp themes.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
  * @memberof WebAmp.Components.Theme
- * @abstract
  * @augments AudioComponent
  */
 class Theme extends AudioComponent {
@@ -21,7 +21,7 @@ class Theme extends AudioComponent {
      * @type {ThemeManager}
      */
     themeManager = new ThemeManager();
-
+    
     /**
      * The configurer that will be used to create the components and layouts
      * needed by this theme.
@@ -29,6 +29,13 @@ class Theme extends AudioComponent {
      * @type {WebAmpConfigurer}
      */
     configurer;
+
+    /**
+     * The name of this theme.
+     * @private
+     * @type {String}
+     */
+    themeName;
 
     /**
      * Construct a new theme.
@@ -66,17 +73,37 @@ class Theme extends AudioComponent {
      * @returns {WebAmpConfigurer}
      */
     startConfiguring() {
-        this.configurer = new WebAmpConfigurer(this);
+        this.configurer = new WebAmpConfigurer(this.themeName);
         return this.configurer;
     }
 
     /**
+     * Create, register and return a new instance of a Theme.
+     * @param {String} themeName Optional. The name to give to the new theme. 
+     * Defaults to a random UUID.
+     * @returns {Theme}
+     */
+    static create(themeName = uuidv4()) {
+        const newTheme = new Theme();
+        newTheme.themeName = themeName;
+        newTheme.register();
+        return newTheme;
+    }
+
+    /**
+     * Sets the name of this theme. Can be called from derived classes.
+     * @param {String} themeName The name to give to the theme.
+     */
+    set themeName(themeName) {
+        this.themeName = themeName;
+    }
+
+    /**
      * Gets the name of this theme. Should be implemented in derived classes.
-     * @abstract
      * @public
      * @returns {String}
      */
-    get themeName() {}
+    get themeName() { return themeName; }
 }
 
 module.exports = { Theme };

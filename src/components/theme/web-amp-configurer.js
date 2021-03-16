@@ -9,6 +9,7 @@ const {PlaylistPreferences} = require("../playlist-manager/playlist-preferences"
 const {AudioHtmlVisualiser} = require("../audio-html-visualiser/audio-html-visualiser");
 const {AudioHtmlVisualiserPreferences} = require("../audio-html-visualiser/audio-html-visualiser-preferences");
 const {LayoutConfigurer} = require("./layout-configurer");
+const {Amp} = require("../amp/amp");
 
 /**
  * Provides a facility that allows the user to configure a WebAmp instance's components
@@ -33,11 +34,28 @@ class WebAmpConfigurer {
     layouts = [];
 
     /**
-     * Begin creation of a WebAmp configuration.
-     * @public
+     * The HTML selector that will be used to identify the element
+     * to initialise.
+     * @private
+     * @type {String}
      */
-    static createConfigurer() {
-        return new WebAmpConfigurer();
+    elementSelector;
+
+    /**
+     * The name of the theme that the configurer is for.
+     * @private
+     * @type {String}
+     */
+    themeName;
+
+    /**
+     * 
+     * @param {String} themeName Optional. The name of the theme that the configurer
+     * is for. If left empty, calling apply() will result in an error if more than
+     * one theme is available.
+     */
+    constructor(themeName) {
+        this.themeName = themeName;
     }
 
     /**
@@ -70,6 +88,16 @@ class WebAmpConfigurer {
     }
 
     /**
+     * Set the element that the configurer will apply to.
+     * @param {String} elementSelector The selector that will be used to find the
+     * element to initialise.
+     */
+    for(elementSelector) {
+        this.elementSelector = elementSelector;
+        return this;
+    }
+
+    /**
      * Configure the entire set of layouts that make up this WebAmp configuration.
      * @public
      * @param {HTMLElement} parentElement The HTML element to use to render content into.
@@ -82,6 +110,15 @@ class WebAmpConfigurer {
         }
         
         return Promise.all(this.layouts.map((configurer) => configurer.configure(parentElement)));
+    }
+
+    /**
+     * Apply this configuration and initialise the element.
+     * @returns {Promise<Amp>} The newly initialised Amp.
+     */
+    async apply() {
+        // Amp the component.
+        return Amp.amp(this.elementSelector, this.themeName);
     }
     
     /**

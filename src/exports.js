@@ -16,6 +16,7 @@ const { Theme } = require("./components/theme/theme");
 // Attach all required classes.
 ZAmp.Amp = Amp;  // Available to initialise the player.
 ZAmp.Theme = Theme; // Available for custom themes.
+ZAmp.build = () => Theme.create().startConfiguring(); // Available for JIT building.
 
 // Set the object back to the window.
 window.ZAmp = ZAmp;

@@ -14,15 +14,11 @@ stepdefinitions:
   - e2e-test: &e2e-test
       name: End-to-End Test
       image: cypress/included:6.6.0
-      caches:
-        - node
       script:
         - npm run serve &
         - npx cypress run --record --key ${CYPRESS_RECORD_KEY}
   - package: &package-and-release
         name: Package and Release
-        caches:
-          - node
         script:
           - npm run build
           - npx semantic-release

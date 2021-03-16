@@ -23,12 +23,18 @@ class ThemeManager {
     /**
      * Retrieve a theme based on its name.
      * @public
-     * @param {String} name The name of the theme to retrieve. Defaults
-     * to "Invisible".
+     * @param {String} name The name of the theme to retrieve. If not
+     * supplied but one theme exists, will return that theme.
      * @returns {Theme} The theme with the specified name.
      */
-    getTheme(name = "Invisible"){
-        return this.themes.find((theme) => theme.themeName === name);
+    getTheme(name){
+        if(name) {
+            return this.themes.find((theme) => theme.themeName === name);
+        } else if(this.themes.length === 1) {
+            return this.themes[0];
+        } else {
+            throw Error("Theme name not supplied and <> 1 themes exist.");
+        }
     }
 
     /**

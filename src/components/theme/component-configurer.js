@@ -112,6 +112,12 @@ class ComponentConfigurer {
      * @public
      */
     finish() { return this.webAmpConfigurer; }
+
+    /**
+     * Finish configuring the WebAmp configurer and apply it immediately.
+     * @public
+     */
+    apply() { return this.webAmpConfigurer.apply(); }
 }
 
 module.exports = { ComponentConfigurer };
