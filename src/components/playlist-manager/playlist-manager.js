@@ -71,7 +71,7 @@ class PlaylistManager extends AudioComponent {
                 this.raiseEvent("playlistLoaded", this.tracks);
             }
         }).then(() => {
-            this.getValue("trackIndex", 0).then((results) => {
+            this.getValue("trackIndex", -1).then((results) => {
                 if(this.preferences.tracks.length !== 0) {
                     if(results.value >= this.preferences.tracks.length || results.value < 0) {
                         results.value = this.preferences.tracks.length - 1;
