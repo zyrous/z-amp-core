@@ -1,3 +1,15 @@
+# [1.1.0](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.17...v1.1.0) (2021-03-17)
+
+
+### Bug Fixes
+
+* fixed bug on playlist state loading ([0912fe4](https://bitbucket.org/zyrous/z-amp-core/commits/0912fe42eb05d079f6ff0039039d1dda16bf0971))
+
+
+### Features
+
+* added fluent interface for theme build/apply ([4a6da4c](https://bitbucket.org/zyrous/z-amp-core/commits/4a6da4c781d60f9b9dafb189eada978adac60c20))
+
 ## [1.0.17](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.16...v1.0.17) (2021-03-15)
 
 
