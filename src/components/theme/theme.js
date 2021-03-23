@@ -35,7 +35,7 @@ class Theme extends AudioComponent {
      * @private
      * @type {String}
      */
-    themeName;
+    name;
 
     /**
      * Construct a new theme.
@@ -95,7 +95,7 @@ class Theme extends AudioComponent {
      * @param {String} themeName The name to give to the theme.
      */
     set themeName(themeName) {
-        this.themeName = themeName;
+        this.name = themeName;
     }
 
     /**
@@ -103,7 +103,7 @@ class Theme extends AudioComponent {
      * @public
      * @returns {String}
      */
-    get themeName() { return themeName; }
+    get themeName() { return this.name; }
 }
 
 module.exports = { Theme };

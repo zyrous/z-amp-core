@@ -1,5 +1,3 @@
-const { WebAmpConfigurer } = require("./web-amp-configurer");
-
 /**
  * Allows for configuration of a layout of a theme. This forms part of
  * a collection owned by a WebAmpConfigurer.
@@ -11,9 +9,9 @@ class LayoutConfigurer {
     /**
      * The parent configurer that contains this component configurer.
      * @private
-     * @type {WebAmpConfigurer}
+     * @type {any}
      */
-    webAmpConfigurer;
+    builder;
 
     /**
      * The function that, when executed, renders HTML for the layout.
@@ -32,14 +30,13 @@ class LayoutConfigurer {
     /**
      * Create a new configurer for a layout that forms part of a theme.
      * @param {Function} layoutFunction The function that, when executed, renders HTML for the layout.
-     * @param {WebAmpConfigurer} webAmpConfigurer The WebAmp configurer that this 
+     * @param {any} builder The WebAmp configurer that this 
      * layout configurer belongs to.
      */
-    constructor(layoutFunction, webAmpConfigurer) {
+    constructor(layoutFunction, builder) {
 
         // Add this object to the parent configurer.
-        this.webAmpConfigurer = webAmpConfigurer;
-        this.webAmpConfigurer.addLayoutConfigurer(this);
+        this.builder = builder;
 
         this.layoutFunction = layoutFunction;
     }
@@ -102,13 +99,13 @@ class LayoutConfigurer {
      * Add another component to the WebAmp configurer.
      * @public
      */
-    and() { return this.webAmpConfigurer; }
+    and() { return this.builder; }
 
     /**
      * Finish configuring the WebAmp configurer.
      * @public
      */
-    finish() { return this.webAmpConfigurer; }
+    finish() { return this.builder; }
 }
 
 module.exports = { LayoutConfigurer };

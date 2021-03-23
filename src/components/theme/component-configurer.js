@@ -1,5 +1,3 @@
-const { WebAmpConfigurer } = require("./web-amp-configurer");
-
 /**
  * Allows for configuration of a WebAmp component by a theme. This forms part
  * of a collection owned by a WebAmpConfigurer.
@@ -11,9 +9,9 @@ class ComponentConfigurer {
     /**
      * The parent configurer that contains this component configurer.
      * @private
-     * @type {WebAmpConfigurer}
+     * @type {any}
      */
-    webAmpConfigurer;
+    builder;
 
     /**
      * The type of the component that the configurer will create.
@@ -42,14 +40,13 @@ class ComponentConfigurer {
      * @param {Type} componentType The type of the component to create.
      * @param {Type} PreferencesType The type of the preferences that will be provided to the 
      * component when it is created.
-     * @param {WebAmpConfigurer} webAmpConfigurer The configurer that this component configurer
+     * @param {any} builder The configurer that this component configurer
      * belongs to.
      */
-    constructor(componentType, PreferencesType, webAmpConfigurer) {
+    constructor(componentType, PreferencesType, builder) {
 
         // Add this object to the parent configurer.
-        this.webAmpConfigurer = webAmpConfigurer;
-        this.webAmpConfigurer.addComponentConfigurer(this);
+        this.builder = builder;
 
         this.ComponentType = componentType;
 
@@ -105,19 +102,19 @@ class ComponentConfigurer {
      * Add another component to the WebAmp configurer.
      * @public
      */
-    and() { return this.webAmpConfigurer; }
+    and() { return this.builder; }
 
     /**
      * Finish configuring the WebAmp configurer.
      * @public
      */
-    finish() { return this.webAmpConfigurer; }
+    finish() { return this.builder; }
 
     /**
      * Finish configuring the WebAmp configurer and apply it immediately.
      * @public
      */
-    apply() { return this.webAmpConfigurer.apply(); }
+    apply() { return this.builder.apply(); }
 }
 
 module.exports = { ComponentConfigurer };

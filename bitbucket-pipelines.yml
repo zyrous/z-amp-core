@@ -17,6 +17,8 @@ stepdefinitions:
       script:
         - npm run serve &
         - npx cypress run --record --key ${CYPRESS_RECORD_KEY}
+      artifacts:
+        - node_modules/**
   - package: &package-and-release
         name: Package and Release
         script:
@@ -33,6 +35,3 @@ pipelines:
       - step: *e2e-test
       - step: *package-and-release
     
-definitions:
-    caches:
-        npm: $HOME/.npmapg

@@ -127,7 +127,11 @@ class WebAmpConfigurer {
      * @public
      * @returns {ComponentConfigurer}
      */
-    addAudioHtmlVisualiser = () => new ComponentConfigurer(AudioHtmlVisualiser, AudioHtmlVisualiserPreferences, this);
+    addAudioHtmlVisualiser(){
+        const configurer = new ComponentConfigurer(AudioHtmlVisualiser, AudioHtmlVisualiserPreferences, this);
+        this.addComponentConfigurer(configurer);
+        return configurer;
+    }
 
     /**
      * Add a pipeline for processing and playing audio.
@@ -135,7 +139,11 @@ class WebAmpConfigurer {
      * @public
      * @returns {ComponentConfigurer}
      */
-    addAudioPipeline = () => new ComponentConfigurer(AudioPipeline, null, this);
+    addAudioPipeline(){
+        const configurer = new ComponentConfigurer(AudioPipeline, null, this);
+        this.addComponentConfigurer(configurer);
+        return configurer;
+    }
 
     /**
      * Add an audio player for streaming media from an online source.
@@ -143,7 +151,11 @@ class WebAmpConfigurer {
      * @public
      * @returns {ComponentConfigurer}
      */
-    addAudioPlayer = () => new ComponentConfigurer(AudioPlayer, PlayerPreferences, this);
+    addAudioPlayer(){
+        const configurer = new ComponentConfigurer(AudioPlayer, PlayerPreferences, this);
+        this.addComponentConfigurer(configurer);
+        return configurer;
+    }
 
     /**
      * Add an equalizer for manipulating frequency bands in the audio pipeline.
@@ -151,7 +163,11 @@ class WebAmpConfigurer {
      * @public
      * @returns {ComponentConfigurer}
      */
-    addEqualizer = () => new ComponentConfigurer(Equalizer, EqualizerPreferences, this);
+    addEqualizer(){
+        const configurer = new ComponentConfigurer(Equalizer, EqualizerPreferences, this);
+        this.addComponentConfigurer(configurer);
+        return configurer;
+    }
 
     /**
      * Add a manager for multiple media files.
@@ -159,7 +175,11 @@ class WebAmpConfigurer {
      * @public
      * @returns {ComponentConfigurer}
      */
-    addPlaylistManager = () => new ComponentConfigurer(PlaylistManager, PlaylistPreferences, this);
+    addPlaylistManager(){
+        const configurer = new ComponentConfigurer(PlaylistManager, PlaylistPreferences, this);
+        this.addComponentConfigurer(configurer);
+        return configurer;
+    }
 
     /**
      * Add a new layout for this configuration.
@@ -167,7 +187,11 @@ class WebAmpConfigurer {
      * @public
      * @param {String} fileName The path to the file that contains the layout template.
      */
-    addLayout = (fileName) => new LayoutConfigurer(fileName, this);
+    addLayout(fileName){
+        const configurer = new LayoutConfigurer(fileName, this);
+        this.addLayoutConfigurer(configurer);
+        return configurer;
+    }
 }
 
 module.exports = { WebAmpConfigurer };

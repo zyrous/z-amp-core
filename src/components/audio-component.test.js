@@ -3,8 +3,8 @@ chai.use(require("chai-as-promised"));
 const expect = chai.expect;
 const faker = require("faker");
 const sinon = require("sinon");
-const JSDOM = require("jsdom");
 
+const JSDOM = require("jsdom");
 const dom = new JSDOM.JSDOM();
 global.window = dom.window;
 global.document = dom.window.document;
