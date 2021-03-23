@@ -1,3 +1,11 @@
+## [1.1.1](https://bitbucket.org/zyrous/z-amp-core/compare/v1.1.0...v1.1.1) (2021-03-23)
+
+
+### Bug Fixes
+
+* changing mock data generation in unit tests ([cddd423](https://bitbucket.org/zyrous/z-amp-core/commits/cddd423ac1b52f27914a16db12247fbc23715cde))
+* fixed circular dependency bug ([0a0f528](https://bitbucket.org/zyrous/z-amp-core/commits/0a0f52884b895bd1b9168bea92cca5477470ef86))
+
 # [1.1.0](https://bitbucket.org/zyrous/z-amp-core/compare/v1.0.17...v1.1.0) (2021-03-17)
 
 
