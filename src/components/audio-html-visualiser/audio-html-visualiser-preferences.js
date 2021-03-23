@@ -28,7 +28,7 @@ class AudioHtmlVisualiserPreferences {
      * @public
      * @type {HTMLElement[]}
      */
-    frequencyElements;
+    frequencyElements = [];
 }
 
 module.exports = { AudioHtmlVisualiserPreferences };
