@@ -1,3 +1,10 @@
+## [1.1.2](https://bitbucket.org/zyrous/z-amp-core/compare/v1.1.1...v1.1.2) (2021-03-23)
+
+
+### Bug Fixes
+
+* added amp() method to top-level object ([05bbc10](https://bitbucket.org/zyrous/z-amp-core/commits/05bbc10fb424524043052f1fa958411f5206a3fa))
+
 ## [1.1.1](https://bitbucket.org/zyrous/z-amp-core/compare/v1.1.0...v1.1.1) (2021-03-23)
 
 
