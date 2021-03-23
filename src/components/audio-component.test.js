@@ -174,8 +174,8 @@ describe("Audio Component", function() {
     }),
 
     it("Attaches DOM element successfully when it doesn't exist", async() => {
-        var testElementName = faker.hacker.noun();
-        var testSelector = faker.hacker.noun();
+        var testElementName = faker.lorem.word();
+        var testSelector = faker.lorem.word();
         var testParentObject = {};
         var mockDocument = sandbox.mock(document);
         mockDocument.expects("querySelector").withArgs(testSelector).returns(null);
@@ -189,9 +189,9 @@ describe("Audio Component", function() {
     }),
 
     it("Attaches multiple DOM elements successfully when they exist", async() => {
-        var testElementName = faker.hacker.noun();
+        var testElementName = faker.lorem.word();
         var testElements = [document.createElement(testElementName), document.createElement(testElementName)];
-        var testSelector = faker.hacker.noun();
+        var testSelector = faker.lorem.word();
         var testParentObject = {};
         var mockDocument = sandbox.mock(document);
         mockDocument.expects("querySelectorAll").withArgs(testSelector).returns(testElements);
