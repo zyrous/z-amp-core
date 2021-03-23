@@ -31,7 +31,7 @@ describe("Audio Component", function() {
     }),
 
     it("Constructs correctly with custom name", async() => {
-        var testName = faker.hacker.noun();
+        var testName = faker.lorem.word();
 
         var component = new AudioComponent(testName);
         expect(component.componentName).to.equal(testName);
@@ -52,7 +52,7 @@ describe("Audio Component", function() {
 
     it("Resets storage provider when change received", async() => {
         var testProvider = {
-            name: faker.hacker.noun()
+            name: faker.lorem.word()
         };
 
         var component = new AudioComponent();
@@ -65,7 +65,7 @@ describe("Audio Component", function() {
         const testStorageProvider = { id: faker.random.uuid() };
         const createProviderStub = sandbox.stub(StorageProviderFactory.prototype, "createProvider")
         .returns(testStorageProvider);
-        const testProviderName = faker.hacker.noun();
+        const testProviderName = faker.lorem.word();
 
         var component = new AudioComponent();
         component.setStorageProvider(testProviderName);
@@ -75,7 +75,7 @@ describe("Audio Component", function() {
     }),
 
     it("Stores values correctly with provider", async() => {
-        const testValueName = faker.hacker.noun();
+        const testValueName = faker.lorem.word();
         const testValue = faker.random.uuid();
         const mockStorageProvider = sandbox.mock(StorageProvider.prototype);
         mockStorageProvider.expects("storeValue")
@@ -91,7 +91,7 @@ describe("Audio Component", function() {
     }),
 
     it("Retrieves values correctly from provider", async() => {
-        const testValueName = faker.hacker.noun();
+        const testValueName = faker.lorem.word();
         const testValue = faker.random.uuid();
         const testDefaultValue = faker.random.uuid();
         const testArgs = { id: faker.random.uuid() };
@@ -110,7 +110,7 @@ describe("Audio Component", function() {
 
     it("Adds new event handlers successfully", async() => {
         const testCallback = sandbox.stub();
-        const testEventName = faker.hacker.noun();
+        const testEventName = faker.lorem.word();
 
         var component = new AudioComponent();
         component.addEventListener(testEventName, testCallback);
@@ -121,7 +121,7 @@ describe("Audio Component", function() {
 
     it("Responds to new event successfully", async() => {
         const testCallback = sandbox.stub();
-        const testEventName = faker.hacker.noun();
+        const testEventName = faker.lorem.word();
         const testArgs = { id: faker.random.uuid() };
 
         var component = new AudioComponent();
@@ -133,13 +133,13 @@ describe("Audio Component", function() {
 
     it("Succeeds when event not handled", async() => {
         var component = new AudioComponent();
-        component.handleEvent(faker.hacker.noun());
+        component.handleEvent(faker.lorem.word());
     }),
 
     it("Attaches DOM element successfully when it exists with no listeners", async() => {
-        var testElementName = faker.hacker.noun();
+        var testElementName = faker.lorem.word();
         var testElement = document.createElement(testElementName);
-        var testSelector = faker.hacker.noun();
+        var testSelector = faker.lorem.word();
         var testParentObject = {};
         var mockDocument = sandbox.mock(document);
         mockDocument.expects("querySelector").withArgs(testSelector).returns(testElement);
@@ -152,11 +152,11 @@ describe("Audio Component", function() {
     }),
 
     it("Attaches DOM element successfully when it exists with listeners", async() => {
-        var testElementName = faker.hacker.noun();
+        var testElementName = faker.lorem.word();
         var testElement = document.createElement(testElementName);
-        var testSelector = faker.hacker.noun();
+        var testSelector = faker.lorem.word();
         var testParentObject = {};
-        var testEventName = faker.hacker.noun();
+        var testEventName = faker.lorem.word();
         var testCallback = sandbox.stub();
         var testListener = {
             eventName: testEventName,
