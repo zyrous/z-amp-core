@@ -4,7 +4,7 @@ const {EqualizerPreset} = require("./equalizer-preset");
 /**
  * Preferences that dictate how an Equalizer component will behave.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Components.Equalizer
+ * @memberof ZAmp.Components.Equalizer
  */
 class EqualizerPreferences {
 

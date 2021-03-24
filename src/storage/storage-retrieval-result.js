@@ -1,7 +1,7 @@
 /**
  * The result of an attempt to retrieve a value from a storage provider.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Storage
+ * @memberof ZAmp.Storage
  */
 class StorageRetrievalResult {
 

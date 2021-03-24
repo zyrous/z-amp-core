@@ -1,18 +1,18 @@
 /**
- * @namespace WebAmp.ThemeManager
+ * @namespace ZAmp.ThemeManager
  */
 
 /**
  * Manages different themes that are available to be set for this
- * WebAmp session.
+ * ZAmp session.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.ThemeManager
+ * @memberof ZAmp.ThemeManager
  */
 class ThemeManager {
 
     /**
      * Add a theme to the manager, making it available to retrieve
-     * in WebAmp.
+     * in ZAmp.
      * @public
      * @param {Theme} theme The theme to add to the manager.
      */

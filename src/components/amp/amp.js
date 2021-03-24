@@ -3,15 +3,15 @@ const { ThemeManager } = require("../../theme-manager/theme-manager");
 const { v4: uuidv4 } = require("uuid");
 
 /**
- * @namespace WebAmp.Components.Amp
+ * @namespace ZAmp.Components.Amp
  */
 
 /**
- * Provides a running instance of WebAmp. This is the primary entry point of
- * the library. Developers using this framework should interact with WebAmp
+ * Provides a running instance of ZAmp. This is the primary entry point of
+ * the library. Developers using this framework should interact with ZAmp
  * exclusively through this interface.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Components.Amp
+ * @memberof ZAmp.Components.Amp
  * @augments AudioComponent
  */
 class Amp extends AudioComponent {
@@ -35,15 +35,15 @@ class Amp extends AudioComponent {
     themeManager = new ThemeManager();
     
     /**
-     * The static version of initialisation of WebAmp. Call this method to create a new
-     * running instance of WebAmp with a theme applied.
+     * The static version of initialisation of ZAmp. Call this method to create a new
+     * running instance of ZAmp with a theme applied.
      * @example
      * // Attach to the body of the DOM using the default theme.
      * Amp.amp()
      *   .then(() => console.log("Ready to play!"))
-     * @param {String} selector The CSS selector that tells WebAmp where to find the parent
+     * @param {String} selector The CSS selector that tells ZAmp where to find the parent
      * HTML element that it will fit inside.
-     * @param {String} themeName The name of the theme that WebAmp will use.
+     * @param {String} themeName The name of the theme that ZAmp will use.
      * @returns {Promise<Amp>}
      */
     static amp(selector = "body", themeName){
@@ -98,7 +98,7 @@ class Amp extends AudioComponent {
      * amp.initialse("#player", "minimal")
      *   .then(() => console.log("Amp good to go!"));
      * @public
-     * @param {String} selector The CSS selector that defines the HTML element that WebAmp will
+     * @param {String} selector The CSS selector that defines the HTML element that ZAmp will
      * render itself within.
      * @param {String} themeName The name of the theme to apply.
      * @returns {Promise<Amp>} The newly initialised Amp.
@@ -124,7 +124,7 @@ class Amp extends AudioComponent {
             // Add the theme as a component so that it can respond to events.
             initPromises.push(this.addComponent(theme));
 
-            // Return all of the promises; when these resolve, WebAmp has been initialised.
+            // Return all of the promises; when these resolve, ZAmp has been initialised.
             return Promise.all(initPromises)
             .then(() => {
                 console.log(`=======================================================

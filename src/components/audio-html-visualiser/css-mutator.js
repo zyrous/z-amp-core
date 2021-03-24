@@ -4,7 +4,7 @@
  * set, the default configuration will cause the HTML element's
  * height to vary from 0 - 100%.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Components.AudioHtmlVisualiser
+ * @memberof ZAmp.Components.AudioHtmlVisualiser
  */
 class CssMutator {
 

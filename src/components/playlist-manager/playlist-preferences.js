@@ -1,7 +1,7 @@
 /**
  * The set of preferences that dictate how a playlist configures itself and behaves.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Components.PlaylistManager
+ * @memberof ZAmp.Components.PlaylistManager
  */
 class PlaylistPreferences {
 

@@ -3,7 +3,7 @@ const { EqualizerPreset } = require("./equalizer-preset");
 const { AudioComponent } = require("../audio-component");
 
 /**
- * @namespace WebAmp.Components.Equalizer
+ * @namespace ZAmp.Components.Equalizer
  */
 
 /**
@@ -13,7 +13,7 @@ const { AudioComponent } = require("../audio-component");
  * sliders), chained together and connecting the audio source to its destination.
  * By default, each frequency band can be adjusted by +/- 40dB.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Components.Equalizer
+ * @memberof ZAmp.Components.Equalizer
  * @augments AudioComponent
  */
 class Equalizer extends AudioComponent {

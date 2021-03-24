@@ -1,7 +1,7 @@
 /**
  * Describes a single segment of an audio pipeline.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Components.AudioPipeline
+ * @memberof ZAmp.Components.AudioPipeline
  */
 class AudioPipelineSegment {
 

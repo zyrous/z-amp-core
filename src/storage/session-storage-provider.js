@@ -3,7 +3,7 @@ const {StorageRetrievalResult} = require("./storage-retrieval-result");
 
 /**
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Storage
+ * @memberof ZAmp.Storage
  * @augments StorageProvider
  */
 class SessionStorageProvider extends StorageProvider {

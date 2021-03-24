@@ -4,13 +4,13 @@ const {StorageProviderFactory} = require("../storage/storage-provider-factory");
 const {StorageRetrievalResult} = require("../storage/storage-retrieval-result");
 
 /**
- * @namespace WebAmp.Components
+ * @namespace ZAmp.Components
  */
 
 /**
- * Provides a base class for all WebAmp components to inherit from.
+ * Provides a base class for all ZAmp components to inherit from.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Components
+ * @memberof ZAmp.Components
  * @abstract
  */
 class AudioComponent {
@@ -37,7 +37,7 @@ class AudioComponent {
     componentName;
     
     /**
-     * Construct a new WebAmp component. Each WebAmp component must call this method within
+     * Construct a new ZAmp component. Each ZAmp component must call this method within
      * its own constructor.
      * @param {String} componentName The name of this component. Names are used to uniquely identify
      * an *instance* of a component.
@@ -49,7 +49,7 @@ class AudioComponent {
 
     /**
      * Initialise elements on the page to allow the user to control this component. Each
-     * WebAmp component is expected to implement this method.
+     * ZAmp component is expected to implement this method.
      * @protected
      * @abstract
      * @async
@@ -58,7 +58,7 @@ class AudioComponent {
 
     /**
      * Initialise the set of keys and key combinations that will be used to control this
-     * component. Each WebAmp component is expected to implement this method.
+     * component. Each ZAmp component is expected to implement this method.
      * @protected
      * @abstract
      * @async
@@ -67,7 +67,7 @@ class AudioComponent {
 
     /**
      * Load any previously saved state into this component, using the storage provider. Each 
-     * WebAmp component is expected to implement this method.
+     * ZAmp component is expected to implement this method.
      * @protected
      * @abstract
      * @async
@@ -232,7 +232,7 @@ class AudioComponent {
     }
     
     /**
-     * Called when a new storage provider is selected for WebAmp.
+     * Called when a new storage provider is selected for ZAmp.
      * @private
      * @param {StorageProvider} storageProvider The storage provider that was selected.
      */

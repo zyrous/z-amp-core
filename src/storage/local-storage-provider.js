@@ -9,7 +9,7 @@ const {StorageRetrievalResult} = require("./storage-retrieval-result");
  * across all pages in the same domain, so if you have multiple pages with a
  * player, they will share the same values.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Storage
+ * @memberof ZAmp.Storage
  * @augments StorageProvider
  */
 class LocalStorageProvider extends StorageProvider {

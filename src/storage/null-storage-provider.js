@@ -4,10 +4,10 @@ const {StorageRetrievalResult} = require("./storage-retrieval-result");
 /**
  * The null storage provider stores nothing. Instead it responds to each
  * call to retrieve a value with the default that is supplied to it. Use
- * this provider if you want WebAmp interactions to be short-lived, i.e.
+ * this provider if you want ZAmp interactions to be short-lived, i.e.
  * for the duration of a single page load only.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Storage
+ * @memberof ZAmp.Storage
  * @augments StorageProvider
  */
 class NullStorageProvider extends StorageProvider {

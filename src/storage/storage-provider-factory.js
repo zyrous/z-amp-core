@@ -5,7 +5,7 @@ const {NullStorageProvider} = require("./null-storage-provider");
 /**
  * Uses the factory pattern to provide access to different types of storage provider.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Storage
+ * @memberof ZAmp.Storage
  */
 class StorageProviderFactory {
 

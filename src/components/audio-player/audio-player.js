@@ -3,7 +3,7 @@ const { AudioComponent } = require("../audio-component");
 const { AudioTrack } = require("../../domain/audio-track");
 
 /**
- * @namespace WebAmp.Components.AudioPlayer
+ * @namespace ZAmp.Components.AudioPlayer
  */
 
 /**
@@ -14,7 +14,7 @@ const { AudioTrack } = require("../../domain/audio-track");
  * These functions are bound to both HTML elements with the correct attributes and, where applicable,
  * the media keys of the host OS.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Components.AudioPlayer
+ * @memberof ZAmp.Components.AudioPlayer
  * @augments AudioComponent
  */
 class AudioPlayer extends AudioComponent {

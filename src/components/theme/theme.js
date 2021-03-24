@@ -1,16 +1,16 @@
 const { AudioComponent } = require("../audio-component");
 const { ThemeManager } = require("../../theme-manager/theme-manager");
-const { WebAmpConfigurer } = require("./web-amp-configurer");
+const { ZAmpConfigurer } = require("./z-amp-configurer");
 const { v4: uuidv4 } = require("uuid");
 
 /**
- * @namespace WebAmp.Components.Theme
+ * @namespace ZAmp.Components.Theme
  */
 
 /**
- * Provides a base class for custom WebAmp themes.
+ * Provides a base class for custom ZAmp themes.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Components.Theme
+ * @memberof ZAmp.Components.Theme
  * @augments AudioComponent
  */
 class Theme extends AudioComponent {
@@ -26,7 +26,7 @@ class Theme extends AudioComponent {
      * The configurer that will be used to create the components and layouts
      * needed by this theme.
      * @private
-     * @type {WebAmpConfigurer}
+     * @type {ZAmpConfigurer}
      */
     configurer;
 
@@ -51,7 +51,7 @@ class Theme extends AudioComponent {
 
     /**
      * Register this theme with the theme manager. This method must be called
-     * before the theme is available for use within WebAmp.
+     * before the theme is available for use within ZAmp.
      * @public
      */
     register() {
@@ -63,17 +63,17 @@ class Theme extends AudioComponent {
      * this theme. This must be implemented in derived classes.
      * @abstract
      * @protected
-     * @returns {WebAmpConfigurer}
+     * @returns {ZAmpConfigurer}
      */
     buildConfiguration() {}
 
     /**
-     * Begin configuring the WebAmp configuration for this theme.
+     * Begin configuring the ZAmp configuration for this theme.
      * @protected
-     * @returns {WebAmpConfigurer}
+     * @returns {ZAmpConfigurer}
      */
     startConfiguring() {
-        this.configurer = new WebAmpConfigurer(this.themeName);
+        this.configurer = new ZAmpConfigurer(this.themeName);
         return this.configurer;
     }
 

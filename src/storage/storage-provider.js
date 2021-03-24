@@ -3,14 +3,14 @@ const {StorageRetrievalResult} = require("./storage-retrieval-result");
 /**
  * Classes in the Storage namespace provide the means of storing and retrieving
  * values to support the execution of logic in different components.
- * @namespace WebAmp.Storage
+ * @namespace ZAmp.Storage
  */
 
 /**
  * Provides a base (abstract) class for different types of providers that
  * offer storage capability to audio components.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Storage
+ * @memberof ZAmp.Storage
  * @abstract
  */
 class StorageProvider {

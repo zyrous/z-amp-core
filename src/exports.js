@@ -8,7 +8,7 @@
 const corejs = require("core-js");
 const regenerator = require("regenerator-runtime/runtime");
 
-// Get the existing WebAmp object, or create one if it doesn't exist.
+// Get the existing ZAmp object, or create one if it doesn't exist.
 var ZAmp = window.ZAmp || {};
 const { Amp } = require("./components/amp/amp"); 
 const { Theme } = require("./components/theme/theme");

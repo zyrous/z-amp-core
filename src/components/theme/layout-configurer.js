@@ -1,8 +1,8 @@
 /**
  * Allows for configuration of a layout of a theme. This forms part of
- * a collection owned by a WebAmpConfigurer.
+ * a collection owned by a ZAmpConfigurer.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Components.Theme
+ * @memberof ZAmp.Components.Theme
  */
 class LayoutConfigurer {
     
@@ -30,7 +30,7 @@ class LayoutConfigurer {
     /**
      * Create a new configurer for a layout that forms part of a theme.
      * @param {Function} layoutFunction The function that, when executed, renders HTML for the layout.
-     * @param {any} builder The WebAmp configurer that this 
+     * @param {any} builder The ZAmp configurer that this 
      * layout configurer belongs to.
      */
     constructor(layoutFunction, builder) {
@@ -96,13 +96,13 @@ class LayoutConfigurer {
     }
 
     /**
-     * Add another component to the WebAmp configurer.
+     * Add another component to the ZAmp configurer.
      * @public
      */
     and() { return this.builder; }
 
     /**
-     * Finish configuring the WebAmp configurer.
+     * Finish configuring the ZAmp configurer.
      * @public
      */
     finish() { return this.builder; }

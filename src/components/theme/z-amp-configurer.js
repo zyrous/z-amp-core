@@ -12,22 +12,22 @@ const {LayoutConfigurer} = require("./layout-configurer");
 const {Amp} = require("../amp/amp");
 
 /**
- * Provides a facility that allows the user to configure a WebAmp instance's components
+ * Provides a facility that allows the user to configure a ZAmp instance's components
  * for use by a single theme.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Components.Theme
+ * @memberof ZAmp.Components.Theme
  */
-class WebAmpConfigurer {
+class ZAmpConfigurer {
     
     /**
-     * The set of components that make up the WebAmp instance.
+     * The set of components that make up the ZAmp instance.
      * @private
      * @type {ComponentConfigurer[]}
      */
     components = [];
 
     /**
-     * The set of layouts that make up the WebAmp instance.
+     * The set of layouts that make up the ZAmp instance.
      * @private
      * @type {LayoutConfigurer[]}
      */
@@ -79,7 +79,7 @@ class WebAmpConfigurer {
     }
 
     /**
-     * Configure the entire set of components that make up this WebAmp configuration.
+     * Configure the entire set of components that make up this ZAmp configuration.
      * @public
      * @returns {AudioComponent[]}
      */
@@ -98,7 +98,7 @@ class WebAmpConfigurer {
     }
 
     /**
-     * Configure the entire set of layouts that make up this WebAmp configuration.
+     * Configure the entire set of layouts that make up this ZAmp configuration.
      * @public
      * @param {HTMLElement} parentElement The HTML element to use to render content into.
      */
@@ -106,7 +106,7 @@ class WebAmpConfigurer {
 
         if(!parentElement){
             // Nothing to render into.
-            throw Error("No parent element to render WebAmp within. Did you provide one to the amp() function?");
+            throw Error("No parent element to render ZAmp within. Did you provide one to the amp() function?");
         }
         
         return Promise.all(this.layouts.map((configurer) => configurer.configure(parentElement)));
@@ -194,4 +194,4 @@ class WebAmpConfigurer {
     }
 }
 
-module.exports = { WebAmpConfigurer };
+module.exports = { ZAmpConfigurer };

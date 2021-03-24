@@ -5,7 +5,7 @@ const {FadePreferences} = require("./fade-preferences");
  * Defines the set of preferences that dictate how the audio player will behave. These
  * settings generally have defaults but can be overridden by the user if necessary.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Components.AudioPlayer
+ * @memberof ZAmp.Components.AudioPlayer
  */
 class PlayerPreferences {
 

@@ -2,13 +2,13 @@ const { AudioComponent } = require("../audio-component");
 const { AudioPipelineSegment } = require("./audio-pipeline-segment");
 
 /**
- * @namespace WebAmp.Components.AudioPipeline
+ * @namespace ZAmp.Components.AudioPipeline
  */
 
 /**
  * Provides and manages a processing pipeline for audio.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Components.AudioPipeline
+ * @memberof ZAmp.Components.AudioPipeline
  * @augments AudioComponent
  */
 class AudioPipeline extends AudioComponent {

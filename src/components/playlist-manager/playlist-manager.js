@@ -3,7 +3,7 @@ const { AudioComponent } = require("../audio-component");
 const { AudioTrack } = require("../../domain/audio-track");
 
 /**
- * @namespace WebAmp.Components.PlaylistManager
+ * @namespace ZAmp.Components.PlaylistManager
  */
 
 /**
@@ -11,7 +11,7 @@ const { AudioTrack } = require("../../domain/audio-track");
  * Supports playing components by providing tracks to play when none are available or when
  * one completes.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Components.PlaylistManager
+ * @memberof ZAmp.Components.PlaylistManager
  * @augments AudioComponent
  */
 class PlaylistManager extends AudioComponent {

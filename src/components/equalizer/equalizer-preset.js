@@ -1,7 +1,7 @@
 /**
  * Represents a preset of bands and frequencies for an equalizer.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Components.Equalizer
+ * @memberof ZAmp.Components.Equalizer
  */ 
 class EqualizerPreset {
 

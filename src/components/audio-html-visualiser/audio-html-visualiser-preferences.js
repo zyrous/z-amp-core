@@ -2,7 +2,7 @@
  * Describes settings for a HTML visualiser that control how it configures itself and how
  * it behaves.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Components.AudioHtmlVisualiser
+ * @memberof ZAmp.Components.AudioHtmlVisualiser
  */
 class AudioHtmlVisualiserPreferences {
 

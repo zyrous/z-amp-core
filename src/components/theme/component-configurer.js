@@ -1,8 +1,8 @@
 /**
- * Allows for configuration of a WebAmp component by a theme. This forms part
- * of a collection owned by a WebAmpConfigurer.
+ * Allows for configuration of a ZAmp component by a theme. This forms part
+ * of a collection owned by a ZAmpConfigurer.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Components.Theme
+ * @memberof ZAmp.Components.Theme
  */
 class ComponentConfigurer {
     
@@ -36,7 +36,7 @@ class ComponentConfigurer {
     preferences;
 
     /**
-     * Create a new configurer for a specific type of WebAmp component.
+     * Create a new configurer for a specific type of ZAmp component.
      * @param {Type} componentType The type of the component to create.
      * @param {Type} PreferencesType The type of the preferences that will be provided to the 
      * component when it is created.
@@ -99,19 +99,19 @@ class ComponentConfigurer {
     }
 
     /**
-     * Add another component to the WebAmp configurer.
+     * Add another component to the ZAmp configurer.
      * @public
      */
     and() { return this.builder; }
 
     /**
-     * Finish configuring the WebAmp configurer.
+     * Finish configuring the ZAmp configurer.
      * @public
      */
     finish() { return this.builder; }
 
     /**
-     * Finish configuring the WebAmp configurer and apply it immediately.
+     * Finish configuring the ZAmp configurer and apply it immediately.
      * @public
      */
     apply() { return this.builder.apply(); }

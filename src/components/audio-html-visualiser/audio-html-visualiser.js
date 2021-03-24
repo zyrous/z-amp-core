@@ -3,7 +3,7 @@ const { AudioComponent } = require("../audio-component");
 const { CssMutator } = require("./css-mutator");
 
 /**
- * @namespace WebAmp.Components.AudioHtmlVisualiser
+ * @namespace ZAmp.Components.AudioHtmlVisualiser
  */
 
 /**
@@ -11,7 +11,7 @@ const { CssMutator } = require("./css-mutator");
  * audio element. This component uses HTML elements with the "audio-vis-eq-frequency"
  * attribute and manipulates them over time, to the music.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Components.AudioHtmlVisualiser
+ * @memberof ZAmp.Components.AudioHtmlVisualiser
  * @augments AudioComponent
  */
 class AudioHtmlVisualiser extends AudioComponent {

@@ -1,7 +1,7 @@
 /**
  * Preferences that dictate how an Equalizer will initialise and control its frequencies.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof WebAmp.Components.Equalizer
+ * @memberof ZAmp.Components.Equalizer
  */
 class FilterPreferences {
 
