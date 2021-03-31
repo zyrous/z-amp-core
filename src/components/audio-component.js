@@ -256,9 +256,6 @@ class AudioComponent {
         if(!channelName) {
             throw Error("Cannot add an audio component to an empty channel.");
         }
-        if(this.belongsToChannel(channelName)) {
-            throw Error(`This audio component already belongs to channel '${channelName}'.`);
-        }
 
         this.channel = channelName;
     }

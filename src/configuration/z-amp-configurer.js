@@ -165,7 +165,7 @@ class ZAmpConfigurer {
      * Add a pipeline for processing and playing audio.
      * @method
      * @public
-     * @returns {ComponentConfigurer}
+     * @returns {AudioPipelineConfigurer}
      */
     addAudioPipeline(pipelineName = "Default"){
         const configurer = new AudioPipelineConfigurer(this, pipelineName, this.elementSelector);
