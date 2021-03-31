@@ -1,3 +1,10 @@
+# [1.2.0](https://bitbucket.org/zyrous/z-amp-core/compare/v1.1.2...v1.2.0) (2021-03-31)
+
+
+### Features
+
+* added support for multiple audio pipelines ([bcdef40](https://bitbucket.org/zyrous/z-amp-core/commits/bcdef40f028fc238837ef7d138b114909bf99283))
+
 ## [1.1.2](https://bitbucket.org/zyrous/z-amp-core/compare/v1.1.1...v1.1.2) (2021-03-23)
 
 
