@@ -1,24 +1,27 @@
 const {ComponentConfigurer} = require("./component-configurer");
-const {AudioPipeline} = require("../audio-pipeline/audio-pipeline");
-const {AudioPlayer} = require("../audio-player/audio-player");
-const {PlayerPreferences} = require("../audio-player/player-preferences");
-const {Equalizer} = require("../equalizer/equalizer");
-const {EqualizerPreferences} = require("../equalizer/equalizer-preferences");
-const {PlaylistManager} = require("../playlist-manager/playlist-manager");
-const {PlaylistPreferences} = require("../playlist-manager/playlist-preferences");
-const {AudioHtmlVisualiser} = require("../audio-html-visualiser/audio-html-visualiser");
-const {AudioHtmlVisualiserPreferences} = require("../audio-html-visualiser/audio-html-visualiser-preferences");
 const {LayoutConfigurer} = require("./layout-configurer");
-const {Amp} = require("../amp/amp");
+const {AudioPipelineConfigurer} = require("./audio-pipeline-configurer");
+const {Amp} = require("../components/amp/amp");
+
+/**
+ * @namespace ZAmp.Configuration
+ */
 
 /**
  * Provides a facility that allows the user to configure a ZAmp instance's components
  * for use by a single theme.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof ZAmp.Components.Theme
+ * @memberof ZAmp.Configuration
  */
 class ZAmpConfigurer {
     
+    /**
+     * The set of pipelines that will be added to the configuration.
+     * @private
+     * @type {AudioPipelineConfigurer[]}
+     */
+    pipelines = [];
+
     /**
      * The set of components that make up the ZAmp instance.
      * @private
@@ -81,10 +84,34 @@ class ZAmpConfigurer {
     /**
      * Configure the entire set of components that make up this ZAmp configuration.
      * @public
+     * @param {String} elementSelector The HTML element to use to attach to.
      * @returns {AudioComponent[]}
      */
-    configureComponents() {
-        return this.components.map((configurer) => configurer.configure());
+    configureComponents(elementSelector) {
+        
+        if(!elementSelector){
+            // Nothing to render into.
+            throw Error("No parent element to render ZAmp within. Did you provide one to the amp() function?");
+        }
+        
+        const rootElement = document.querySelector(elementSelector);
+
+        if(!rootElement) {
+            // Can't find the element.
+            throw Error(`Cannot find HTML element with selector: ${elementSelector}`);
+        }
+
+        // Configure all elements that are not part of a pipeline. These will all be a part of
+        // the "Default" channel.
+        var components = this.components.map((configurer) => configurer.configure(rootElement));
+
+        // Go through each pipeline. Note that they are done in order, rather than in parallel,
+        // so that they can be initialised in the same order they were configured.
+        for(const pipeline of this.pipelines) {
+            components = components.concat(pipeline.configureComponents(rootElement));
+        }
+
+        return components;
     }
 
     /**
@@ -94,22 +121,35 @@ class ZAmpConfigurer {
      */
     for(elementSelector) {
         this.elementSelector = elementSelector;
+        this.pipelines.map((pipeline) => pipeline.parentSelector = elementSelector);
         return this;
     }
 
     /**
      * Configure the entire set of layouts that make up this ZAmp configuration.
      * @public
-     * @param {HTMLElement} parentElement The HTML element to use to render content into.
+     * @param {String} elementSelector The HTML element to use to render content into.
      */
-    async configureLayouts(parentElement) {
+    async configureLayouts(elementSelector) {
 
-        if(!parentElement){
+        if(!elementSelector){
             // Nothing to render into.
             throw Error("No parent element to render ZAmp within. Did you provide one to the amp() function?");
         }
+
+        const htmlElement = document.querySelector(elementSelector);
+
+        if(!htmlElement) {
+            // Can't find the element.
+            throw Error(`Cannot find HTML element with selector: ${elementSelector}`);
+        }
+
+        var promises = this.layouts.map((configurer) => configurer.configure(htmlElement));
+        for(const pipeline of this.pipelines) {
+            promises = promises.concat(pipeline.configureLayouts(htmlElement));
+        }
         
-        return Promise.all(this.layouts.map((configurer) => configurer.configure(parentElement)));
+        return Promise.all(promises);
     }
 
     /**
@@ -120,18 +160,6 @@ class ZAmpConfigurer {
         // Amp the component.
         return Amp.amp(this.elementSelector, this.themeName);
     }
-    
-    /**
-     * Add a visualiser for manipulating HTML elements in time to the audio.
-     * @method
-     * @public
-     * @returns {ComponentConfigurer}
-     */
-    addAudioHtmlVisualiser(){
-        const configurer = new ComponentConfigurer(AudioHtmlVisualiser, AudioHtmlVisualiserPreferences, this);
-        this.addComponentConfigurer(configurer);
-        return configurer;
-    }
 
     /**
      * Add a pipeline for processing and playing audio.
@@ -139,45 +167,9 @@ class ZAmpConfigurer {
      * @public
      * @returns {ComponentConfigurer}
      */
-    addAudioPipeline(){
-        const configurer = new ComponentConfigurer(AudioPipeline, null, this);
-        this.addComponentConfigurer(configurer);
-        return configurer;
-    }
-
-    /**
-     * Add an audio player for streaming media from an online source.
-     * @method
-     * @public
-     * @returns {ComponentConfigurer}
-     */
-    addAudioPlayer(){
-        const configurer = new ComponentConfigurer(AudioPlayer, PlayerPreferences, this);
-        this.addComponentConfigurer(configurer);
-        return configurer;
-    }
-
-    /**
-     * Add an equalizer for manipulating frequency bands in the audio pipeline.
-     * @method
-     * @public
-     * @returns {ComponentConfigurer}
-     */
-    addEqualizer(){
-        const configurer = new ComponentConfigurer(Equalizer, EqualizerPreferences, this);
-        this.addComponentConfigurer(configurer);
-        return configurer;
-    }
-
-    /**
-     * Add a manager for multiple media files.
-     * @method
-     * @public
-     * @returns {ComponentConfigurer}
-     */
-    addPlaylistManager(){
-        const configurer = new ComponentConfigurer(PlaylistManager, PlaylistPreferences, this);
-        this.addComponentConfigurer(configurer);
+    addAudioPipeline(pipelineName = "Default"){
+        const configurer = new AudioPipelineConfigurer(this, pipelineName, this.elementSelector);
+        this.pipelines.push(configurer);
         return configurer;
     }
 

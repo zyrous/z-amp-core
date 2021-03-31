@@ -1,6 +1,6 @@
 const { AudioComponent } = require("../audio-component");
 const { ThemeManager } = require("../../theme-manager/theme-manager");
-const { ZAmpConfigurer } = require("./z-amp-configurer");
+const { ZAmpConfigurer } = require("../../configuration/z-amp-configurer")
 const { v4: uuidv4 } = require("uuid");
 
 /**
@@ -81,6 +81,7 @@ class Theme extends AudioComponent {
      * Create, register and return a new instance of a Theme.
      * @param {String} themeName Optional. The name to give to the new theme. 
      * Defaults to a random UUID.
+     * @public
      * @returns {Theme}
      */
     static create(themeName = uuidv4()) {
@@ -92,6 +93,7 @@ class Theme extends AudioComponent {
 
     /**
      * Sets the name of this theme. Can be called from derived classes.
+     * @protected
      * @param {String} themeName The name to give to the theme.
      */
     set themeName(themeName) {
@@ -99,7 +101,7 @@ class Theme extends AudioComponent {
     }
 
     /**
-     * Gets the name of this theme. Should be implemented in derived classes.
+     * Gets the name of this theme.
      * @public
      * @returns {String}
      */

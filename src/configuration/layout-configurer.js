@@ -2,7 +2,7 @@
  * Allows for configuration of a layout of a theme. This forms part of
  * a collection owned by a ZAmpConfigurer.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof ZAmp.Components.Theme
+ * @memberof ZAmp.Configuration
  */
 class LayoutConfigurer {
     

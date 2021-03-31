@@ -23,8 +23,8 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
-Cypress.Commands.add("shouldBePlayingAudio", () => {
-    cy.get("audio,video").should((els) => {
+Cypress.Commands.add("shouldBePlayingAudio", (selector) => {
+    cy.get(`${selector} audio,video`).should((els) => {
         let audible = false;
         els.each((i, el) => {
         console.log(el.duration, el.paused, el.muted);
@@ -34,8 +34,8 @@ Cypress.Commands.add("shouldBePlayingAudio", () => {
     });
 });
 
-Cypress.Commands.add("shouldBePaused", () => {
-    cy.get('audio,video').should((els) => {
+Cypress.Commands.add("shouldBePaused", (selector) => {
+    cy.get(`${selector} audio,video`).should((els) => {
         els.each((i, el) => {
             console.log(el.duration, el.paused, el.muted);
         
@@ -44,8 +44,8 @@ Cypress.Commands.add("shouldBePaused", () => {
     });
 });
 
-Cypress.Commands.add("shouldBeMuted", () => {
-    cy.get('audio,video').should((els) => {
+Cypress.Commands.add("shouldBeMuted", (selector) => {
+    cy.get(`${selector} audio,video`).should((els) => {
         els.each((i, el) => {
             console.log(el.duration, el.paused, el.muted);
         
@@ -54,24 +54,24 @@ Cypress.Commands.add("shouldBeMuted", () => {
     });
 });
 
-Cypress.Commands.add("shouldBeAtTrackPosition", (position, maxDelta = 4) => {
-    cy.get('audio,video').should((els) => {
+Cypress.Commands.add("shouldBeAtTrackPosition", (selector, position, maxDelta = 4) => {
+    cy.get(`${selector} audio,video`).should((els) => {
         els.each((i, el) => {
             expect(el.currentTime).to.be.approximately(position, maxDelta);
         })
     });
 });
 
-Cypress.Commands.add("shouldBeAtVolumeLevel", (level) => {
-    cy.get('audio,video').should((els) => {
+Cypress.Commands.add("shouldBeAtVolumeLevel", (selector, level) => {
+    cy.get(`${selector} audio,video`).should((els) => {
         els.each((i, el) => {
             expect(el.volume).to.eql(level / 100);
         })
     });
 });
 
-Cypress.Commands.add("shouldBePlayingTrackNumber", (trackNumber) => {
-    cy.get("[audio-playlist-item-template]").then((els) => {
+Cypress.Commands.add("shouldBePlayingTrackNumber", (selector, trackNumber) => {
+    cy.get(`${selector} [audio-playlist-item-template]`).then((els) => {
         els.each((i,el) => {
             console.log("testing element: ", JSON.stringify(el));
             if(i === trackNumber - 1) {
@@ -83,8 +83,8 @@ Cypress.Commands.add("shouldBePlayingTrackNumber", (trackNumber) => {
     })
 })
 
-Cypress.Commands.add("getPlayingTrackNumber", () => {
-    return cy.get("[audio-playlist-item-template]")
+Cypress.Commands.add("getPlayingTrackNumber", (selector) => {
+    return cy.get(`${selector} [audio-playlist-item-template]`)
     .each((el, index) => {
         console.log("TESTING ELEMENT: ", el);
         if(el.hasClass("playing")) {

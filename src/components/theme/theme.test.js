@@ -14,7 +14,7 @@ const {Theme} = require("./theme");
 
 // Dependencies for mocking.
 const {ThemeManager} = require("../../theme-manager/theme-manager");
-const {ZAmpConfigurer} = require("./z-amp-configurer");
+const {ZAmpConfigurer} = require("../../configuration/z-amp-configurer");
 
 // Sandbox for mocks.
 const sandbox = sinon.createSandbox();

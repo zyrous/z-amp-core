@@ -1,5 +1,6 @@
 const { AudioComponent } = require("../audio-component");
 const { ThemeManager } = require("../../theme-manager/theme-manager");
+const { StorageProviderFactory } = require("../../storage/storage-provider-factory");
 const { v4: uuidv4 } = require("uuid");
 
 /**
@@ -60,8 +61,8 @@ class Amp extends AudioComponent {
 
         // Make sure that we listen to all events that are raised, so that we can pass
         // them to our child components.
-        this.addEventListener("eventRaised", (eventName, ...args) => {
-            this.components.map((c) => c.handleEvent(eventName, ...args));
+        this.addEventListener("eventRaised", (eventName, channel, ...args) => {
+            this.components.map((c) => c.handleEvent(eventName, channel, ...args));
         });
     }
 
@@ -76,13 +77,13 @@ class Amp extends AudioComponent {
         this.components.push(component);
 
         // Listen to all events that are raised by the component.
-        component.addEventListener("eventRaised", (eventName, ...args) => {
+        component.addEventListener("eventRaised", (eventName, channel, ...args) => {
 
             // Give the Amp a chance to handle the event.
-            this.handleEvent(eventName, ...args);
+            this.handleEvent(eventName, channel, ...args);
 
             // Pass the event to each one of our components.
-            this.components.map((c) => c.handleEvent(eventName, ...args));
+            this.components.map((c) => c.handleEvent(eventName, channel, ...args));
         });
 
         // Finally, initialise the component.
@@ -114,12 +115,11 @@ class Amp extends AudioComponent {
         }
 
         // Get the parent element and configure the theme within it.
-        const parentElement = document.querySelector(selector);
-        return theme.configurer.configureLayouts(parentElement)
+        return theme.configurer.configureLayouts(selector)
         .then(() => {
             
             // Configure all of the components and then add them.
-            var initPromises = theme.configurer.configureComponents().map((component) => this.addComponent(component));
+            var initPromises = theme.configurer.configureComponents(selector).map((component) => this.addComponent(component));
             
             // Add the theme as a component so that it can respond to events.
             initPromises.push(this.addComponent(theme));
@@ -158,39 +158,61 @@ class Amp extends AudioComponent {
     }
 
     /**
+     * Set a new type of storage provider for this component.
+     * @public
+     * @param {String} providerName The name of the storage provider to set.
+     */
+    setStorageProvider(providerName) {
+
+        // Get the provider.
+        const provider = new StorageProviderFactory().createProvider(providerName);
+
+        if(!provider){
+            // Can't find it.
+            throw Error(`Cannot find storage provider with name: ${providerName}`);
+        }
+        
+        // Save it.
+        this.storageProvider = provider;
+
+        // Set it on all components.
+        this.components.map((component) => component.setStorageProvider(provider));
+    }
+
+    /**
      * Retrieve the player component (if available).
      * @public
      * @returns {AudioComponent} The audio player.
      */
-    get player() { return this.findComponent("AudioPlayer"); }
+    player(playerName = "AudioPlayer") { return this.findComponent(playerName); }
 
     /**
      * Retrieve the playlist component (if available).
      * @public
      * @returns {AudioComponent} The playlist.
      */
-    get playlist() { return this.findComponent("PlaylistManager"); }
+    playlist(playlistName = "PlaylistManager") { return this.findComponent(playlistName); }
     
     /**
      * Retrieve the equalizer component (if available).
      * @public
      * @returns {AudioComponent} The equalizer.
      */
-    get equalizer() { return this.findComponent("Equalizer"); }
+    equalizer(equalizerName = "Equalizer") { return this.findComponent(equalizerName); }
 
     /**
      * Retrieve the theme.
      * @public
      * @returns {AudioComponent} The active theme.
      */
-    get theme() { return this.findComponent("Theme"); }
+    theme() { return this.findComponent("Theme"); }
 
     /**
      * Retrieve the theme manager.
      * @public
      * @returns {ThemeManager} The theme manager.
      */
-    get themeManager() { return this.findComponent("ThemeManager"); }
+    themeManager() { return this.findComponent("ThemeManager"); }
 }
 
 module.exports = { Amp };

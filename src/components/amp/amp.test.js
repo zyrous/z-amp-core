@@ -7,7 +7,8 @@ const sinon = require("sinon");
 // Dependencies for testing.
 const {Amp} = require("./amp");
 const {ThemeManager} = require("../../theme-manager/theme-manager");
-const { AudioComponent } = require("../audio-component");
+const {AudioComponent} = require("../audio-component");
+const {StorageProviderFactory} = require("../../storage/storage-provider-factory");
 global.console = {
     log: () => {}
 }
@@ -40,6 +41,33 @@ describe("Amp", function() {
         expect(amp).to.equal(testAmp);
         expect(initialiseStub.calledWith(testSelector, testThemeName)).to.be.true;
     }),
+
+    it("Sets storage provider by name", async() => {
+        const testStorageProvider = { id: faker.random.uuid() };
+        const createProviderStub = sandbox.stub(StorageProviderFactory.prototype, "createProvider")
+        .returns(testStorageProvider);
+        const testProviderName = faker.lorem.word();
+
+        var testAmp = new Amp();
+        testAmp.setStorageProvider(testProviderName);
+
+        expect(createProviderStub.calledWith(testProviderName)).to.be.true;
+        expect(testAmp.storageProvider).to.equal(testStorageProvider);
+    }),
+
+    it("Attaches to root element when supplied", async() => {
+        const testRootElement = { id: faker.random.uuid() };
+
+        var testAmp = new Amp();
+        testAmp.attachToRootElement(testRootElement);
+
+        expect(testAmp.getRootElement()).to.equal(testRootElement);
+    }),
+
+    it("Fails to attach to root element when no value supplied", async() => {
+        var testAmp = new Amp();
+        expect(() => testAmp.attachToRootElement()).to.throw();
+    })
 
     it("Adds new component correctly", async() => {
         const testComponent = sandbox.createStubInstance(AudioComponent);

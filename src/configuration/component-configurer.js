@@ -2,7 +2,7 @@
  * Allows for configuration of a ZAmp component by a theme. This forms part
  * of a collection owned by a ZAmpConfigurer.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof ZAmp.Components.Theme
+ * @memberof ZAmp.Configuration
  */
 class ComponentConfigurer {
     
@@ -40,10 +40,10 @@ class ComponentConfigurer {
      * @param {Type} componentType The type of the component to create.
      * @param {Type} PreferencesType The type of the preferences that will be provided to the 
      * component when it is created.
-     * @param {any} builder The configurer that this component configurer
-     * belongs to.
+     * @param {any} builder The configurer that this component configurer belongs to.
+     * @param {String} componentName The name to give the component.
      */
-    constructor(componentType, PreferencesType, builder) {
+    constructor(componentType, PreferencesType, builder, componentName) {
 
         // Add this object to the parent configurer.
         this.builder = builder;
@@ -53,6 +53,11 @@ class ComponentConfigurer {
         // Create the preferences for the component.
         if(PreferencesType) {
             this.preferences = new PreferencesType();
+        }
+
+        // Save the name to give the component.
+        if(componentName){
+            this.componentName = componentName;
         }
     }
 
@@ -92,10 +97,16 @@ class ComponentConfigurer {
     /**
      * Create the component defined by this configurer.
      * @public
+     * @param {HtmlElement} rootElement The DOM element that the component will configure
+     * itself within.
+     * @param {String} channelName The name of the channel to add the component to.
      * @returns {any} The newly constructed component.
      */
-    configure() {
-        return new this.ComponentType(this.preferences, this.componentName);
+    configure(rootElement, channelName) {
+        const component = new this.ComponentType(this.preferences, this.componentName);
+        component.attachToRootElement(rootElement);
+        component.addToChannel(channelName);
+        return component;
     }
 
     /**
@@ -103,18 +114,6 @@ class ComponentConfigurer {
      * @public
      */
     and() { return this.builder; }
-
-    /**
-     * Finish configuring the ZAmp configurer.
-     * @public
-     */
-    finish() { return this.builder; }
-
-    /**
-     * Finish configuring the ZAmp configurer and apply it immediately.
-     * @public
-     */
-    apply() { return this.builder.apply(); }
 }
 
 module.exports = { ComponentConfigurer };

@@ -151,9 +151,7 @@ class AudioPlayer extends AudioComponent {
                 // Create a new audio element. We'll attach it to the parent of
                 // the player.
                 element = document.createElement("audio");
-                // Make sure we can find it next time.
-                // element.setAttribute("audio-element", "audio-element");
-                document.body.appendChild(element);
+                this.rootElement.appendChild(element);
                 this.preferences.audioElement = element;
             }
 

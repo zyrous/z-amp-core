@@ -1,13 +1,13 @@
 const crypto = require("crypto");
 
 /**
- * @namespace Domain
+ * @namespace ZAmp.Domain
  */
 
 /**
  * Represents an audio track that a player can play.
  * @author Mason Yarrick <mason.yarrick@zyrous.com>
- * @memberof Domain
+ * @memberof ZAmp.Domain
  */
 class AudioTrack {
 

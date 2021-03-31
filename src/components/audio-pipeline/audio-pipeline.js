@@ -43,6 +43,7 @@ class AudioPipeline extends AudioComponent {
     /**
      * Construct a new audio processing pipeline.
      * @param {String} componentName The name of this component. Defaults to "AudioPipeline".
+     * "Default".
      */
     constructor(componentName = "AudioPipeline"){
         super(componentName);

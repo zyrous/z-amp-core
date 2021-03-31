@@ -56,22 +56,9 @@ describe("Audio Component", function() {
         };
 
         var component = new AudioComponent();
-        component.handleEvent("storageProviderChanged", testProvider);
+        component.handleEvent("storageProviderChanged", "Default", testProvider);
 
         expect(component.storageProvider).to.equal(testProvider);
-    }),
-
-    it("Sets storage provider by name", async() => {
-        const testStorageProvider = { id: faker.random.uuid() };
-        const createProviderStub = sandbox.stub(StorageProviderFactory.prototype, "createProvider")
-        .returns(testStorageProvider);
-        const testProviderName = faker.lorem.word();
-
-        var component = new AudioComponent();
-        component.setStorageProvider(testProviderName);
-
-        expect(createProviderStub.calledWith(testProviderName)).to.be.true;
-        expect(component.storageProvider).to.equal(testStorageProvider);
     }),
 
     it("Stores values correctly with provider", async() => {
@@ -79,7 +66,7 @@ describe("Audio Component", function() {
         const testValue = faker.random.uuid();
         const mockStorageProvider = sandbox.mock(StorageProvider.prototype);
         mockStorageProvider.expects("storeValue")
-        .withExactArgs(testValueName, testValue)
+        .withExactArgs(`Default-${testValueName}`, testValue)
         .resolves(testValue);
 
         var component = new AudioComponent();
@@ -97,7 +84,7 @@ describe("Audio Component", function() {
         const testArgs = { id: faker.random.uuid() };
         const mockStorageProvider = sandbox.mock(StorageProvider.prototype);
         mockStorageProvider.expects("getValue")
-        .withExactArgs(testValueName, testDefaultValue, [testArgs])
+        .withExactArgs(`Default-${testValueName}`, testDefaultValue, [testArgs])
         .resolves(testValue);
 
         var component = new AudioComponent();
@@ -126,9 +113,21 @@ describe("Audio Component", function() {
 
         var component = new AudioComponent();
         component.addEventListener(testEventName, testCallback);
-        component.handleEvent(testEventName, testArgs);
+        component.handleEvent(testEventName, "Default", testArgs);
 
         expect(testCallback.calledWith(testArgs)).to.be.true;
+    }),
+
+    it("Ignores new event for different pipeline", async() => {
+        const testCallback = sandbox.stub();
+        const testEventName = faker.lorem.word();
+        const testArgs = { id: faker.random.uuid() };
+
+        var component = new AudioComponent();
+        component.addEventListener(testEventName, testCallback);
+        component.handleEvent(testEventName, faker.lorem.word(), testArgs);
+
+        expect(testCallback.calledWith(testArgs)).to.be.false;
     }),
 
     it("Succeeds when event not handled", async() => {

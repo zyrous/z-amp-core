@@ -1,6 +1,5 @@
 const {StorageProvider} = require("../storage/storage-provider");
 const {LocalStorageProvider} = require("../storage/local-storage-provider");
-const {StorageProviderFactory} = require("../storage/storage-provider-factory");
 const {StorageRetrievalResult} = require("../storage/storage-retrieval-result");
 
 /**
@@ -35,6 +34,20 @@ class AudioComponent {
      * @type {String}
      */
     componentName;
+
+    /**
+     * The channels that this component belongs to. Always includes "Default".
+     * @private
+     * @type {String}
+     */
+    channel = "Default";
+
+    /**
+     * The parent element that the component should attach to.
+     * @protected
+     * @type {HtmlElement}
+     */
+    rootElement;
     
     /**
      * Construct a new ZAmp component. Each ZAmp component must call this method within
@@ -44,7 +57,7 @@ class AudioComponent {
      */
     constructor(componentName = "Undefined") {
         this.componentName = componentName;
-        this.addEventListener("storageProviderChanged", this.onStorageProviderChanged);
+        this.addEventListener("storageProviderChanged", (provider) => this.setStorageProvider(provider));
     }
 
     /**
@@ -114,15 +127,15 @@ class AudioComponent {
      * In addition, an extra event "eventRaised" will be instantiated.
      * @protected
      * @param {string} eventName The name of the event to raise.
-     * @param  {...any} args Any arguments to pass to the listening function(s).
+     * @param {...any} args Any arguments to pass to the listening function(s).
      */
     raiseEvent(eventName, ...args){
         // Handle the event.
-        this.handleEvent(eventName, ...args);
+        this.handleEvent(eventName, this.channel, ...args);
         // Raise the "eventRaised" event. This allows parent objects to receive all
         // events and handle them as required (for example bubbling).
         if(eventName !== "eventRaised") {
-            this.raiseEvent("eventRaised", eventName, ...args);
+            this.raiseEvent("eventRaised", eventName, this.channel, ...args);
         }
     }
 
@@ -130,10 +143,12 @@ class AudioComponent {
      * Handle an event that has been raised.
      * @public
      * @param {string} eventName The name of the event to handle.
-     * @param  {...any} args Any arguments to pass to event listeners.
+     * @param {string} channel The name of the channel that the event was raised on.
+     * @param {...any} args Any arguments to pass to event listeners.
      */
-    handleEvent(eventName, ...args) {
-        if(this.eventListeners.has(eventName)) {
+    handleEvent(eventName, channel, ...args) {
+        if(this.channel === channel
+            && this.eventListeners.has(eventName)) {
             // Call each of the listeners that have previously registered.
             this.eventListeners.get(eventName).map((listener) => listener(...args));
         }
@@ -150,12 +165,12 @@ class AudioComponent {
      * @returns {HTMLElement} The HTML element that was attached to.
      */
     async attachElement(parentObject, elementName, selector, ...eventListeners) {
-        
+
         return new Promise((resolve) => {
             // Check that the object doesn't already exist on the parent. If it does, it's likely
             // been set directly in preferences already.
             if(!parentObject[elementName]){
-                parentObject[elementName] = document.querySelector(selector);
+                parentObject[elementName] = this.getRootElement().querySelector(selector);
             }
             if(parentObject[elementName]){
                 // Add each listener to the element.
@@ -180,8 +195,9 @@ class AudioComponent {
         return new Promise((resolve) => {
             // Check that the object doesn't already exist on the parent. If it does, it's likely
             // been set directly in preferences already.
-            if(!parentObject[elementName]){
-                parentObject[elementName] = Array.from(document.querySelectorAll(selector));
+            if(!parentObject[elementName] 
+                || parentObject[elementName].length === 0){
+                parentObject[elementName] = Array.from(this.getRootElement().querySelectorAll(selector));
             }
             if(parentObject[elementName]){
                 // Add each listener to the elements.
@@ -200,7 +216,7 @@ class AudioComponent {
      */
     async storeValue(name, value) {
         return new Promise((resolve) => {
-            this.storageProvider.storeValue(name, value);
+            this.storageProvider.storeValue(`${this.channel}-${name}`, value);
             resolve(value);
         });
     }
@@ -215,29 +231,83 @@ class AudioComponent {
      */
     async getValue(name, defaultValue, ...args) {
         return new Promise((resolve) => {
-            resolve(this.storageProvider.getValue(name, defaultValue, args));
+            resolve(this.storageProvider.getValue(`${this.channel}-${name}`, defaultValue, args));
         });
+    }
+
+    /**
+     * Determines whether or not this component belongs to a specific channel.
+     * @public
+     * @method
+     * @param {String} channelName The name of the channel to check for.
+     * @returns {Boolean} True if the component belongs to the channel; false otherwise.
+     */
+    belongsToChannel = (channelName) => {
+        return this.channel === channelName;
+    }
+
+    /**
+     * Add this audio component to a specific channel.
+     * @public
+     * @method
+     * @param {String} channelName The name of the channel to add this component to.
+     */
+    addToChannel = (channelName) => {
+        if(!channelName) {
+            throw Error("Cannot add an audio component to an empty channel.");
+        }
+        if(this.belongsToChannel(channelName)) {
+            throw Error(`This audio component already belongs to channel '${channelName}'.`);
+        }
+
+        this.channel = channelName;
+    }
+
+    /**
+     * Attach this audio component to a root DOM element.
+     * @public
+     * @method
+     * @param {HtmlElement} rootElement The root element to attach this component to.
+     */
+    attachToRootElement = (rootElement) => {
+        if(!rootElement) {
+            throw Error("Cannot attach an audio component to an empty root DOM element.");
+        }
+        if(this.rootElement) {
+            throw Error("This audio component is already attached to a DOM element.");
+        }
+
+        this.rootElement = rootElement;
+    }
+
+    /**
+     * Get the root element that this component is attached to.
+     * @private
+     * @method
+     * @returns {HtmlElement} The root element for this component.
+     */
+    getRootElement = () => {
+        if(!this.rootElement) {
+            return document;
+        } else {
+            return this.rootElement;
+        }
     }
 
     /**
      * Set a new type of storage provider for this component.
      * @public
-     * @param {String} providerName The name of the storage provider to set.
+     * @param {StorageProvider} provider The provider to set.
      */
-    async setStorageProvider(providerName) {
-        // Get the provider.
-        const provider = new StorageProviderFactory().createProvider(providerName);
-        // Raise an event so all other components set the same provider.
-        this.raiseEvent("storageProviderChanged", provider);
-    }
-    
-    /**
-     * Called when a new storage provider is selected for ZAmp.
-     * @private
-     * @param {StorageProvider} storageProvider The storage provider that was selected.
-     */
-    onStorageProviderChanged = (storageProvider) => {
-        this.storageProvider = storageProvider;
+    setStorageProvider(provider) {
+
+        if(!provider){
+            // Can't find it.
+            throw Error("Cannot set an empty storage provider");
+        }
+        
+        // Save it.
+        this.storageProvider = provider;
     }
 }
 

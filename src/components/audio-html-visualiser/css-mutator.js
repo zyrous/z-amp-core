@@ -74,7 +74,8 @@ class CssMutator {
      */
     mutate(percentage) {
         // Calculate the new value.
-        var newValue = this.spread * (percentage / 100.0) + this.lowerValue;
+        // NOTE: Rounding here to avoid floating point errors.
+        var newValue = Math.round(((this.spread * (percentage / 100.0) + this.lowerValue) * 100)) / 100;
         this.htmlElement.style[this.cssProperty] = `${newValue}${this.unitOfMeasure}`;
     }
 }

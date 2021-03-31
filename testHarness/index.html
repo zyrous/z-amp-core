@@ -9,23 +9,54 @@
                 // Create the theme.
                 ZAmp.build()
                     .for("#player")
-                    .addAudioPipeline()
-                    .and().addAudioPlayer()
-                    .and().addPlaylistManager().withSettings({
-                        tracks: [
-                            {url: "./track_1.mp3", title: "Track 1", artist: "Z Amp"},
-                            {url: "./track_2.mp3", title: "Track 2", artist: "Z Amp"},
-                            {url: "./track_3.mp3", title: "Track 3", artist: "Z Amp"}
-                        ]
+                    .addAudioPipeline("P1")
+                        .for("#p1")
+                        .withAudioPlayer()
+                        .and().withPlaylistManager("pm1")// .withSettings({
+                        //     tracks: [
+                        //         {url: "./track_1.mp3", title: "Track 1", artist: "Z Amp"},
+                        //         {url: "./track_2.mp3", title: "Track 2", artist: "Z Amp"},
+                        //         {url: "./track_3.mp3", title: "Track 3", artist: "Z Amp"}
+                        //     ]
+                        // })
+                        .and().withEqualizer().withSettings({
+                            presets: [
+                                {name: "Preset 1", bands: new Map([[22,-25],[103,-12.5],[490,0],[2324,12.5],[11020,25]])},
+                                {name: "Preset 2", bands: new Map([[22,25],[103,12.5],[490,0],[2324,-12.5],[11020,-25]])}
+                            ]
+                        })
+                        .and().withAudioHtmlVisualiser()
+                        .and().then()
+                    .addAudioPipeline("P2")
+                        .for("#p2")
+                        .withAudioPlayer()
+                        .and().withPlaylistManager("pm2")// .withSettings({
+                        //     tracks: [
+                        //         {url: "./track_1.mp3", title: "Track 1", artist: "Z Amp"},
+                        //         {url: "./track_2.mp3", title: "Track 2", artist: "Z Amp"},
+                        //         {url: "./track_3.mp3", title: "Track 3", artist: "Z Amp"}
+                        //     ]
+                        // })
+                        .and().withEqualizer().withSettings({
+                            presets: [
+                                {name: "Preset 1", bands: new Map([[22,-25],[103,-12.5],[490,0],[2324,12.5],[11020,25]])},
+                                {name: "Preset 2", bands: new Map([[22,25],[103,12.5],[490,0],[2324,-12.5],[11020,-25]])}
+                            ]
+                        })
+                        .and().withAudioHtmlVisualiser()
+                        .and().then()
+                    .apply()
+                    .then((amp) => {
+                        amp.playlist("pm1").clear();
+                        amp.playlist("pm1").addTrack({url: "./track_1.mp3", title: "Track 1", artist: "Z Amp"});
+                        amp.playlist("pm1").addTrack({url: "./track_2.mp3", title: "Track 2", artist: "Z Amp"});
+                        amp.playlist("pm1").addTrack({url: "./track_3.mp3", title: "Track 3", artist: "Z Amp"});
+
+                        amp.playlist("pm2").clear();
+                        amp.playlist("pm2").addTrack({url: "./track_1.mp3", title: "Track 1", artist: "Z Amp"});
+                        amp.playlist("pm2").addTrack({url: "./track_2.mp3", title: "Track 2", artist: "Z Amp"});
+                        amp.playlist("pm2").addTrack({url: "./track_3.mp3", title: "Track 3", artist: "Z Amp"});
                     })
-                    .and().addEqualizer().withSettings({
-                        presets: [
-                            {name: "Preset 1", bands: new Map([[22,-25],[103,-12.5],[490,0],[2324,12.5],[11020,25]])},
-                            {name: "Preset 2", bands: new Map([[22,25],[103,12.5],[490,0],[2324,-12.5],[11020,-25]])}
-                        ]
-                    })
-                    .and().addAudioHtmlVisualiser()
-                    .apply();
             }
         </script>
         <style>
@@ -62,64 +93,131 @@
         </style>
     </head>
     <body>
-        <div id="player"></div>
-        <h1>Player</h1>
-        <button audio-button-play>PLAY</button>
-        <button audio-button-pause>PAUSE</button>
-        <button audio-button-play-pause>PLAY/PAUSE</button>
-        <br />
-        <button audio-button-seek-backward>SKIP BACK</button>
-        <input type="range" audio-button-position-range></input>
-        <button audio-button-seek-forward>SKIP FORWARD</button>
-        <br />
-        <button audio-button-volume-down>VOLUME DOWN</button>
-        <button audio-button-volume-mute>MUTE</button>
-        <input type="range" audio-button-volume-range></input>
-        <button audio-button-volume-up>VOLUME UP</button>
-        <br />
-        <label audio-label-track-position></label> /
-        <label audio-label-track-duration></label>
-        <hr />
+        <div id="player">
+            <div id="p1" style="display: inline-block; width: 40%;">
+                <h1>Player 1</h1>
+                <button audio-button-play>PLAY</button>
+                <button audio-button-pause>PAUSE</button>
+                <button audio-button-play-pause>PLAY/PAUSE</button>
+                <br />
+                <button audio-button-seek-backward>SKIP BACK</button>
+                <input type="range" audio-button-position-range></input>
+                <button audio-button-seek-forward>SKIP FORWARD</button>
+                <br />
+                <button audio-button-volume-down>VOLUME DOWN</button>
+                <button audio-button-volume-mute>MUTE</button>
+                <input type="range" audio-button-volume-range></input>
+                <button audio-button-volume-up>VOLUME UP</button>
+                <br />
+                <label audio-label-track-position></label> /
+                <label audio-label-track-duration></label>
+                <hr />
 
-        <h1>Playlist Manager</h1>
-        <button audio-button-next>NEXT TRACK</button>
-        <button audio-button-previous>PREVIOUS TRACK</button>
-        <button audio-button-shuffle>SHUFFLE</button>
-        <button audio-button-loop>LOOP</button>
-        <br />
-        <label audio-label-track-number></label>.
-        <label audio-label-artist-name></label> - 
-        <label audio-label-track-name></label>
-        (<label audio-label-track-url></label>)
-        <br />
-        <div audio-playlist-item-list>
-            <div audio-playlist-item-template>
-                <button>
-                    <label audio-playlist-item-artist></label> -
-                    <label audio-playlist-item-title></label>
-                </button>
+                <h1>Playlist Manager 1</h1>
+                <button audio-button-next>NEXT TRACK</button>
+                <button audio-button-previous>PREVIOUS TRACK</button>
+                <button audio-button-shuffle>SHUFFLE</button>
+                <button audio-button-loop>LOOP</button>
+                <br />
+                <label audio-label-track-number></label>.
+                <label audio-label-artist-name></label> - 
+                <label audio-label-track-name></label>
+                (<label audio-label-track-url></label>)
+                <br />
+                <div audio-playlist-item-list>
+                    <div audio-playlist-item-template>
+                        <button>
+                            <label audio-playlist-item-artist></label> -
+                            <label audio-playlist-item-title></label>
+                        </button>
+                    </div>
+                </div>
+                <hr />
+
+                <h1>Equalizer 1</h1>
+                <div>
+                    <div><input type="range" audio-button-eq-range frequency="22"></input><span audio-label-eq-frequency></span></div>
+                    <div><input type="range" audio-button-eq-range frequency="103"></input><span audio-label-eq-frequency></span></div>
+                    <div><input type="range" audio-button-eq-range frequency="490"></input><span audio-label-eq-frequency></span></div>
+                    <div><input type="range" audio-button-eq-range frequency="2324"></input><span audio-label-eq-frequency></span></div>
+                    <div><input type="range" audio-button-eq-range frequency="11020"></input><span audio-label-eq-frequency></span></div>
+                </div>
+                <button audio-button-eq-preset preset="Preset 1">Preset 1</button>
+                <button audio-button-eq-preset preset="Preset 2">Preset 2</button>
+                <label audio-button-eq-preset preset="Custom">Custom</label>
+                <hr />
+
+                <h1>Visualiser 1</h1>
+                <div class="audio-bar-container">
+                    <div audio-vis-eq-frequency class="audio-bar"></div>
+                    <div audio-vis-eq-frequency class="audio-bar"></div>
+                    <div audio-vis-eq-frequency class="audio-bar"></div>
+                    <div audio-vis-eq-frequency class="audio-bar"></div>
+                    <div audio-vis-eq-frequency class="audio-bar"></div>
+                </div>
             </div>
-        </div>
-        <hr />
+            <div id="p2" style="display: inline-block; width: 40%;">
+                <h1>Player 2</h1>
+                <button audio-button-play>PLAY</button>
+                <button audio-button-pause>PAUSE</button>
+                <button audio-button-play-pause>PLAY/PAUSE</button>
+                <br />
+                <button audio-button-seek-backward>SKIP BACK</button>
+                <input type="range" audio-button-position-range></input>
+                <button audio-button-seek-forward>SKIP FORWARD</button>
+                <br />
+                <button audio-button-volume-down>VOLUME DOWN</button>
+                <button audio-button-volume-mute>MUTE</button>
+                <input type="range" audio-button-volume-range></input>
+                <button audio-button-volume-up>VOLUME UP</button>
+                <br />
+                <label audio-label-track-position></label> /
+                <label audio-label-track-duration></label>
+                <hr />
 
-        <h1>Equalizer</h1>
-        <div><input type="range" audio-button-eq-range frequency="22"></input><span audio-label-eq-frequency></span></div>
-        <div><input type="range" audio-button-eq-range frequency="103"></input><span audio-label-eq-frequency></span></div>
-        <div><input type="range" audio-button-eq-range frequency="490"></input><span audio-label-eq-frequency></span></div>
-        <div><input type="range" audio-button-eq-range frequency="2324"></input><span audio-label-eq-frequency></span></div>
-        <div><input type="range" audio-button-eq-range frequency="11020"></input><span audio-label-eq-frequency></span></div>
-        <button audio-button-eq-preset preset="Preset 1">Preset 1</button>
-        <button audio-button-eq-preset preset="Preset 2">Preset 2</button>
-        <label audio-button-eq-preset preset="Custom">Custom</label>
-        <hr />
+                <h1>Playlist Manager 2</h1>
+                <button audio-button-next>NEXT TRACK</button>
+                <button audio-button-previous>PREVIOUS TRACK</button>
+                <button audio-button-shuffle>SHUFFLE</button>
+                <button audio-button-loop>LOOP</button>
+                <br />
+                <label audio-label-track-number></label>.
+                <label audio-label-artist-name></label> - 
+                <label audio-label-track-name></label>
+                (<label audio-label-track-url></label>)
+                <br />
+                <div audio-playlist-item-list>
+                    <div audio-playlist-item-template>
+                        <button>
+                            <label audio-playlist-item-artist></label> -
+                            <label audio-playlist-item-title></label>
+                        </button>
+                    </div>
+                </div>
+                <hr />
 
-        <h1>Visualiser</h1>
-        <div class="audio-bar-container">
-            <div audio-vis-eq-frequency class="audio-bar"></div>
-            <div audio-vis-eq-frequency class="audio-bar"></div>
-            <div audio-vis-eq-frequency class="audio-bar"></div>
-            <div audio-vis-eq-frequency class="audio-bar"></div>
-            <div audio-vis-eq-frequency class="audio-bar"></div>
+                <h1>Equalizer 2</h1>
+                <div>
+                    <div><input type="range" audio-button-eq-range frequency="22"></input><span audio-label-eq-frequency></span></div>
+                    <div><input type="range" audio-button-eq-range frequency="103"></input><span audio-label-eq-frequency></span></div>
+                    <div><input type="range" audio-button-eq-range frequency="490"></input><span audio-label-eq-frequency></span></div>
+                    <div><input type="range" audio-button-eq-range frequency="2324"></input><span audio-label-eq-frequency></span></div>
+                    <div><input type="range" audio-button-eq-range frequency="11020"></input><span audio-label-eq-frequency></span></div>
+                </div>
+                <button audio-button-eq-preset preset="Preset 1">Preset 1</button>
+                <button audio-button-eq-preset preset="Preset 2">Preset 2</button>
+                <label audio-button-eq-preset preset="Custom">Custom</label>
+                <hr />
+
+                <h1>Visualiser 2</h1>
+                <div class="audio-bar-container">
+                    <div audio-vis-eq-frequency class="audio-bar"></div>
+                    <div audio-vis-eq-frequency class="audio-bar"></div>
+                    <div audio-vis-eq-frequency class="audio-bar"></div>
+                    <div audio-vis-eq-frequency class="audio-bar"></div>
+                    <div audio-vis-eq-frequency class="audio-bar"></div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
