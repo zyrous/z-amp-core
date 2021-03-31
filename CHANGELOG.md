@@ -1,3 +1,10 @@
+## [1.2.2](https://bitbucket.org/zyrous/z-amp-core/compare/v1.2.1...v1.2.2) (2021-03-31)
+
+
+### Bug Fixes
+
+* removing requirement for new channel name from audio component setup ([e8d1be4](https://bitbucket.org/zyrous/z-amp-core/commits/e8d1be4c3e052e1c72d73fed7664af48a0cf47d4))
+
 ## [1.2.1](https://bitbucket.org/zyrous/z-amp-core/compare/v1.2.0...v1.2.1) (2021-03-31)
 
 
