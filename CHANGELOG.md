@@ -1,3 +1,10 @@
+## [1.2.1](https://bitbucket.org/zyrous/z-amp-core/compare/v1.2.0...v1.2.1) (2021-03-31)
+
+
+### Bug Fixes
+
+* re-adding non-dev dependencies for core and runtime ([7f9e820](https://bitbucket.org/zyrous/z-amp-core/commits/7f9e8201e961c35171fafcfc9a389afb332a2dae))
+
 # [1.2.0](https://bitbucket.org/zyrous/z-amp-core/compare/v1.1.2...v1.2.0) (2021-03-31)
 
 
