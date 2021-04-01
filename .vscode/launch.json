@@ -13,8 +13,7 @@
                 "--timeout",
                 "0",
                 "--colors",
-                "${workspaceFolder}/src/**/*.test.js",
-      
+                "${workspaceFolder}/src/**/*.test.js"
             ],
             "internalConsoleOptions": "openOnSessionStart",
             "skipFiles": [

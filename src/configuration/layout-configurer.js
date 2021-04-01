@@ -30,8 +30,7 @@ class LayoutConfigurer {
     /**
      * Create a new configurer for a layout that forms part of a theme.
      * @param {Function} layoutFunction The function that, when executed, renders HTML for the layout.
-     * @param {any} builder The ZAmp configurer that this 
-     * layout configurer belongs to.
+     * @param {any} builder The ZAmp configurer that this layout configurer belongs to.
      */
     constructor(layoutFunction, builder) {
 

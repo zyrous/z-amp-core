@@ -181,6 +181,11 @@ class PlaylistManager extends AudioComponent {
      */
     changeTrack = (track) => {
         var existingTrack = this.preferences.tracks.find((t) => t.equals(new AudioTrack(track)));
+
+        if(!existingTrack) {
+            throw Error("Cannot change to a track that isn't in the playlist");
+        }
+
         const newTrackIndex = this.preferences.tracks.indexOf(existingTrack);
 
         if(newTrackIndex !== this.currentTrackIndex) {
@@ -197,6 +202,11 @@ class PlaylistManager extends AudioComponent {
      * @param {boolean} force Whether to force the addition of the track, even if it exists. Defaults to false.
      */
     addTrack = (track, force = false) => {
+
+        if(!track) {
+            throw Error("You cannot add an empty track to the playlist");
+        }
+        
         const newTrack = new AudioTrack(track);
 
         // We need to add the track if
@@ -213,6 +223,21 @@ class PlaylistManager extends AudioComponent {
                 this.changeTrack(track);
                 this.trackRequired = false;
             }
+        }
+    }
+
+    /**
+     * Add an array of new tracks to the playlist. Tracks will be added in the same order that they are present
+     * in the array.
+     * @method
+     * @public
+     * @param {AudioTrack[]} tracks The array of tracks to add to the playlist.
+     * @param {boolean} force Whether to force the addition of the track, even if it exists. Defaults to false.
+     */
+    addTracks = (tracks, force = false) => {
+        // Don't use map here, just to ensure ordering.
+        for(const track of tracks) {
+            this.addTrack(track, force);
         }
     }
 
@@ -539,11 +564,13 @@ class PlaylistManager extends AudioComponent {
         }
 
         // Set the class of the playlist items.
-        if(this.preferences.playlistItemContainerElements[parseInt(this.currentTrackIndex, 10)]) {
-            this.preferences.playlistItemContainerElements[parseInt(this.currentTrackIndex, 10)].classList.remove(this.preferences.playlistItemContainerPlayingClass);
-        }
-        if(this.preferences.playlistItemContainerElements[parseInt(index, 10)]) {
-            this.preferences.playlistItemContainerElements[parseInt(index, 10)].classList.add(this.preferences.playlistItemContainerPlayingClass);
+        if(this.preferences.playlistItemContainerElements) {
+            if(this.preferences.playlistItemContainerElements[parseInt(this.currentTrackIndex, 10)]) {
+                this.preferences.playlistItemContainerElements[parseInt(this.currentTrackIndex, 10)].classList.remove(this.preferences.playlistItemContainerPlayingClass);
+            }
+            if(this.preferences.playlistItemContainerElements[parseInt(index, 10)]) {
+                this.preferences.playlistItemContainerElements[parseInt(index, 10)].classList.add(this.preferences.playlistItemContainerPlayingClass);
+            }
         }
 
         this.currentTrackIndex = index;

@@ -57,8 +57,7 @@ describe("CSS Mutator", function() {
         const mutator = new CssMutator(testElement, testCssProperty, testUnitOfMeasure, testLowerValue, testUpperValue);
 
         mutator.mutate(testPercentage);
-        
-        const expectedValue = (Math.round((testUpperValue - testLowerValue) * testPercentage) / 100.0) + testLowerValue;
+        const expectedValue = Math.round((((testUpperValue - testLowerValue) * (testPercentage / 100.0) + testLowerValue) * 100)) / 100;
         expect(testElement.style[testCssProperty]).to.equal(`${expectedValue}${testUnitOfMeasure}`);
     })
 });
