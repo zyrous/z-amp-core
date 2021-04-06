@@ -1,3 +1,10 @@
+## [1.2.3](https://bitbucket.org/zyrous/z-amp-core/compare/v1.2.2...v1.2.3) (2021-04-06)
+
+
+### Bug Fixes
+
+* fixing npm dependency vulnerabilities ([ad84b51](https://bitbucket.org/zyrous/z-amp-core/commits/ad84b51ad4f4b6bfdc5e8d2349a5edb3034a8a24))
+
 ## [1.2.2](https://bitbucket.org/zyrous/z-amp-core/compare/v1.2.1...v1.2.2) (2021-03-31)
 
 
