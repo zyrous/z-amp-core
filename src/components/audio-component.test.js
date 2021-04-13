@@ -61,6 +61,11 @@ describe("Audio Component", function() {
         expect(component.storageProvider).to.equal(testProvider);
     }),
 
+    it("Fails to set storage provider when empty", async() => {
+        var component = new AudioComponent();
+        expect(() => component.setStorageProvider()).to.throw();
+    }),
+
     it("Stores values correctly with provider", async() => {
         const testValueName = faker.lorem.word();
         const testValue = faker.random.uuid();
@@ -95,7 +100,7 @@ describe("Audio Component", function() {
         mockStorageProvider.verify();
     }),
 
-    it("Adds new event handlers successfully", async() => {
+    it("Adds new event handlers successfully for first time", async() => {
         const testCallback = sandbox.stub();
         const testEventName = faker.lorem.word();
 
@@ -104,6 +109,20 @@ describe("Audio Component", function() {
 
         expect(component.eventListeners.has(testEventName)).to.be.true;
         expect(component.eventListeners.get(testEventName)[0]).to.equal(testCallback);
+    }),
+
+    it("Adds new event handlers successfully multiple times", async() => {
+        const testCallback1 = sandbox.stub();
+        const testCallback2 = sandbox.stub();
+        const testEventName = faker.lorem.word();
+
+        var component = new AudioComponent();
+        component.addEventListener(testEventName, testCallback1);
+        component.addEventListener(testEventName, testCallback2);
+
+        expect(component.eventListeners.has(testEventName)).to.be.true;
+        expect(component.eventListeners.get(testEventName).indexOf(testCallback1)).to.be.greaterThanOrEqual(0);
+        expect(component.eventListeners.get(testEventName).indexOf(testCallback2)).to.be.greaterThanOrEqual(0);
     }),
 
     it("Responds to new event successfully", async() => {
@@ -148,6 +167,31 @@ describe("Audio Component", function() {
 
         expect(result).to.equal(testElement);
         expect(testParentObject[testElementName]).to.equal(testElement);
+    }),
+
+    it("Attaches DOM element successfully when it exists multiple times", async() => {
+        var testPropertyName = faker.lorem.word();
+        var testElementName1 = faker.lorem.word();
+        var testElementName2 = faker.lorem.word();
+        var testElement1 = document.createElement(testElementName1);
+        var testElement2 = document.createElement(testElementName2);
+        var testSelector1 = faker.lorem.word();
+        var testSelector2 = faker.lorem.word();
+        var testParentObject = {};
+        var mockDocument = sandbox.mock(document);
+        mockDocument.expects("querySelector").withArgs(testSelector1).returns(testElement1);
+        mockDocument.expects("querySelector").withArgs(testSelector2).returns(testElement2);
+
+        var component = new AudioComponent();
+        var result = await component.attachElement(testParentObject, testPropertyName, testSelector1);
+        expect(result).to.equal(testElement1);
+        expect(testParentObject[testPropertyName]).to.equal(testElement1);
+
+        // Make sure that next time we try with the same element name, the original property isn't
+        // overwritten.
+        result = await component.attachElement(testParentObject, testPropertyName, testSelector2);
+        expect(result).to.equal(testElement1);
+        expect(testParentObject[testPropertyName]).to.equal(testElement1);
     }),
 
     it("Attaches DOM element successfully when it exists with listeners", async() => {
@@ -202,4 +246,89 @@ describe("Audio Component", function() {
         expect(result.indexOf(testElements[1])).to.be.gte(0);
         mockDocument.verify();
     });
+
+    it("Attaches multiple DOM elements successfully multiple when they exist", async() => {
+        var testPropertyName = faker.lorem.word();
+        var testElementName1 = faker.lorem.word();
+        var testElementName2 = faker.lorem.word();
+        var testElements1 = [document.createElement(testElementName1), document.createElement(testElementName1)];
+        var testElements2 = [document.createElement(testElementName2), document.createElement(testElementName2)];
+        var testSelector1 = faker.lorem.word();
+        var testSelector2 = faker.lorem.word();
+        var testParentObject = {};
+        var mockDocument = sandbox.mock(document);
+        mockDocument.expects("querySelectorAll").withArgs(testSelector1).returns(testElements1);
+        mockDocument.expects("querySelectorAll").withArgs(testSelector2).returns(testElements2);
+
+        var component = new AudioComponent();
+        var result = await component.attachMultipleElements(testParentObject, testPropertyName, testSelector1);
+
+        expect(testParentObject[testPropertyName].indexOf(testElements1[0])).to.be.greaterThanOrEqual(0);
+        expect(testParentObject[testPropertyName].indexOf(testElements1[1])).to.be.greaterThanOrEqual(0);
+        expect(result.indexOf(testElements1[0])).to.be.gte(0);
+        expect(result.indexOf(testElements1[1])).to.be.gte(0);
+
+        result = await component.attachMultipleElements(testParentObject, testPropertyName, testSelector2);
+        expect(testParentObject[testPropertyName].indexOf(testElements1[0])).to.be.greaterThanOrEqual(0);
+        expect(testParentObject[testPropertyName].indexOf(testElements1[1])).to.be.greaterThanOrEqual(0);
+        expect(result.indexOf(testElements1[0])).to.be.gte(0);
+        expect(result.indexOf(testElements1[1])).to.be.gte(0);
+    }),
+
+    it("Adds to channel successfully when not null", async() => {
+        const testChannel = faker.lorem.word();
+
+        var component = new AudioComponent();
+        component.addToChannel(testChannel);
+
+        expect(component.channel).to.equal(testChannel);
+    }),
+
+    it("Overrides channel when supplied for second time", async() => {
+        const testChannel = faker.lorem.word();
+
+        var component = new AudioComponent();
+        component.addToChannel(faker.lorem.word());
+        component.addToChannel(testChannel);
+
+        expect(component.channel).to.equal(testChannel);
+    }),
+
+    it("Fails to add to channel when channel is empty", async() => {
+        var component = new AudioComponent();
+        expect(() => component.addToChannel()).to.throw();
+    }),
+
+    it("Tests for channel correctly when not null", async() => {
+        const testChannel = faker.lorem.word();
+
+        var component = new AudioComponent();
+        component.channel = testChannel;
+
+        expect(component.belongsToChannel(testChannel)).to.be.true;
+        expect(component.belongsToChannel(faker.lorem.word())).to.be.false;
+    }),
+
+    it("Attaches to root element when non-null", async() => {
+        const testRootElement = { id: faker.random.uuid() };
+
+        var component = new AudioComponent();
+        component.attachToRootElement(testRootElement);
+
+        expect(component.rootElement).to.equal(testRootElement);
+    }),
+
+    it("Fails to attach to root element when null", async() => {
+        var component = new AudioComponent();
+        expect(() => component.attachToRootElement()).to.throw();
+    }),
+
+    it("Fails to attach to root element when already attached", async() => {
+        var testRootElement = { id: faker.random.uuid() };
+
+        var component = new AudioComponent();
+        component.attachToRootElement(testRootElement);
+
+        expect(() => component.attachToRootElement({ id: faker.random.uuid() })).to.throw();
+    })
 });

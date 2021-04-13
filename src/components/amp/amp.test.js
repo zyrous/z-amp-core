@@ -55,18 +55,13 @@ describe("Amp", function() {
         expect(testAmp.storageProvider).to.equal(testStorageProvider);
     }),
 
-    it("Attaches to root element when supplied", async() => {
-        const testRootElement = { id: faker.random.uuid() };
+    it("Fails to set storage provider when not found", async() => {
+        const createProviderStub = sandbox.stub(StorageProviderFactory.prototype, "createProvider")
+        .returns(undefined);
+        const testProviderName = faker.lorem.word();
 
         var testAmp = new Amp();
-        testAmp.attachToRootElement(testRootElement);
-
-        expect(testAmp.getRootElement()).to.equal(testRootElement);
-    }),
-
-    it("Fails to attach to root element when no value supplied", async() => {
-        var testAmp = new Amp();
-        expect(() => testAmp.attachToRootElement()).to.throw();
+        expect(() => testAmp.setStorageProvider(testProviderName)).to.throw();
     })
 
     it("Adds new component correctly", async() => {

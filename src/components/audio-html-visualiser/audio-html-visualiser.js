@@ -29,7 +29,7 @@ class AudioHtmlVisualiser extends AudioComponent {
      * @private
      * @type {AudioContext}
      */
-    audioContext; 
+    audioContext;
 
     /**
      * The analyser that the visualiser will use to retrieve frequencies.
