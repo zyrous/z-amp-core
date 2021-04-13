@@ -214,7 +214,11 @@ describe("Amp", function() {
         const getThemeStub = sandbox.stub(ThemeManager.prototype, "getTheme").returns(testTheme);
 
         const amp = new Amp();
-        amp.initialise(testSelectorName, testThemeName);
+        await amp.initialise(testSelectorName, testThemeName);
+
+        expect(getThemeStub.calledOnceWith(testThemeName)).to.be.true;
+        expect(testTheme.configurer.configureLayouts.calledOnceWith(testSelectorName)).to.be.true;
+        expect(testTheme.configurer.configureComponents.calledOnceWith(testSelectorName)).to.be.true;
     })
 
 });

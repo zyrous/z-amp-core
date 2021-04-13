@@ -57,6 +57,13 @@ class AudioComponent {
     _rootElement;
     
     /**
+     * Gets the parent element that the component should attach to.
+     * @protected
+     * @type {HtmlElement}
+     */
+     get rootElement() { return this._rootElement; }
+    
+    /**
      * Construct a new ZAmp component. Each ZAmp component must call this method within
      * its own constructor.
      * @param {String} componentName The name of this component. Names are used to uniquely identify

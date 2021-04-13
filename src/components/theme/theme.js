@@ -30,6 +30,14 @@ class Theme extends AudioComponent {
     _configurer;
 
     /**
+     * The configurer that will be used to create the components and layouts
+     * needed by this theme.
+     * @public
+     * @type {ZAmpConfigurer}
+     */
+    get configurer() { return this._configurer; }
+
+    /**
      * The name of this theme.
      * @private
      * @type {String}

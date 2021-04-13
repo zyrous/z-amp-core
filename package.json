@@ -8,7 +8,7 @@
     "build": "gulp build",
     "serve": "gulp serve",
     "test": "nyc mocha src/**/*.test.js",
-    "watch": "nyc --reporter=lcov --reporter=text --report-dir='./coverage' mocha src/**/*.test.js --watch",
+    "watch": "nyc mocha src/**/*.test.js --watch",
     "coverage": "nyc --reporter=lcov --reporter=text --report-dir='./coverage' mocha src/**/*.test.js",
     "cy:run": "cypress run",
     "cy:open": "cypress open"
