@@ -58,7 +58,7 @@ describe("Audio Component", function() {
         var component = new AudioComponent();
         component.handleEvent("storageProviderChanged", "Default", testProvider);
 
-        expect(component.storageProvider).to.equal(testProvider);
+        expect(component._storageProvider).to.equal(testProvider);
     }),
 
     it("Fails to set storage provider when empty", async() => {
@@ -75,7 +75,7 @@ describe("Audio Component", function() {
         .resolves(testValue);
 
         var component = new AudioComponent();
-        component.storageProvider = new StorageProvider();
+        component._storageProvider = new StorageProvider();
         const returnValue = await component.storeValue(testValueName, testValue);
 
         expect(returnValue).to.equal(testValue);
@@ -93,7 +93,7 @@ describe("Audio Component", function() {
         .resolves(testValue);
 
         var component = new AudioComponent();
-        component.storageProvider = new StorageProvider();
+        component._storageProvider = new StorageProvider();
         const returnValue = await component.getValue(testValueName, testDefaultValue, testArgs);
 
         expect(returnValue).to.equal(testValue);
@@ -107,8 +107,8 @@ describe("Audio Component", function() {
         var component = new AudioComponent();
         component.addEventListener(testEventName, testCallback);
 
-        expect(component.eventListeners.has(testEventName)).to.be.true;
-        expect(component.eventListeners.get(testEventName)[0]).to.equal(testCallback);
+        expect(component._eventListeners.has(testEventName)).to.be.true;
+        expect(component._eventListeners.get(testEventName)[0]).to.equal(testCallback);
     }),
 
     it("Adds new event handlers successfully multiple times", async() => {
@@ -120,9 +120,9 @@ describe("Audio Component", function() {
         component.addEventListener(testEventName, testCallback1);
         component.addEventListener(testEventName, testCallback2);
 
-        expect(component.eventListeners.has(testEventName)).to.be.true;
-        expect(component.eventListeners.get(testEventName).indexOf(testCallback1)).to.be.greaterThanOrEqual(0);
-        expect(component.eventListeners.get(testEventName).indexOf(testCallback2)).to.be.greaterThanOrEqual(0);
+        expect(component._eventListeners.has(testEventName)).to.be.true;
+        expect(component._eventListeners.get(testEventName).indexOf(testCallback1)).to.be.greaterThanOrEqual(0);
+        expect(component._eventListeners.get(testEventName).indexOf(testCallback2)).to.be.greaterThanOrEqual(0);
     }),
 
     it("Responds to new event successfully", async() => {
@@ -281,7 +281,7 @@ describe("Audio Component", function() {
         var component = new AudioComponent();
         component.addToChannel(testChannel);
 
-        expect(component.channel).to.equal(testChannel);
+        expect(component._channel).to.equal(testChannel);
     }),
 
     it("Overrides channel when supplied for second time", async() => {
@@ -291,7 +291,7 @@ describe("Audio Component", function() {
         component.addToChannel(faker.lorem.word());
         component.addToChannel(testChannel);
 
-        expect(component.channel).to.equal(testChannel);
+        expect(component._channel).to.equal(testChannel);
     }),
 
     it("Fails to add to channel when channel is empty", async() => {
@@ -303,7 +303,7 @@ describe("Audio Component", function() {
         const testChannel = faker.lorem.word();
 
         var component = new AudioComponent();
-        component.channel = testChannel;
+        component._channel = testChannel;
 
         expect(component.belongsToChannel(testChannel)).to.be.true;
         expect(component.belongsToChannel(faker.lorem.word())).to.be.false;
@@ -315,7 +315,7 @@ describe("Audio Component", function() {
         var component = new AudioComponent();
         component.attachToRootElement(testRootElement);
 
-        expect(component.rootElement).to.equal(testRootElement);
+        expect(component._rootElement).to.equal(testRootElement);
     }),
 
     it("Fails to attach to root element when null", async() => {
@@ -330,5 +330,14 @@ describe("Audio Component", function() {
         component.attachToRootElement(testRootElement);
 
         expect(() => component.attachToRootElement({ id: faker.random.uuid() })).to.throw();
+    }),
+
+    it("Returns correct root element when attached", async() => {
+        var testRootElement = { id: faker.random.uuid() };
+
+        var component = new AudioComponent();
+        component._rootElement = testRootElement;
+
+        expect(component.getRootElement()).to.equal(testRootElement);
     })
 });

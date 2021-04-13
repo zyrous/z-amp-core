@@ -19,35 +19,49 @@ class AudioComponent {
      * @private
      * @type {Map}
      */
-    eventListeners = new Map();
+    _eventListeners = new Map();
 
     /**
      * The storage provider for this component.
      * @private
      * @type {StroageProvider}
      */
-    storageProvider = new LocalStorageProvider();
+    _storageProvider = new LocalStorageProvider();
 
     /**
      * The name of this component.
+     * @private
+     * @type {String}
+     */
+    _componentName;
+
+    /**
+     * Gets the name of this component.
      * @public
      * @type {String}
      */
-    componentName;
+    get componentName() { return this._componentName };
 
     /**
      * The channels that this component belongs to. Always includes "Default".
      * @private
      * @type {String}
      */
-    channel = "Default";
+    _channel = "Default";
 
     /**
      * The parent element that the component should attach to.
+     * @private
+     * @type {HtmlElement}
+     */
+    _rootElement;
+
+    /**
+     * Gets the parent element that the component should attach to.
      * @protected
      * @type {HtmlElement}
      */
-    rootElement;
+    get rootElement() { return this._rootElement; }
     
     /**
      * Construct a new ZAmp component. Each ZAmp component must call this method within
@@ -56,7 +70,7 @@ class AudioComponent {
      * an *instance* of a component.
      */
     constructor(componentName = "Undefined") {
-        this.componentName = componentName;
+        this._componentName = componentName;
         this.addEventListener("storageProviderChanged", (provider) => this.setStorageProvider(provider));
     }
 
@@ -116,10 +130,10 @@ class AudioComponent {
      * @param {function} callback The function to call.
      */
     addEventListener(eventName, callback) {
-        if(!this.eventListeners.has(eventName)) {
-            this.eventListeners.set(eventName, []);
+        if(!this._eventListeners.has(eventName)) {
+            this._eventListeners.set(eventName, []);
         }
-        this.eventListeners.get(eventName).push(callback);
+        this._eventListeners.get(eventName).push(callback);
     }
 
     /**
@@ -131,11 +145,11 @@ class AudioComponent {
      */
     raiseEvent(eventName, ...args){
         // Handle the event.
-        this.handleEvent(eventName, this.channel, ...args);
+        this.handleEvent(eventName, this._channel, ...args);
         // Raise the "eventRaised" event. This allows parent objects to receive all
         // events and handle them as required (for example bubbling).
         if(eventName !== "eventRaised") {
-            this.raiseEvent("eventRaised", eventName, this.channel, ...args);
+            this.raiseEvent("eventRaised", eventName, this._channel, ...args);
         }
     }
 
@@ -147,10 +161,10 @@ class AudioComponent {
      * @param {...any} args Any arguments to pass to event listeners.
      */
     handleEvent(eventName, channel, ...args) {
-        if(this.channel === channel
-            && this.eventListeners.has(eventName)) {
+        if(this._channel === channel
+            && this._eventListeners.has(eventName)) {
             // Call each of the listeners that have previously registered.
-            this.eventListeners.get(eventName).map((listener) => listener(...args));
+            this._eventListeners.get(eventName).map((listener) => listener(...args));
         }
     }
 
@@ -216,7 +230,7 @@ class AudioComponent {
      */
     async storeValue(name, value) {
         return new Promise((resolve) => {
-            this.storageProvider.storeValue(`${this.channel}-${name}`, value);
+            this._storageProvider.storeValue(`${this._channel}-${name}`, value);
             resolve(value);
         });
     }
@@ -231,7 +245,7 @@ class AudioComponent {
      */
     async getValue(name, defaultValue, ...args) {
         return new Promise((resolve) => {
-            resolve(this.storageProvider.getValue(`${this.channel}-${name}`, defaultValue, args));
+            resolve(this._storageProvider.getValue(`${this._channel}-${name}`, defaultValue, args));
         });
     }
 
@@ -243,7 +257,7 @@ class AudioComponent {
      * @returns {Boolean} True if the component belongs to the channel; false otherwise.
      */
     belongsToChannel = (channelName) => {
-        return this.channel === channelName;
+        return this._channel === channelName;
     }
 
     /**
@@ -257,7 +271,7 @@ class AudioComponent {
             throw Error("Cannot add an audio component to an empty channel.");
         }
 
-        this.channel = channelName;
+        this._channel = channelName;
     }
 
     /**
@@ -270,11 +284,11 @@ class AudioComponent {
         if(!rootElement) {
             throw Error("Cannot attach an audio component to an empty root DOM element.");
         }
-        if(this.rootElement) {
+        if(this._rootElement) {
             throw Error("This audio component is already attached to a DOM element.");
         }
 
-        this.rootElement = rootElement;
+        this._rootElement = rootElement;
     }
 
     /**
@@ -284,10 +298,10 @@ class AudioComponent {
      * @returns {HtmlElement} The root element for this component.
      */
     getRootElement = () => {
-        if(!this.rootElement) {
+        if(!this._rootElement) {
             return document;
         } else {
-            return this.rootElement;
+            return this._rootElement;
         }
     }
 
@@ -304,7 +318,7 @@ class AudioComponent {
         }
         
         // Save it.
-        this.storageProvider = provider;
+        this._storageProvider = provider;
     }
 }
 

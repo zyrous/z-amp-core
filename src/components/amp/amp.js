@@ -1,7 +1,6 @@
 const { AudioComponent } = require("../audio-component");
 const { ThemeManager } = require("../../theme-manager/theme-manager");
 const { StorageProviderFactory } = require("../../storage/storage-provider-factory");
-const { v4: uuidv4 } = require("uuid");
 
 /**
  * @namespace ZAmp.Components.Amp
@@ -18,22 +17,18 @@ const { v4: uuidv4 } = require("uuid");
 class Amp extends AudioComponent {
 
     /**
-     * The unique identifier of this amp.
-     */
-    ampId = uuidv4();
-
-    /**
      * The set of components that make up this Amp.
      * @private
      * @type {AudioComponent[]}
      */
-    components = [];
+    _components = [];
 
     /**
      * The manager that will provide access to themes to use.
      * @private
+     * @type {ThemeManager}
      */
-    themeManager = new ThemeManager();
+    _themeManager = new ThemeManager();
     
     /**
      * The static version of initialisation of ZAmp. Call this method to create a new
@@ -62,7 +57,7 @@ class Amp extends AudioComponent {
         // Make sure that we listen to all events that are raised, so that we can pass
         // them to our child components.
         this.addEventListener("eventRaised", (eventName, channel, ...args) => {
-            this.components.map((c) => c.handleEvent(eventName, channel, ...args));
+            this._components.map((c) => c.handleEvent(eventName, channel, ...args));
         });
     }
 
@@ -74,7 +69,7 @@ class Amp extends AudioComponent {
      * @param {AudioComponent} component The component to add to this Amp. 
      */
     addComponent(component) {
-        this.components.push(component);
+        this._components.push(component);
 
         // Listen to all events that are raised by the component.
         component.addEventListener("eventRaised", (eventName, channel, ...args) => {
@@ -83,7 +78,7 @@ class Amp extends AudioComponent {
             this.handleEvent(eventName, channel, ...args);
 
             // Pass the event to each one of our components.
-            this.components.map((c) => c.handleEvent(eventName, channel, ...args));
+            this._components.map((c) => c.handleEvent(eventName, channel, ...args));
         });
 
         // Finally, initialise the component.
@@ -107,7 +102,7 @@ class Amp extends AudioComponent {
     async initialise(selector = "body", themeName){
         
         // Get the selected theme.
-        var theme = this.themeManager.getTheme(themeName);
+        var theme = this._themeManager.getTheme(themeName);
 
         if(!theme){
             // We can't initialise without a theme.
@@ -148,7 +143,7 @@ class Amp extends AudioComponent {
      * @returns {AudioComponent} The component with the specified name (if available).
      */
     findComponent(componentName) {
-        const component = this.components.find((component) => component.componentName === componentName);
+        const component = this._components.find((component) => component.componentName === componentName);
 
         if(!component){
             throw Error(`No component found with name '${componentName}. Did you (or your theme) forget to register it?`);
@@ -176,7 +171,7 @@ class Amp extends AudioComponent {
         this.storageProvider = provider;
 
         // Set it on all components.
-        this.components.map((component) => component.setStorageProvider(provider));
+        this._components.map((component) => component.setStorageProvider(provider));
     }
 
     /**

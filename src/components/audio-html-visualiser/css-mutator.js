@@ -13,42 +13,42 @@ class CssMutator {
      * @private
      * @type {HTMLElement}
      */
-    htmlElement;
+    _htmlElement;
 
     /**
      * The property that will be mutated on the element. Defaults to "height".
      * @private
      * @type {String}
      */
-    cssProperty = "height";
+    _cssProperty = "height";
 
     /**
      * The unit of measure that will be appended to the CSS value. Defaults to "%".
      * @private
      * @type {String}
      */
-    unitOfMeasure = "%";
+    _unitOfMeasure = "%";
 
     /**
      * The lower bounds of the value to set on the element. Defaults to 0.0.
      * @private
      * @type {Number}
      */
-    lowerValue = 0.0;
+    _lowerValue = 0.0;
 
     /**
      * The upper bounds of the value to set on the element. Defaults to 100.0.
      * @private
      * @type {Number}
      */
-    upperValue = 100.0;
+    _upperValue = 100.0;
 
     /**
      * The difference between the upper and lower values. Defaults to 100.0.
      * @private
      * @type {Number}
      */
-    spread = 100.0;
+    _spread = 100.0;
 
     /**
      * Construct a new mutator for a CSS property of an HTML element.
@@ -58,13 +58,13 @@ class CssMutator {
      * @param {Number} lowerValue The lower bounds of the value to set on the element. Defaults to 0.0.
      * @param {Number} upperValue The upper bounds of the value to set on the element. Defaults to 100.0.
      */
-    constructor(htmlElement, cssProperty = this.cssProperty, unitOfMeasure = this.unitOfMeasure, lowerValue = this.lowerValue, upperValue = this.upperValue){
-        this.htmlElement = htmlElement;
-        this.cssProperty = cssProperty;
-        this.unitOfMeasure = unitOfMeasure;
-        this.lowerValue = Number.parseFloat(lowerValue);
-        this.upperValue = Number.parseFloat(upperValue);
-        this.spread = this.upperValue - this.lowerValue;
+    constructor(htmlElement, cssProperty = "height", unitOfMeasure = "%", lowerValue = 0.0, upperValue = 100.0){
+        this._htmlElement = htmlElement;
+        this._cssProperty = cssProperty;
+        this._unitOfMeasure = unitOfMeasure;
+        this._lowerValue = Number.parseFloat(lowerValue);
+        this._upperValue = Number.parseFloat(upperValue);
+        this._spread = this._upperValue - this._lowerValue;
     }
 
     /**
@@ -75,8 +75,8 @@ class CssMutator {
     mutate(percentage) {
         // Calculate the new value.
         // NOTE: Rounding here to avoid floating point errors.
-        var newValue = Math.round(((this.spread * (percentage / 100.0) + this.lowerValue) * 100)) / 100;
-        this.htmlElement.style[this.cssProperty] = `${newValue}${this.unitOfMeasure}`;
+        var newValue = Math.round(((this._spread * (percentage / 100.0) + this._lowerValue) * 100)) / 100;
+        this._htmlElement.style[this._cssProperty] = `${newValue}${this._unitOfMeasure}`;
     }
 }
 

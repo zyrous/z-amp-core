@@ -27,7 +27,7 @@ describe("Amp", function() {
 
         expect(amp).to.not.be.null;
         expect(amp.componentName).to.equal("Amp");
-        expect(amp.eventListeners.get("eventRaised")).to.exist;
+        expect(amp._eventListeners.get("eventRaised")).to.exist;
     }),
 
     it("Constructs amp from static method", async() => {
@@ -70,8 +70,8 @@ describe("Amp", function() {
         const testAmp = new Amp();
         testAmp.addComponent(testComponent);
 
-        expect(testAmp.components.length).to.equal(1);
-        expect(testAmp.components[0]).to.equal(testComponent);
+        expect(testAmp._components.length).to.equal(1);
+        expect(testAmp._components[0]).to.equal(testComponent);
         expect(testComponent.addEventListener.calledWith("eventRaised")).to.be.true;
         expect(testComponent.initialise.calledOnce).to.be.true;
     }),
@@ -90,6 +90,102 @@ describe("Amp", function() {
         const component = testAmp.findComponent(testComponentName);
 
         expect(component).to.equal(testComponent);
+    }),
+
+    it("Receives events raised by child components correctly", async() => {
+        const testEvent = faker.lorem.word();
+        const testChildCallback = sandbox.stub();
+        const testAmpCallback = sandbox.stub();
+
+        const testChild = new AudioComponent();
+        testChild.addEventListener(testEvent, testChildCallback);
+        const testArg = {
+            id: faker.random.uuid()
+        };
+
+        const amp = new Amp();
+        amp.addEventListener(testEvent, testAmpCallback);
+        amp.addComponent(testChild);
+        testChild.raiseEvent(testEvent, testArg);
+
+        expect(testAmpCallback.args[0][0]).to.equal(testArg);
+        expect(testChildCallback.args[0][0]).to.equal(testArg);
+    }),
+
+    it("Passes raised events to children", async() => {
+        const testEvent = faker.lorem.word();
+        const testChildCallback = sandbox.stub();
+        const testArg = {
+            id: faker.random.uuid()
+        };
+        const testChild = new AudioComponent();
+        testChild.addEventListener(testEvent, testChildCallback);
+
+        const amp = new Amp();
+        amp.addComponent(testChild);
+        amp.raiseEvent("eventRaised", testEvent, "Default", testArg);
+
+        expect(testChildCallback.args[0][0]).to.equal(testArg);
+    }),
+
+    it("Finds audio player correctly", async() => {
+        const componentName = "AudioPlayer";
+        const component = new AudioComponent(componentName);
+
+        const amp = new Amp();
+        amp.addComponent(component);
+
+        const result = amp.player();
+
+        expect(result).to.equal(component);
+    }),
+
+    it("Finds playlist manager correctly", async() => {
+        const componentName = "PlaylistManager";
+        const component = new AudioComponent(componentName);
+
+        const amp = new Amp();
+        amp.addComponent(component);
+
+        const result = amp.playlist();
+
+        expect(result).to.equal(component);
+    }),
+
+    it("Finds equalizer correctly", async() => {
+        const componentName = "Equalizer";
+        const component = new AudioComponent(componentName);
+
+        const amp = new Amp();
+        amp.addComponent(component);
+
+        const result = amp.equalizer();
+
+        expect(result).to.equal(component);
+    }),
+
+    it("Finds theme correctly", async() => {
+        const componentName = "Theme";
+        const component = new AudioComponent(componentName);
+
+        const amp = new Amp();
+        amp.addComponent(component);
+
+        const result = amp.theme();
+
+        expect(result).to.equal(component);
+    }),
+
+    it("Finds theme manager correctly", async() => {
+        const componentName = "ThemeManager";
+        const component = new AudioComponent(componentName);
+
+        const amp = new Amp();
+        amp.addComponent(component);
+
+        const result = amp.themeManager();
+
+        expect(result).to.equal(component);
     })
 
 });

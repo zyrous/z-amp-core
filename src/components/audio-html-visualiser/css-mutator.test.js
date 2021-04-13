@@ -11,12 +11,12 @@ describe("CSS Mutator", function() {
 
         const mutator = new CssMutator(testElement);
         
-        expect(mutator.htmlElement).to.equal(testElement);
-        expect(mutator.cssProperty).to.equal("height");
-        expect(mutator.unitOfMeasure).to.equal("%");
-        expect(mutator.lowerValue).to.equal(0.0);
-        expect(mutator.upperValue).to.equal(100.0);
-        expect(mutator.spread).to.equal(100.0);
+        expect(mutator._htmlElement).to.equal(testElement);
+        expect(mutator._cssProperty).to.equal("height");
+        expect(mutator._unitOfMeasure).to.equal("%");
+        expect(mutator._lowerValue).to.equal(0.0);
+        expect(mutator._upperValue).to.equal(100.0);
+        expect(mutator._spread).to.equal(100.0);
     }),
 
     it("Should be initialised with overrides correctly", async() => {
@@ -28,12 +28,12 @@ describe("CSS Mutator", function() {
 
         const mutator = new CssMutator(testElement, testCssProperty, testUnitOfMeasure, testLowerValue, testUpperValue);
 
-        expect(mutator.htmlElement).to.equal(testElement);
-        expect(mutator.cssProperty).to.equal(testCssProperty);
-        expect(mutator.unitOfMeasure).to.equal(testUnitOfMeasure);
-        expect(mutator.lowerValue).to.equal(testLowerValue);
-        expect(mutator.upperValue).to.equal(testUpperValue);
-        expect(mutator.spread).to.equal(testUpperValue - testLowerValue);
+        expect(mutator._htmlElement).to.equal(testElement);
+        expect(mutator._cssProperty).to.equal(testCssProperty);
+        expect(mutator._unitOfMeasure).to.equal(testUnitOfMeasure);
+        expect(mutator._lowerValue).to.equal(testLowerValue);
+        expect(mutator._upperValue).to.equal(testUpperValue);
+        expect(mutator._spread).to.equal(testUpperValue - testLowerValue);
     }),
 
     it("Mutates default property with non-zero percentage", async() => {

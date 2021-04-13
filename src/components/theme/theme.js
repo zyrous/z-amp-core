@@ -1,7 +1,6 @@
 const { AudioComponent } = require("../audio-component");
 const { ThemeManager } = require("../../theme-manager/theme-manager");
 const { ZAmpConfigurer } = require("../../configuration/z-amp-configurer")
-const { v4: uuidv4 } = require("uuid");
 
 /**
  * @namespace ZAmp.Components.Theme
@@ -84,7 +83,7 @@ class Theme extends AudioComponent {
      * @public
      * @returns {Theme}
      */
-    static create(themeName = uuidv4()) {
+    static create(themeName = "Theme") {
         const newTheme = new Theme();
         newTheme.themeName = themeName;
         newTheme.register();
