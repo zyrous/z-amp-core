@@ -19,7 +19,7 @@ class Theme extends AudioComponent {
      * @private
      * @type {ThemeManager}
      */
-    themeManager = new ThemeManager();
+    _themeManager = new ThemeManager();
     
     /**
      * The configurer that will be used to create the components and layouts
@@ -27,14 +27,14 @@ class Theme extends AudioComponent {
      * @private
      * @type {ZAmpConfigurer}
      */
-    configurer;
+    _configurer;
 
     /**
      * The name of this theme.
      * @private
      * @type {String}
      */
-    name;
+    _name;
 
     /**
      * Construct a new theme.
@@ -54,7 +54,7 @@ class Theme extends AudioComponent {
      * @public
      */
     register() {
-        this.themeManager.addTheme(this);
+        this._themeManager.addTheme(this);
     }
 
     /**
@@ -72,8 +72,8 @@ class Theme extends AudioComponent {
      * @returns {ZAmpConfigurer}
      */
     startConfiguring() {
-        this.configurer = new ZAmpConfigurer(this.themeName);
-        return this.configurer;
+        this._configurer = new ZAmpConfigurer(this._themeName);
+        return this._configurer;
     }
 
     /**
@@ -96,7 +96,7 @@ class Theme extends AudioComponent {
      * @param {String} themeName The name to give to the theme.
      */
     set themeName(themeName) {
-        this.name = themeName;
+        this._name = themeName;
     }
 
     /**
@@ -104,7 +104,7 @@ class Theme extends AudioComponent {
      * @public
      * @returns {String}
      */
-    get themeName() { return this.name; }
+    get themeName() { return this._name; }
 }
 
 module.exports = { Theme };

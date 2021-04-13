@@ -186,6 +186,35 @@ describe("Amp", function() {
         const result = amp.themeManager();
 
         expect(result).to.equal(component);
+    }),
+
+    it("Fails to initialise without a theme", async() => {
+        const testThemeName = faker.lorem.word();
+        const getThemeStub = sandbox.stub(ThemeManager.prototype, "getTheme").returns(undefined);
+
+        const amp = new Amp();
+        expect(amp.initialise("body", testThemeName)).to.eventually.throw();
+        expect(getThemeStub.calledOnce).to.be.true;
+        expect(getThemeStub.args[0][0]).to.equal(testThemeName);
+    }),
+
+    it("Initialises layouts and components correctly when a theme exists",async() => {
+        const testTheme = new AudioComponent();
+        testTheme.configurer = {
+            configureLayouts: sandbox.stub(),
+            configureComponents: sandbox.stub()
+        };
+
+        testTheme.configurer.configureLayouts.resolves([]);
+        testTheme.configurer.configureComponents.returns([]);
+
+        const testThemeName = faker.lorem.word();
+        const testSelectorName = faker.lorem.word();
+
+        const getThemeStub = sandbox.stub(ThemeManager.prototype, "getTheme").returns(testTheme);
+
+        const amp = new Amp();
+        amp.initialise(testSelectorName, testThemeName);
     })
 
 });
