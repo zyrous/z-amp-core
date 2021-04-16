@@ -116,13 +116,13 @@ describe("Audio HTML Visualiser", function() {
     }),
 
     it("Executes animation correctly", async() => {
-        const mutatorCount = faker.random.number(100);
+        const elementCount = faker.random.number(100);
         const mutators = [];
         const testElements = [];
         const testDistStarts = [];
         const testDistEnds = [];
         const testDistLengths = [];
-        for(var i=0; i<mutatorCount; i++){
+        for(var i=0; i<elementCount; i++){
             mutators.push([{
                 mutate: sandbox.stub()
             }]);
@@ -156,7 +156,7 @@ describe("Audio HTML Visualiser", function() {
 
         component.startAnimation(() => {
             // Now check that each mutator was called with the right value.
-            for(var i=0; i<mutatorCount; i++){
+            for(var i=0; i<elementCount; i++){
                 expect(mutators[i][0].mutate.calledWith(frequencyValues[i] * 100.0 / 256.0)).to.be.true;
             }
         });

@@ -18,27 +18,38 @@ class AudioPipeline extends AudioComponent {
      * @private
      * @type {HTMLMediaElement}
      */
-    mediaElement;
+    _audioElement;
+
+    /**
+     * Sets the audio element that this pipeline will use.
+     * @private
+     * @param {HTMLMediaElement} element The HTML media element to use for audio.
+     */
+    set audioElement(element){
+        this._audioElement = element;
+        this.loadState();
+    }
 
     /**
      * The Audio Context that this pipeline creates.
      * @private
      * @type {AudioContext}
      */
-    audioContext;
+    _audioContext;
 
     /**
      * The segments that make up this audio pipeline.
      * @private
      * @type {AudioPipelineSegment[]}
      */
-    pipelineSegments = [];
+    _pipelineSegments = [];
 
     /**
      * Whether or not this pipeline has been initialised yet.
      * @private
+     * @type {Boolean}
      */
-    pipelineInitialised = false;
+    _pipelineInitialised = false;
 
     /**
      * Construct a new audio processing pipeline.
@@ -61,10 +72,10 @@ class AudioPipeline extends AudioComponent {
      * @private
      */
     onDocumentClick = () => {
-        if(this.audioContext.state !== "running") {
+        if(this._audioContext.state !== "running") {
             // The audio context is not running, so we need to start it up again.
             // NOTE: This has likely been caused by the browser denying auto-play.
-            this.audioContext.resume();
+            this._audioContext.resume();
         }
     }
 
@@ -76,29 +87,29 @@ class AudioPipeline extends AudioComponent {
 
         // We only need to continue if we haven't already been initialised and we have a media element
         // to use.
-        if(this.pipelineInitialised
-            || !this.mediaElement) {
+        if(this._pipelineInitialised
+            || !this._audioElement) {
             return;
         }
 
         // Construct a new audio context. This is the context that all pipeline segments must use.
         const audioContext = new AudioContext();
-        this.audioContext = audioContext;
+        this._audioContext = audioContext;
 
         // Generate a new audio source from the context. This will become the first node in our pipeline.
-        const audioSource = audioContext.createMediaElementSource(this.mediaElement);
+        const audioSource = audioContext.createMediaElementSource(this._audioElement);
 
         // Initially we must connect the new audio source directly to the destination so that the pipeline
         // works even without any other segments.
         audioSource.connect(audioContext.destination);
 
         // We'll initialise our segment array with two segments initially; the audio source and destination.
-        this.pipelineSegments.push(new AudioPipelineSegment(audioSource, audioSource, 0));
-        this.pipelineSegments.push(new AudioPipelineSegment(audioContext.destination, audioContext.destination, 100));
+        this._pipelineSegments.push(new AudioPipelineSegment(audioSource, audioSource, 0));
+        this._pipelineSegments.push(new AudioPipelineSegment(this._audioContext.destination, this._audioContext.destination, 100));
 
         // Announce that the pipeline has been created.
-        this.raiseEvent("audioPipelineCreated", audioContext);
-        this.pipelineInitialised = true;
+        this.raiseEvent("audioPipelineCreated", this._audioContext);
+        this._pipelineInitialised = true;
     }
 
     /**
@@ -115,11 +126,11 @@ class AudioPipeline extends AudioComponent {
         var previousSegment;
         var nextSegment;
 
-        for(var i=0; i<this.pipelineSegments.length; i++){
+        for(var i=0; i<this._pipelineSegments.length; i++){
 
             // Find the segments on either side of this one.
-            previousSegment = this.pipelineSegments[parseInt(i, 10)];
-            nextSegment = this.pipelineSegments[parseInt(i, 10)+1];
+            previousSegment = this._pipelineSegments[parseInt(i, 10)];
+            nextSegment = this._pipelineSegments[parseInt(i, 10)+1];
             
             if(previousSegment && previousSegment.weighting <= weighting
                 && nextSegment && nextSegment.weighting >= weighting) {
@@ -139,22 +150,12 @@ class AudioPipeline extends AudioComponent {
 
         // Add the new segment to the array.
         const segment = new AudioPipelineSegment(firstNode, lastNode, weighting);
-        this.pipelineSegments.splice(segmentIndex, 0, segment);
+        this._pipelineSegments.splice(segmentIndex, 0, segment);
 
         // Plug the segment inbetween the previous and next ones.
         previousSegment.lastNode.disconnect(nextSegment.firstNode);
         previousSegment.lastNode.connect(segment.firstNode);
         segment.lastNode.connect(nextSegment.firstNode);
-    }
-
-    /**
-     * Sets the audio element that this pipeline will use.
-     * @private
-     * @param {HTMLMediaElement} element The HTML media element to use for audio.
-     */
-    set audioElement(element){
-        this.mediaElement = element;
-        this.loadState();
     }
 }
 
