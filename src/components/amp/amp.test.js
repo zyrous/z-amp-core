@@ -189,6 +189,7 @@ describe("Amp", function() {
     }),
 
     it("Fails to initialise without a theme", async() => {
+        sandbox.stub(console, "log");
         const testThemeName = faker.lorem.word();
         const getThemeStub = sandbox.stub(ThemeManager.prototype, "getTheme").returns(undefined);
 

@@ -116,7 +116,7 @@ describe("Audio HTML Visualiser", function() {
     }),
 
     it("Executes animation correctly", async() => {
-        const elementCount = faker.random.number(100);
+        const elementCount = faker.random.number({max:100,min:10});
         const mutators = [];
         const testElements = [];
         const testDistStarts = [];
@@ -157,7 +157,11 @@ describe("Audio HTML Visualiser", function() {
         component.startAnimation(() => {
             // Now check that each mutator was called with the right value.
             for(var i=0; i<elementCount; i++){
-                expect(mutators[i][0].mutate.calledWith(frequencyValues[i] * 100.0 / 256.0)).to.be.true;
+                var expectedArg = frequencyValues[i] * 100.0 / 256.0;
+                if(isNaN(expectedArg)) {
+                    expectedArg = 0;
+                }
+                expect(mutators[i][0].mutate.args[0][0]).to.equal(expectedArg);
             }
         });
     })

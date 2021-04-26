@@ -46,7 +46,7 @@ describe("Audio Pipeline", function() {
 
         const testContext = {
             state: "paused",
-            resume: sandbox.stub()
+            resume: sandbox.stub().returns()
         };
 
         const pipeline = new AudioPipeline();
