@@ -30,4 +30,4 @@ Right now, **z-amp-core** provides the following types of audio components:
 
 If you'd like to create your own components, it's easy to get started. In addition, the powerful theming engine allows you to create advanced UIs quickly.
 
-To find out more, visit the [full documentation](https://bitbucket.org/zyrous/z-amp-core/src/master/docs/static/HOME.md).
+To find out more, visit the [full documentation](https://zyrous.github.io/z-amp-core/).
