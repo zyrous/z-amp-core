@@ -55,7 +55,6 @@ out/
 build/
 dist/
 bin/
-docs/gen
 /index.html
 
 # Test output

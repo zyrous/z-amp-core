@@ -16,3 +16,5 @@ Find out how to receive notifications when events occur within the framework.
 Learn what each core module does and how to use it.
 ## [Creating Themes](./static/CREATE_THEME.md)
 Create and distribute your own custom theme for others to use.
+## [API Reference](./gen/index.html)
+Inspect the individual classes that compose the library.
