@@ -595,7 +595,7 @@ class AudioPlayer extends AudioComponent {
      * Called when the user wishes to begin playback.
      * @private
      */
-    onPlay() {
+    onPlay = () => {
         this.play();
     }
 
@@ -603,7 +603,7 @@ class AudioPlayer extends AudioComponent {
      * Called when the user wishes to pause playback.
      * @private
      */
-    onPause() {
+    onPause = () => {
         this.pause();
     }
 
@@ -611,7 +611,7 @@ class AudioPlayer extends AudioComponent {
      * Called when the user wants to toggle playback.
      * @private
      */
-    onPlayToggled() {
+    onPlayToggled = () => {
         if(!this.isPaused) {
             this.pause();
         } else {
@@ -623,7 +623,7 @@ class AudioPlayer extends AudioComponent {
      * Called when the user wishes to mute the volume.
      * @private
      */
-    onMute() {
+    onMute = () => {
         if(this._isMuted) {
             this.isMuted = false;
             this.raiseEvent("volumeUnmuted", this._volume);
@@ -637,7 +637,7 @@ class AudioPlayer extends AudioComponent {
      * Called when a new track is loaded.
      * @private
      */
-    onTrackLoaded() {
+    onTrackLoaded = () => {
         if(this._loadedTrack !== this._track) {
             // Save the new track.
             this._loadedTrack = this._track;
@@ -650,7 +650,7 @@ class AudioPlayer extends AudioComponent {
      * Called when a track has finished playing.
      * @private
      */
-    onTrackEnded() {
+    onTrackEnded = () => {
         this.raiseEvent("trackEnded", this._track);
     }
 
@@ -658,7 +658,7 @@ class AudioPlayer extends AudioComponent {
      * Called when the user wishes to decrease the volume.
      * @private
      */
-    onVolumeDown() {
+    onVolumeDown = () => {
         this.volume = Math.max(this._volume - 10, 0);
     }
 
@@ -666,7 +666,7 @@ class AudioPlayer extends AudioComponent {
      * Called when a user wishes to increase the volume.
      * @private
      */
-    onVolumeUp() {
+    onVolumeUp = () => {
         this.volume = Math.min(this._volume + 10, 100);
     }
 
@@ -674,7 +674,7 @@ class AudioPlayer extends AudioComponent {
      * Called when a user wishes to change the volume to a specific value.
      * @private
      */
-    onVolumeSelected() {
+    onVolumeSelected = () => {
         this.volume = this._preferences.volumeRangeElement.value;
     }
 
@@ -682,7 +682,7 @@ class AudioPlayer extends AudioComponent {
      * Called when the user wishes to change the playing position to a specific value.
      * @private
      */
-    onPositionSelected() {
+    onPositionSelected = () => {
         // Get the position (percentage).
         var rangePosition = this._preferences.positionRangeElement.value;
         // Get the position (seconds).
@@ -700,7 +700,7 @@ class AudioPlayer extends AudioComponent {
      * Called when the user wishes to seek forward on their audio track.
      * @private
      */
-    onSeekForward() {
+    onSeekForward = () => {
         var audioPosition = Math.min(this.audioElement.duration, this.audioElement.currentTime + this._preferences.seekPreferences.seekForwardTime); 
         var rangePosition = audioPosition / this.audioElement.duration * 100;
         this.audioElement.currentTime = audioPosition;
@@ -712,7 +712,7 @@ class AudioPlayer extends AudioComponent {
      * Called when the user wishes to seek backward on their audio track.
      * @private
      */
-    onSeekBackward() {
+    onSeekBackward = () => {
         var audioPosition = Math.max(0, this.audioElement.currentTime - this._preferences.seekPreferences.seekBackwardTime);
         var rangePosition = audioPosition === 0 ? 0 : audioPosition / this.audioElement.duration * 100;
         this.audioElement.currentTime = audioPosition;
@@ -724,7 +724,7 @@ class AudioPlayer extends AudioComponent {
      * Called when the position on the audio track changes (including from regular playing).
      * @private
      */
-    onPositionChanged() {
+    onPositionChanged = () => {
         var newPosition = this.audioElement.currentTime === 0 ? 0 : 100 /  this.audioElement.duration * this.audioElement.currentTime;
         this.position = newPosition;
     }
@@ -733,12 +733,12 @@ class AudioPlayer extends AudioComponent {
      * Called when the DOM is clicked.
      * @private
      */
-    onDocumentClick() {
+    onDocumentClick = () => {
         // NOTE: This check is to deal with HTML audio policies of browsers. If the user has clicked
         // the document it must have become activated, which means we're allowed to play audio. Check
         // to see if we should be playing (i.e. this._isPaused is false) but the audio element is paused.
         // If that's true, we need to play.
-        if(this.audioElement.paused && (this.isPaused === false)) {
+        if(this.preferences.audioElement.paused && (this._isPaused === false)) {
             this.play();
         }
     }
@@ -747,7 +747,7 @@ class AudioPlayer extends AudioComponent {
      * Called when the tab that the player is on changes visibility (either visible or hidden).
      * @private
      */
-    onVisibilityChanged() {
+    onVisibilityChanged = () => {
         this.isHidden = document.hidden;
     }
 }

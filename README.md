@@ -16,7 +16,7 @@
 -   **Easily animate** any HTML element in time with the music by simply adding HTML attributes
 
 ## How it works
-**z-amp-core** is a Javascript library, built with NodeJS, that interacts with the HTML DOM of your page to insert an HTML5 `<audio>` tag. Depending on the additional components that you're using, **z-amp-core** also looks for HTML elements in the DOM with specific attributes and attaches to them to enable player features. For example, you could add the following to your HTML:
+**z-amp-core** is a Javascript library, built with NodeJS, that interacts with the HTML DOM of your page to insert an HTML5 `<audio>` tag or specify one of your own for it to act upon. Depending on the additional components that you're using, **z-amp-core** also looks for HTML elements in the DOM with specific attributes and attaches to them to enable player features. For example, you could add the following to your HTML:
 ```html
 <button audio-button-play>PLAY</button>
 ```
@@ -30,4 +30,4 @@ Right now, **z-amp-core** provides the following types of audio components:
 
 If you'd like to create your own components, it's easy to get started. In addition, the powerful theming engine allows you to create advanced UIs quickly.
 
-To find out more, visit the z-amp site for full documentation.
+To find out more, visit the [full documentation](https://bitbucket.org/zyrous/z-amp-core/src/master/docs/static/HOME.md).
