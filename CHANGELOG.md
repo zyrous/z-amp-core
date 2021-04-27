@@ -1,3 +1,11 @@
+## [1.2.4](https://bitbucket.org/zyrous/z-amp-core/compare/v1.2.3...v1.2.4) (2021-04-27)
+
+
+### Bug Fixes
+
+* corrected event handler declaration in audio player ([4d7ab6c](https://bitbucket.org/zyrous/z-amp-core/commits/4d7ab6cee609b10c5675aab1c2e9c424af45ec99))
+* corrected failing cypress tests ([733e0a8](https://bitbucket.org/zyrous/z-amp-core/commits/733e0a83b1e7efb8727f2435823901b62f9fd07d))
+
 ## [1.2.3](https://bitbucket.org/zyrous/z-amp-core/compare/v1.2.2...v1.2.3) (2021-04-06)
 
 
