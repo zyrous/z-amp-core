@@ -1,3 +1,11 @@
+## [1.2.5](https://github.com/zyrous/z-amp-core/compare/v1.2.4...v1.2.5) (2021-04-27)
+
+
+### Bug Fixes
+
+* adding github workflow definition ([8e7aebd](https://github.com/zyrous/z-amp-core/commit/8e7aebd54636bb008ff423ec9447297502da9113))
+* corrected naming of secrets in workflow file ([5ab87a5](https://github.com/zyrous/z-amp-core/commit/5ab87a54ff9b4aa6e235b0dd9dc07cfbae61ee6f))
+
 ## [1.2.4](https://bitbucket.org/zyrous/z-amp-core/compare/v1.2.3...v1.2.4) (2021-04-27)
 
 
