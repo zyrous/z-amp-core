@@ -3,9 +3,9 @@
 const faker = require("faker");
 
 function startAudio(selector) {
-    cy.shouldBePaused();
+    cy.shouldBePaused(selector);
     cy.get(`${selector} [audio-button-play]`).click();
-    cy.shouldBePlayingAudio();
+    cy.shouldBePlayingAudio(selector);
 }
 
 function convertSecondsToPlayerString(secondsToConvert) {
@@ -45,11 +45,14 @@ context("Audio Player", () => {
     }),
 
     it("Should toggle audio when play/pause button pressed", () => {
-        startAudio("#p1");
+        cy.shouldBePaused("#p1");
+        cy.shouldBePaused("#p2");
+        cy.get("#p1 [audio-button-play-pause]").click();
+        cy.shouldBePlayingAudio("#p1");
+        // Make sure the second player is unaffected.
+        cy.shouldBePaused("#p2");
         cy.get("#p1 [audio-button-play-pause]").click();
         cy.shouldBePaused("#p1");
-        
-        // Make sure the second player is unaffected.
         cy.shouldBePaused("#p2");
     }),
 

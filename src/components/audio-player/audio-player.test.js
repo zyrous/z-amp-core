@@ -610,7 +610,7 @@ describe("Audio Player", function() {
             paused: true
         };
 
-        player.pause();
+        await player.pause();
 
         expect(player.isPaused).to.be.true;
     }),
@@ -618,6 +618,7 @@ describe("Audio Player", function() {
     it("Pauses correctly when not already paused", async() => {
         const pausedStub = sandbox.stub();
         const pauseStub = sandbox.stub();
+        sandbox.stub(AudioPlayer.prototype, "fadeAudioTo").resolves();
         const player = new AudioPlayer();
         player.preferences.audioElement = {
             paused: false,
@@ -625,7 +626,7 @@ describe("Audio Player", function() {
         };
         player.addEventListener("audioPaused", pausedStub);
 
-        player.pause();
+        await player.pause();
 
         expect(player.isPaused).to.be.true;
         expect(pauseStub.calledOnce).to.be.true;

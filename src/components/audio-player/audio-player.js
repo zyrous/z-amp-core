@@ -107,18 +107,18 @@ class AudioPlayer extends AudioComponent {
         if(muted){
             this.fadeAudioTo(0, 0);
         } else {
-            this.fadeAudioTo(this._volume, 0);
+            this.fadeAudioTo(this.volume, 0);
         }
         
         if(this._preferences.muteElement) {
             
             // Switch classes on the toggle element.
             if(muted){
-                this._preferences.muteElement.classList.remove(this._preferences.unmutedClass);
-                this._preferences.muteElement.classList.add(this._preferences.mutedClass);
+                this.preferences.muteElement.classList.remove(this.preferences.unmutedClass);
+                this.preferences.muteElement.classList.add(this.preferences.mutedClass);
             } else {
-                this._preferences.muteElement.classList.remove(this._preferences.mutedClass);
-                this._preferences.muteElement.classList.add(this._preferences.unmutedClass);
+                this.preferences.muteElement.classList.remove(this.preferences.mutedClass);
+                this.preferences.muteElement.classList.add(this.preferences.unmutedClass);
             }
         }
     }
@@ -146,18 +146,18 @@ class AudioPlayer extends AudioComponent {
     set position(position){
         this._position = position;
         this.storeValue("playerPosition", position);
-        if(this._preferences.positionRangeElement){
-            this._preferences.positionRangeElement.value = this._position;
+        if(this.preferences.positionRangeElement){
+            this.preferences.positionRangeElement.value = this.position;
         }
 
         // Set the track position.
-        if(this._preferences.trackPositionLabelElement){
-            this._preferences.trackPositionLabelElement.textContent = this.formatTimeString(this.audioElement.currentTime);
+        if(this.preferences.trackPositionLabelElement){
+            this.preferences.trackPositionLabelElement.textContent = this.formatTimeString(this.audioElement.currentTime);
         }
 
         // Set the track duration.
-        if(this._preferences.trackDurationLabelElement) {
-            this._preferences.trackDurationLabelElement.textContent = this.formatTimeString(this.audioElement.duration);
+        if(this.preferences.trackDurationLabelElement) {
+            this.preferences.trackDurationLabelElement.textContent = this.formatTimeString(this.audioElement.duration);
         }
         this.raiseEvent("positionChanged", position);
     }
@@ -184,7 +184,7 @@ class AudioPlayer extends AudioComponent {
      * @returns {MediaElementAudioSourceNode} The source node that this player draws a stream from.
      */
     get audioElement() {
-        return this._preferences.audioElement;
+        return this.preferences.audioElement;
     }
 
     /**
@@ -210,15 +210,15 @@ class AudioPlayer extends AudioComponent {
 
         this._isPaused = paused;
         this.storeValue("isPaused", paused);
-        if(this._preferences.playPauseElement) {
+        if(this.preferences.playPauseElement) {
             
             // Switch classes on the toggle element.
-            if(this._isPaused){
-                this._preferences.playPauseElement.classList.remove(this._preferences.playingClass);
-                this._preferences.playPauseElement.classList.add(this._preferences.pausedClass);
+            if(paused){
+                this.preferences.playPauseElement.classList.remove(this.preferences.playingClass);
+                this.preferences.playPauseElement.classList.add(this.preferences.pausedClass);
             } else {
-                this._preferences.playPauseElement.classList.remove(this._preferences.pausedClass);
-                this._preferences.playPauseElement.classList.add(this._preferences.playingClass);
+                this.preferences.playPauseElement.classList.remove(this.preferences.pausedClass);
+                this.preferences.playPauseElement.classList.add(this.preferences.playingClass);
             }
         }
     }
@@ -232,16 +232,16 @@ class AudioPlayer extends AudioComponent {
         if(isHidden){
             // If we're now hidden and our preference is to pause on hide (and we're not already
             // paused), fade out and pause.
-            if(this._preferences.pauseOnHide && !this._isPaused) {
+            if(this.preferences.pauseOnHide && !this.isPaused) {
                 this.fadeAudioTo(0);
-                this._preferences.audioElement.pause();
+                this.preferences.audioElement.pause();
             }
         } else {
             // If we're now visible and we prefer to pause on hide (and we weren't paused before),
             // we need to play and fade in now.
-            if(this._preferences.pauseOnHide && !this._isPaused) {
-                const newVolume = this._isMuted ? 0 : this._volume;
-                this._preferences.audioElement.play();
+            if(this.preferences.pauseOnHide && !this.isPaused) {
+                const newVolume = this.isMuted ? 0 : this.volume;
+                this.preferences.audioElement.play();
                 this.fadeAudioTo(newVolume);
             }
         }
@@ -277,7 +277,7 @@ class AudioPlayer extends AudioComponent {
         // Currently playing track.
         this.getValue("currentTrack", null).then((results) => this.track = results.value);
         // Current audio volume.
-        this.getValue("volume", this._preferences.defaultVolume).then((results) => this.volume = results.value);
+        this.getValue("volume", this.preferences.defaultVolume).then((results) => this.volume = results.value);
         // Whether the player is muted.
         this.getValue("isMuted", false).then((results) => this.isMuted = results.value);
         // The track position.
@@ -289,7 +289,7 @@ class AudioPlayer extends AudioComponent {
 
             // We need to start playing immediately if:
             if(this.isPaused === false // 1. We are in an un-paused state, or 
-            || (this.isPaused === undefined && this._preferences.autoPlay)) {  // 2. We don't have a value set and we are autoplaying.
+            || (this.isPaused === undefined && this.preferences.autoPlay)) {  // 2. We don't have a value set and we are autoplaying.
                 this.play();
             } else {
                 this.raiseEvent("audioPaused");
@@ -302,7 +302,7 @@ class AudioPlayer extends AudioComponent {
      * @protected
      */
     async initialiseKeys() {
-        if(this._preferences.mediaKeys) {
+        if(this.preferences.mediaKeys) {
             navigator.mediaSession.setActionHandler("play", this.onPlay);
             navigator.mediaSession.setActionHandler("pause", this.onPause);
 
@@ -319,7 +319,7 @@ class AudioPlayer extends AudioComponent {
             super.initialiseElements(),
 
             // Audio element (mandatory).
-            this.attachElement(this._preferences, "audioElement", "[audio-element]")
+            this.attachElement(this.preferences, "audioElement", "[audio-element]")
             .then((element) => {
                 if(!element) {
                     // Create a new audio element. We'll attach it to the parent of
@@ -336,61 +336,61 @@ class AudioPlayer extends AudioComponent {
                 this.raiseEvent("mediaElementLoaded", element);
                 
                 // Listen for when tracks end.
-                this._preferences.audioElement.addEventListener("ended", this.onTrackEnded);
+                this.preferences.audioElement.addEventListener("ended", this.onTrackEnded);
                 // Listen for when track position changes.
-                this._preferences.audioElement.addEventListener("timeupdate", this.onPositionChanged);
+                this.preferences.audioElement.addEventListener("timeupdate", this.onPositionChanged);
                 // Listen for when we determine that we can play through the whole audio without stopping.
-                this._preferences.audioElement.addEventListener("canplaythrough", this.onTrackLoaded);
+                this.preferences.audioElement.addEventListener("canplaythrough", this.onTrackLoaded);
             }),
 
             // Play controls.
-            this.attachElement(this._preferences, "playElement", "[audio-button-play]", {
+            this.attachElement(this.preferences, "playElement", "[audio-button-play]", {
                 eventName: "click",
                 callback: this.onPlay
             }),
-            this.attachElement(this._preferences, "pauseElement", "[audio-button-pause]", {
+            this.attachElement(this.preferences, "pauseElement", "[audio-button-pause]", {
                 eventName: "click",
                 callback: this.onPause
             }),
-            this.attachElement(this._preferences, "playPauseElement", "[audio-button-play-pause]", {
+            this.attachElement(this.preferences, "playPauseElement", "[audio-button-play-pause]", {
                 eventName: "click",
                 callback: this.onPlayToggled
             }),
 
             // Track position controls.
-            this.attachElement(this._preferences, "seekForwardElement", "[audio-button-seek-forward]", {
+            this.attachElement(this.preferences, "seekForwardElement", "[audio-button-seek-forward]", {
                 eventName: "click",
                 callback: this.onSeekForward
             }),
-            this.attachElement(this._preferences, "seekBackwardElement", "[audio-button-seek-backward]", {
+            this.attachElement(this.preferences, "seekBackwardElement", "[audio-button-seek-backward]", {
                 eventName: "click",
                 callback: this.onSeekBackward
             }),
-            this.attachElement(this._preferences, "positionRangeElement", "[audio-button-position-range]", {
+            this.attachElement(this.preferences, "positionRangeElement", "[audio-button-position-range]", {
                 eventName: "change",
                 callback: this.onPositionSelected
             }).then((element) => {
                 if(element) {
                     element.min = 0;
                     element.max = 100;
-                    element.value = this._position;
+                    element.value = this.position;
                 }
             }),
 
             // Volume controls.
-            this.attachElement(this._preferences, "muteElement", "[audio-button-volume-mute]", {
+            this.attachElement(this.preferences, "muteElement", "[audio-button-volume-mute]", {
                 eventName: "click",
                 callback: this.onMute
             }),
-            this.attachElement(this._preferences, "volumeUpElement", "[audio-button-volume-up]", {
+            this.attachElement(this.preferences, "volumeUpElement", "[audio-button-volume-up]", {
                 eventName: "click",
                 callback: this.onVolumeUp
             }),
-            this.attachElement(this._preferences, "volumeDownElement", "[audio-button-volume-down]", {
+            this.attachElement(this.preferences, "volumeDownElement", "[audio-button-volume-down]", {
                 eventName: "click",
                 callback: this.onVolumeDown
             }),
-            this.attachElement(this._preferences, "volumeRangeElement", "[audio-button-volume-range]", {
+            this.attachElement(this.preferences, "volumeRangeElement", "[audio-button-volume-range]", {
                 eventName: "change",
                 callback: this.onVolumeSelected
             }).then((element) => {
@@ -401,13 +401,13 @@ class AudioPlayer extends AudioComponent {
             }),
 
             // Track information.
-            this.attachElement(this._preferences, "trackPositionLabelElement", "[audio-label-track-position]")
+            this.attachElement(this.preferences, "trackPositionLabelElement", "[audio-label-track-position]")
             .then((element) => {
                 if(element){
                     element.innerHTML = null;
                 }
             }),
-            this.attachElement(this._preferences, "trackDurationLabelElement", "[audio-label-track-duration]")
+            this.attachElement(this.preferences, "trackDurationLabelElement", "[audio-label-track-duration]")
             .then((element) => {
                 if(element){
                     element.innerHTML = null;
@@ -423,7 +423,10 @@ class AudioPlayer extends AudioComponent {
      * @method
      * @param {AudioTrack} track The track to play (optional). Defaults to the current track.
      */
-    async play(track = this._track) {
+    async play(track = this.track) {
+
+        // Whatever's happened, we're not paused anymore.
+        this.isPaused = false;
 
         // We only need to do something here if:
         if(track !== this.track // 1. The provided track has changed, or
@@ -494,24 +497,23 @@ class AudioPlayer extends AudioComponent {
                 }
             }
         }
-
-        // Whatever's happened, we're not paused anymore.
-        this.isPaused = false;
     }
 
     /**
      * Pause whichever track is playing right now.
      * @public
      */
-    pause() {
+    async pause() {
         this.isPaused = true;
-        if (!this.audioElement.paused) {
+        if (this.audioElement.paused === false) {
 
             // We weren't already paused before, so fade out, pause the track and raise an event.
-            this.fadeAudioTo(0);
+            await this.fadeAudioTo(0);
             this.audioElement.pause();
             this.raiseEvent("audioPaused", this.audioElement.currentTime);
         }
+
+        return Promise.resolve();
     }
     
     /**
@@ -535,7 +537,7 @@ class AudioPlayer extends AudioComponent {
 
         // If we don't have a duration, just use the default.
         if(!duration) {
-            duration = this._preferences.fadePreferences.duration;
+            duration = this.preferences.fadePreferences.duration;
         }
 
         // NOTE: The fade works by adjusting the volume in step increments, rather than continuously
@@ -549,9 +551,9 @@ class AudioPlayer extends AudioComponent {
 
             // Figure out how many steps to use and how much we should change by on each step.
             var stepSize, stepDuration;
-            if(this._preferences.fadePreferences.fade === true) {
-                stepDuration = this._preferences.fadePreferences.duration / this._preferences.fadePreferences.stepCount;
-                stepSize = audioDelta / this._preferences.fadePreferences.stepCount / 100;
+            if(this.preferences.fadePreferences.fade === true) {
+                stepDuration = this.preferences.fadePreferences.duration / this.preferences.fadePreferences.stepCount;
+                stepSize = audioDelta / this.preferences.fadePreferences.stepCount / 100;
             } else {
                 stepDuration = 0;
                 stepSize = audioDelta;
@@ -612,7 +614,7 @@ class AudioPlayer extends AudioComponent {
      * @private
      */
     onPlayToggled = () => {
-        if(!this.isPaused) {
+        if(this.isPaused === false) {
             this.pause();
         } else {
             this.play();
@@ -624,9 +626,9 @@ class AudioPlayer extends AudioComponent {
      * @private
      */
     onMute = () => {
-        if(this._isMuted) {
+        if(this.isMuted) {
             this.isMuted = false;
-            this.raiseEvent("volumeUnmuted", this._volume);
+            this.raiseEvent("volumeUnmuted", this.volume);
         } else {
             this.isMuted = true;
             this.raiseEvent("volumeMuted");
@@ -638,9 +640,9 @@ class AudioPlayer extends AudioComponent {
      * @private
      */
     onTrackLoaded = () => {
-        if(this._loadedTrack !== this._track) {
+        if(this._loadedTrack !== this.track) {
             // Save the new track.
-            this._loadedTrack = this._track;
+            this._loadedTrack = this.track;
             // Refresh the current position of the track.
             this.audioElement.currentTime = (this._position / 100) * this.audioElement.duration;
         }
@@ -651,7 +653,7 @@ class AudioPlayer extends AudioComponent {
      * @private
      */
     onTrackEnded = () => {
-        this.raiseEvent("trackEnded", this._track);
+        this.raiseEvent("trackEnded", this.track);
     }
 
     /**
@@ -659,7 +661,7 @@ class AudioPlayer extends AudioComponent {
      * @private
      */
     onVolumeDown = () => {
-        this.volume = Math.max(this._volume - 10, 0);
+        this.volume = Math.max(this.volume - 10, 0);
     }
 
     /**
@@ -667,7 +669,7 @@ class AudioPlayer extends AudioComponent {
      * @private
      */
     onVolumeUp = () => {
-        this.volume = Math.min(this._volume + 10, 100);
+        this.volume = Math.min(this.volume + 10, 100);
     }
 
     /**
@@ -675,7 +677,7 @@ class AudioPlayer extends AudioComponent {
      * @private
      */
     onVolumeSelected = () => {
-        this.volume = this._preferences.volumeRangeElement.value;
+        this.volume = this.preferences.volumeRangeElement.value;
     }
 
     /**
@@ -684,7 +686,7 @@ class AudioPlayer extends AudioComponent {
      */
     onPositionSelected = () => {
         // Get the position (percentage).
-        var rangePosition = this._preferences.positionRangeElement.value;
+        var rangePosition = this.preferences.positionRangeElement.value;
         // Get the position (seconds).
         var audioPosition = rangePosition === 0 ? 0 : this.audioElement.duration / 100 * rangePosition;
 
@@ -713,7 +715,7 @@ class AudioPlayer extends AudioComponent {
      * @private
      */
     onSeekBackward = () => {
-        var audioPosition = Math.max(0, this.audioElement.currentTime - this._preferences.seekPreferences.seekBackwardTime);
+        var audioPosition = Math.max(0, this.audioElement.currentTime - this.preferences.seekPreferences.seekBackwardTime);
         var rangePosition = audioPosition === 0 ? 0 : audioPosition / this.audioElement.duration * 100;
         this.audioElement.currentTime = audioPosition;
         this.position = rangePosition;
@@ -738,7 +740,7 @@ class AudioPlayer extends AudioComponent {
         // the document it must have become activated, which means we're allowed to play audio. Check
         // to see if we should be playing (i.e. this._isPaused is false) but the audio element is paused.
         // If that's true, we need to play.
-        if(this.preferences.audioElement.paused && (this._isPaused === false)) {
+        if(this.audioElement.paused && (this.isPaused === false)) {
             this.play();
         }
     }

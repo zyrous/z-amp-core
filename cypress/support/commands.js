@@ -27,7 +27,7 @@ Cypress.Commands.add("shouldBePlayingAudio", (selector) => {
     cy.get(`${selector} audio,video`).should((els) => {
         let audible = false;
         els.each((i, el) => {
-        console.log(el.duration, el.paused, el.muted);
+        console.log(`TESTING FOR PLAYING. Duration: ${el.duration}, Paused: ${el.paused}, Muted: ${el.muted} `);
     
         expect(el.duration > 0 && !el.paused && !el.muted).to.eq(true);
         });
@@ -37,7 +37,7 @@ Cypress.Commands.add("shouldBePlayingAudio", (selector) => {
 Cypress.Commands.add("shouldBePaused", (selector) => {
     cy.get(`${selector} audio,video`).should((els) => {
         els.each((i, el) => {
-            console.log(el.duration, el.paused, el.muted);
+            console.log(`TESTING FOR PAUSED. Duration: ${el.duration}, Paused: ${el.paused}, Muted: ${el.muted} `);
         
             expect(el.paused).to.eq(true);
         })
