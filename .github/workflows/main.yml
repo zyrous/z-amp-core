@@ -37,12 +37,12 @@ jobs:
         
       - name: Report coverage
         env:
-          CODACY_PROJECT_TOKEN: ${{CODACY_PROJECT_TOKEN}}
+          CODACY_PROJECT_TOKEN: ${{secrets.CODACY_PROJECT_TOKEN}}
         run: bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage/lcov.info
         
       - name: Run UI tests
         env:
-          CYPRESS_RECORD_KEY: ${{CYPRESS_RECORD_KEY}}
+          CYPRESS_RECORD_KEY: ${{secrets.CYPRESS_RECORD_KEY}}
         run: npm run serve & npx cypress run --record --key ${CYPRESS_RECORD_KEY}
         
       - name: Package
@@ -50,6 +50,6 @@ jobs:
         
       - name: Release
         env:
-          GH_TOKEN: ${{GH_TOKEN}}
-          NPM_TOKEN: ${{NPM_TOKEN}}
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
         run: npx semantic-release
