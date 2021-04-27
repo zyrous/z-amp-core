@@ -4,6 +4,7 @@
   "description": "Provides a robust framework to build audio components for the web",
   "main": "build/dist/exports.js",
   "repository": "https://github.com/zyrous/z-amp-core.git",
+  "homepage": "https://zyrous.github.io/z-amp-core/",
   "scripts": {
     "build": "gulp build",
     "serve": "gulp serve",
