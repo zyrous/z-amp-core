@@ -34,12 +34,10 @@ Now let's move onto the script, where things get a bit more interesting. **z-amp
 *But wait! Wasn't that a lot more code than just using the `<audio>` element on its own?* **Yes, yes it was**. If all you want to do is add a very simply audio player to your page, we recommend you use the Web Audio API without **z-amp-core**. Stick with it though; there're more exciting things coming up.
 
 Let's build our example out a bit by adding some more features:
-<p class="codepen" data-height="466" data-theme-id="light" data-default-tab="html,result" data-user="mason-zyrous" data-slug-hash="abpMXBb" style="height: 466px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="z-amp-core: audio-player basic 2">
-  <span>See the Pen <a href="https://codepen.io/mason-zyrous/pen/abpMXBb">
-  z-amp-core: audio-player basic 2</a> by mason-zyrous (<a href="https://codepen.io/mason-zyrous">@mason-zyrous</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+<iframe height="466" style="width: 100%;" scrolling="no" title="z-amp-core: audio-player basic 2" src="https://codepen.io/mason-zyrous/embed/abpMXBb?height=466&theme-id=light&default-tab=html,result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/mason-zyrous/pen/abpMXBb'>z-amp-core: audio-player basic 2</a> by mason-zyrous
+  (<a href='https://codepen.io/mason-zyrous'>@mason-zyrous</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
 
 Note that we've added buttons for seeking forward/back, selecting a track position, increasing/decreasing the volume, selecting a specific volume and muting the audio, as well as labels for the track position and duration, *without adding a single new line of script*. All we need to do is to lay out our HTML and tag each element with the functionality that we want it to have. Pretty cool, right?
 
