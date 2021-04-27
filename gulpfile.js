@@ -6,9 +6,12 @@ const browserify = require("browserify");
 const terser = require("gulp-terser");
 const pug = require("gulp-pug-3");
 const pugify = require("pugify");
-const jsdoc = require("gulp-jsdoc3");
+// const jsdoc = require("gulp-jsdoc3");
+const jsdoc2md = require("jsdoc-to-markdown");
 const babel = require("gulp-babel");
 const browserSync = require("browser-sync").create();
+const fs = require("fs");
+const path = require("path");
 
 /**
  * The sets of source code that we want to treat individually. These 
@@ -163,10 +166,27 @@ async function buildDevBrowserJs(cb) {
 
 function buildDoc(cb) {
     console.log("Building documentation...");
-    gulp.src(["./src/**/*.js"], {read:false})
-        .pipe(jsdoc(cb));
+    // gulp.src(["./src/**/*.js"], {read:false})
+    //     .pipe(jsdoc(cb));
 
-    cb();
+    // jsdoc2md.render({ files: "./src/**/*.js" }).then((output) => fs.writeFileSync("docs/gen/api.md", output));
+    const templateData = jsdoc2md.getTemplateDataSync({ files: "./src/**/*.js" });
+
+    const classNames = templateData.reduce((classNames, identifier) => {
+        if (identifier.kind === "class") {
+            classNames.push(identifier.name);
+        }
+        return classNames;
+    }, []);
+
+    for(const className of classNames){
+        const template = `{{#class name="${className}"}}{{>docs}}{{/class}}`;
+        console.log(`Rendering ${className}, template: ${template}`);
+        const output = jsdoc2md.renderSync({data: templateData, template: template});
+        fs.writeFileSync(path.resolve("docs/gen", `${className}.md`), output);
+    }
+
+    return cb();
 }
 
 function renderIndexPage(cb) {
@@ -176,7 +196,7 @@ function renderIndexPage(cb) {
     .pipe(gulp.dest("."));
     console.log("Index page rendered.");
 
-    cb();
+    return cb();
 }
 
 /**
