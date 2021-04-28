@@ -1,3 +1,10 @@
+## [1.2.6](https://github.com/zyrous/z-amp-core/compare/v1.2.5...v1.2.6) (2021-04-28)
+
+
+### Bug Fixes
+
+* re-adding npm ci to prod build ([1ea3a41](https://github.com/zyrous/z-amp-core/commit/1ea3a41043c6f7f395267eccdc633a0498ee951a))
+
 ## [1.2.5](https://github.com/zyrous/z-amp-core/compare/v1.2.4...v1.2.5) (2021-04-27)
 
 
