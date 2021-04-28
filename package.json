@@ -68,7 +68,7 @@
     "browserify-css": "^0.15.0",
     "chai": "^4.3.4",
     "chai-as-promised": "^7.1.1",
-    "cypress": "^6.6.0",
+    "cypress": "^6.9.1",
     "eslint": "^7.22.0",
     "eslint-plugin-cypress": "^2.11.2",
     "faker": "^5.4.0",
