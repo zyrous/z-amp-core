@@ -1,3 +1,10 @@
+## [1.2.8](https://github.com/zyrous/z-amp-core/compare/v1.2.7...v1.2.8) (2021-04-29)
+
+
+### Bug Fixes
+
+* upgrade cypress from 6.6.0 to 6.9.1 ([b612605](https://github.com/zyrous/z-amp-core/commit/b6126055cc93a92a6ecc864609cdc693981ccb1d))
+
 ## [1.2.7](https://github.com/zyrous/z-amp-core/compare/v1.2.6...v1.2.7) (2021-04-29)
 
 
