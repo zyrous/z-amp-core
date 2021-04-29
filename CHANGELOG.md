@@ -1,3 +1,31 @@
+## [1.2.10](https://github.com/zyrous/z-amp-core/compare/v1.2.9...v1.2.10) (2021-04-29)
+
+
+### Bug Fixes
+
+* upgrade gulp-pug-3 from 1.1.7 to 1.2.1 ([27df8f3](https://github.com/zyrous/z-amp-core/commit/27df8f3820eea0b4c2e122c3e73da6c78db726a4))
+
+## [1.2.9](https://github.com/zyrous/z-amp-core/compare/v1.2.8...v1.2.9) (2021-04-29)
+
+
+### Bug Fixes
+
+* upgrade faker from 5.4.0 to 5.5.2 ([d7f7a25](https://github.com/zyrous/z-amp-core/commit/d7f7a253642c842e085d790a14c3d06efdc36a8d))
+
+## [1.2.8](https://github.com/zyrous/z-amp-core/compare/v1.2.7...v1.2.8) (2021-04-29)
+
+
+### Bug Fixes
+
+* upgrade cypress from 6.6.0 to 6.9.1 ([b612605](https://github.com/zyrous/z-amp-core/commit/b6126055cc93a92a6ecc864609cdc693981ccb1d))
+
+## [1.2.7](https://github.com/zyrous/z-amp-core/compare/v1.2.6...v1.2.7) (2021-04-29)
+
+
+### Bug Fixes
+
+* upgrade multiple dependencies with Snyk ([f9b2431](https://github.com/zyrous/z-amp-core/commit/f9b2431b7044d397e74560c75e7fa083b016385a))
+
 ## [1.2.6](https://github.com/zyrous/z-amp-core/compare/v1.2.5...v1.2.6) (2021-04-28)
 
 
