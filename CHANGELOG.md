@@ -1,3 +1,10 @@
+## [1.2.10](https://github.com/zyrous/z-amp-core/compare/v1.2.9...v1.2.10) (2021-04-29)
+
+
+### Bug Fixes
+
+* upgrade gulp-pug-3 from 1.1.7 to 1.2.1 ([27df8f3](https://github.com/zyrous/z-amp-core/commit/27df8f3820eea0b4c2e122c3e73da6c78db726a4))
+
 ## [1.2.9](https://github.com/zyrous/z-amp-core/compare/v1.2.8...v1.2.9) (2021-04-29)
 
 
