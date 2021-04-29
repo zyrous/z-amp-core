@@ -1,3 +1,10 @@
+## [1.2.9](https://github.com/zyrous/z-amp-core/compare/v1.2.8...v1.2.9) (2021-04-29)
+
+
+### Bug Fixes
+
+* upgrade faker from 5.4.0 to 5.5.2 ([d7f7a25](https://github.com/zyrous/z-amp-core/commit/d7f7a253642c842e085d790a14c3d06efdc36a8d))
+
 ## [1.2.8](https://github.com/zyrous/z-amp-core/compare/v1.2.7...v1.2.8) (2021-04-29)
 
 
