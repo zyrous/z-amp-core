@@ -1,3 +1,10 @@
+## [1.2.7](https://github.com/zyrous/z-amp-core/compare/v1.2.6...v1.2.7) (2021-04-29)
+
+
+### Bug Fixes
+
+* upgrade multiple dependencies with Snyk ([f9b2431](https://github.com/zyrous/z-amp-core/commit/f9b2431b7044d397e74560c75e7fa083b016385a))
+
 ## [1.2.6](https://github.com/zyrous/z-amp-core/compare/v1.2.5...v1.2.6) (2021-04-28)
 
 
