@@ -1,3 +1,10 @@
+## [1.2.12](https://github.com/zyrous/z-amp-core/compare/v1.2.11...v1.2.12) (2021-04-30)
+
+
+### Bug Fixes
+
+* upgrade jsdom from 16.5.1 to 16.5.2 ([501dab4](https://github.com/zyrous/z-amp-core/commit/501dab4ddd82280c83323253f25b8735f7923c7d))
+
 ## [1.2.11](https://github.com/zyrous/z-amp-core/compare/v1.2.10...v1.2.11) (2021-04-29)
 
 
