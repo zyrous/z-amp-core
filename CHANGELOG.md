@@ -1,3 +1,10 @@
+## [1.2.14](https://github.com/zyrous/z-amp-core/compare/v1.2.13...v1.2.14) (2021-04-30)
+
+
+### Bug Fixes
+
+* upgrade core-js from 3.9.1 to 3.10.1 ([c924eb3](https://github.com/zyrous/z-amp-core/commit/c924eb383737e73de7bba2c007cd0473daa99ceb))
+
 ## [1.2.13](https://github.com/zyrous/z-amp-core/compare/v1.2.12...v1.2.13) (2021-04-30)
 
 
