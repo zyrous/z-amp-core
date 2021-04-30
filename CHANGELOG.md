@@ -1,3 +1,31 @@
+## [1.2.15](https://github.com/zyrous/z-amp-core/compare/v1.2.14...v1.2.15) (2021-04-30)
+
+
+### Bug Fixes
+
+* upgrade eslint from 7.22.0 to 7.23.0 ([1a85dfc](https://github.com/zyrous/z-amp-core/commit/1a85dfc1f1fbad20fa0b6067b911ac6e42909dae))
+
+## [1.2.14](https://github.com/zyrous/z-amp-core/compare/v1.2.13...v1.2.14) (2021-04-30)
+
+
+### Bug Fixes
+
+* upgrade core-js from 3.9.1 to 3.10.1 ([c924eb3](https://github.com/zyrous/z-amp-core/commit/c924eb383737e73de7bba2c007cd0473daa99ceb))
+
+## [1.2.13](https://github.com/zyrous/z-amp-core/compare/v1.2.12...v1.2.13) (2021-04-30)
+
+
+### Bug Fixes
+
+* upgrade husky from 5.1.3 to 5.2.0 ([f0e309c](https://github.com/zyrous/z-amp-core/commit/f0e309c0c1fabfe34ded6f1a8bd32ce416bfd1dd))
+
+## [1.2.12](https://github.com/zyrous/z-amp-core/compare/v1.2.11...v1.2.12) (2021-04-30)
+
+
+### Bug Fixes
+
+* upgrade jsdom from 16.5.1 to 16.5.2 ([501dab4](https://github.com/zyrous/z-amp-core/commit/501dab4ddd82280c83323253f25b8735f7923c7d))
+
 ## [1.2.11](https://github.com/zyrous/z-amp-core/compare/v1.2.10...v1.2.11) (2021-04-29)
 
 
