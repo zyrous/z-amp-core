@@ -1,3 +1,10 @@
+## [1.2.15](https://github.com/zyrous/z-amp-core/compare/v1.2.14...v1.2.15) (2021-04-30)
+
+
+### Bug Fixes
+
+* upgrade eslint from 7.22.0 to 7.23.0 ([1a85dfc](https://github.com/zyrous/z-amp-core/commit/1a85dfc1f1fbad20fa0b6067b911ac6e42909dae))
+
 ## [1.2.14](https://github.com/zyrous/z-amp-core/compare/v1.2.13...v1.2.14) (2021-04-30)
 
 
