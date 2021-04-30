@@ -1,3 +1,10 @@
+## [1.2.13](https://github.com/zyrous/z-amp-core/compare/v1.2.12...v1.2.13) (2021-04-30)
+
+
+### Bug Fixes
+
+* upgrade husky from 5.1.3 to 5.2.0 ([f0e309c](https://github.com/zyrous/z-amp-core/commit/f0e309c0c1fabfe34ded6f1a8bd32ce416bfd1dd))
+
 ## [1.2.12](https://github.com/zyrous/z-amp-core/compare/v1.2.11...v1.2.12) (2021-04-30)
 
 
