@@ -1,3 +1,10 @@
+## [1.2.16](https://github.com/zyrous/z-amp-core/compare/v1.2.15...v1.2.16) (2021-04-30)
+
+
+### Bug Fixes
+
+* package.json & package-lock.json to reduce vulnerabilities ([c7782d6](https://github.com/zyrous/z-amp-core/commit/c7782d687abaa8b09868e6df5ec71d95a2442c77))
+
 ## [1.2.15](https://github.com/zyrous/z-amp-core/compare/v1.2.14...v1.2.15) (2021-04-30)
 
 
