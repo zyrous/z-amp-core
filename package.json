@@ -71,7 +71,7 @@
     "cypress": "^7.2.0",
     "eslint": "^7.23.0",
     "eslint-plugin-cypress": "^2.11.2",
-    "faker": "^5.5.2",
+    "faker": "^5.5.3",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-cli": "^2.3.0",
