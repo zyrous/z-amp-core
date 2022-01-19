@@ -86,7 +86,7 @@
     "mocha": "^6.2.3",
     "nyc": "^15.0.1",
     "pugify": "^2.2.0",
-    "semantic-release": "^17.4.2",
+    "semantic-release": "^19.0.0",
     "sinon": "^9.0.2",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"
