@@ -74,7 +74,7 @@
     "faker": "^5.5.2",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
-    "gulp-cli": "^2.3.0",
+    "gulp-cli": "^3.0.0",
     "gulp-jsdoc3": "^3.0.0",
     "gulp-pug-3": "^1.2.1",
     "gulp-terser": "^2.0.1",
